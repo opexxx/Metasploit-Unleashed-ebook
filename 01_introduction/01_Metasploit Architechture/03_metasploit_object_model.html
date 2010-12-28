@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>Metasploit Object Model</title>
+</head>
+<body>
+<span class="Apple-style-span"
+ style="border-collapse: separate; color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; font-size: medium;"><span
+ class="Apple-style-span"
+ style="font-family: sans-serif; font-size: 15px; line-height: 22px;">
+<h1 id="firstHeading" class="firstHeading"
+ style="border-bottom: 1px solid rgb(170, 170, 170); margin: 0px 0px 0.1em; background-image: none; font-weight: normal; padding-top: 0.5em; padding-bottom: 0px; font-size: 28px; line-height: 1.2em;">Metasploit
+Object Model</h1>
+<div id="bodyContent">
+<p style="margin: 0.4em 0px 0.5em; line-height: 1.5em;">In the
+Metasploit Framework, all modules are Ruby classes.</p>
+<ul
+ style="margin: 0.3em 0px 0px 1.5em; padding: 0px; line-height: 1.5em; list-style-type: square; list-style-image: url(http://www.offensive-security.com/w/skins/monobook/bullet.gif);">
+  <li style="margin-bottom: 0.1em;">Modules inherit from the
+type-specific class</li>
+  <li style="margin-bottom: 0.1em;">The type-specific class inherits
+from the Msf::Module class</li>
+  <li style="margin-bottom: 0.1em;">There is a shared common API
+between modules</li>
+</ul>
+<p style="margin: 0.4em 0px 0.5em; line-height: 1.5em;">Payloads are
+slightly different.</p>
+<ul
+ style="margin: 0.3em 0px 0px 1.5em; padding: 0px; line-height: 1.5em; list-style-type: square; list-style-image: url(http://www.offensive-security.com/w/skins/monobook/bullet.gif);">
+  <li style="margin-bottom: 0.1em;">Payloads are created at runtime
+from various components</li>
+  <li style="margin-bottom: 0.1em;">Glue together stagers with stages</li>
+</ul>
+<p style="margin: 0.4em 0px 0.5em; line-height: 1.5em;"><br>
+</p>
+<div style="text-align: center;"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/Metasploit_Architechture"
+ title="Metasploit Architechture"
+ style="text-decoration: none; background-image: none; font-weight: bold;">Metasploit
+Architechture</a></div>
+</div>
+</span></span>
+</body>
+</html>

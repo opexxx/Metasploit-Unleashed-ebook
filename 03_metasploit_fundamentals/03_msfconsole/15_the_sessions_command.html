@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>The sessions Command</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">The
+sessions Command</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">The 'sessions' command allows you to
+list, interact with, and kill
+spawned sessions. The sessions can be shells, Meterpreter sessions,
+VNC, etc.
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">msf &gt; sessions<br><br>Usage: sessions [options]<br><br>Active session manipulation and interaction.<br><br>OPTIONS:<br><br>    -d   Detach an interactive session<br>    -h        Help banner.<br>    -i   Interact with the supplied session identifier.<br>    -k   Terminate session.<br>    -l        List all active sessions.<br>    -q        Quiet mode.<br>    -v        List verbose fields.</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">To list any active sessions, pass
+the '-l' options to 'sessions'.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);">msf exploit(3proxy) &gt; sessions -l<br><br>Active sessions<br>===============<br><br>  Id  Description    Tunnel<br>  --  -----------    ------<br>  1   Command shell  192.168.1.101:33191 -&gt; 192.168.1.104:4444</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">To interact with a given session,
+you just need to use the '-i' switch followed by the Id number of the
+session.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);">msf exploit(3proxy) &gt; sessions -i 1<br>[*] Starting interaction with 1...<br><br>C:\WINDOWS\system32&gt;</pre>
+<br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/Msfconsole"
+ title="Msfconsole">msfconsole</a></div>
+</body>
+</html>

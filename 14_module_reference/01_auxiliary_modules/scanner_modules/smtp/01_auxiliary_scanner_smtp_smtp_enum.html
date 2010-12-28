@@ -1,0 +1,38 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>auxiliary/scanner/smtp/smtp_enum</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">auxiliary/scanner/smtp/smtp_enum</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">The SMTP Enumeration module will
+connect to a given mail server and
+use a wordlist to enumerate users that are present on the remote
+system.
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">msf &gt; use auxiliary/scanner/smtp/smtp_enum <br>msf auxiliary(smtp_enum) &gt; show options<br><br>Module options:<br><br>   Name       Current Setting                                      Required  Description<br>   ----       ---------------                                      --------  -----------<br>   RHOSTS                                                          yes       The target address range or CIDR identifier<br>   RPORT      25                                                   yes       The target port<br>   THREADS    1                                                    yes       The number of concurrent threads<br>   USER_FILE  /opt/metasploit3/msf3/data/wordlists/unix_users.txt  yes       The file that contains a list of probable users accounts.<br>   VERBOSE    false                                                yes       Whether to print output for all attempts</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">Using the module is a simple matter
+of feeding it a host or range
+of hosts to scan and a wordlist containing usernames to enumerate.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);">msf auxiliary(smtp_enum) &gt; set RHOSTS 192.168.1.56<br>RHOSTS =&gt; 192.168.1.56<br>msf auxiliary(smtp_enum) &gt; run<br><br>[*] 220 metasploitable.localdomain ESMTP Postfix (Ubuntu)<br><br>[*] Domain Name: localdomain<br>[+] 192.168.1.56:25 - Found user: ROOT<br>[+] 192.168.1.56:25 - Found user: backup<br>[+] 192.168.1.56:25 - Found user: bin<br>[+] 192.168.1.56:25 - Found user: daemon<br>[+] 192.168.1.56:25 - Found user: distccd<br>[+] 192.168.1.56:25 - Found user: ftp<br>[+] 192.168.1.56:25 - Found user: games<br>[+] 192.168.1.56:25 - Found user: gnats<br>[+] 192.168.1.56:25 - Found user: irc<br>[+] 192.168.1.56:25 - Found user: libuuid<br>[+] 192.168.1.56:25 - Found user: list<br>[+] 192.168.1.56:25 - Found user: lp<br>[+] 192.168.1.56:25 - Found user: mail<br>[+] 192.168.1.56:25 - Found user: man<br>[+] 192.168.1.56:25 - Found user: news<br>[+] 192.168.1.56:25 - Found user: nobody<br>[+] 192.168.1.56:25 - Found user: postgres<br>[+] 192.168.1.56:25 - Found user: postmaster<br>[+] 192.168.1.56:25 - Found user: proxy<br>[+] 192.168.1.56:25 - Found user: root<br>[+] 192.168.1.56:25 - Found user: service<br>[+] 192.168.1.56:25 - Found user: sshd<br>[+] 192.168.1.56:25 - Found user: sync<br>[+] 192.168.1.56:25 - Found user: sys<br>[+] 192.168.1.56:25 - Found user: syslog<br>[+] 192.168.1.56:25 - Found user: user<br>[+] 192.168.1.56:25 - Found user: uucp<br>[+] 192.168.1.56:25 - Found user: www-data<br>[-] 192.168.1.56:25 - EXPN : 502 5.5.2 Error: command not recognized<br>[+] 192.168.1.56:25 Users found: ROOT, backup, bin, daemon, distccd, ftp, games, gnats, irc, libuuid, list, lp, mail, man, news, nobody, postgres, postmaster, proxy, root, service, sshd, sync, sys, syslog, user, uucp, www-data<br>[*] 192.168.1.56:25 No e-mail addresses found.<br>[*] Scanned 1 of 1 hosts (100% complete)<br>[*] Auxiliary module execution completed<br>msf auxiliary(smtp_enum) &gt;</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">Since the email username and system
+username are frequently the
+same, you can now use any enumerated users for further logon attempts
+against other network services.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/SMTP_Scanners"
+ title="SMTP Scanners">SMTP Scanners</a></div>
+</body>
+</html>

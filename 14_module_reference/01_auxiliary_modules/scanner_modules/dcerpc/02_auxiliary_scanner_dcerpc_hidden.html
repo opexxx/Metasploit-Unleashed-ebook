@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>auxiliary/scanner/dcerpc/hidden</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">auxiliary/scanner/dcerpc/hidden</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">The dcerpc/hidden scanner connects to a
+given range of IP addresses
+and try to locate any RPC services that are not listed in the Endpoint
+Mapper and determine if anonymous access to the service is allowed.
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">msf &gt; use auxiliary/scanner/dcerpc/hidden <br>msf auxiliary(hidden) &gt; show options<br><br>Module options:<br><br>   Name     Current Setting  Required  Description<br>   ----     ---------------  --------  -----------<br>   RHOSTS                    yes       The target address range or CIDR identifier<br>   THREADS  1                yes       The number of concurrent threads</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">As you can see, there are not many
+options to configure so we will just point it at some targets and let
+it run.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);">msf auxiliary(hidden) &gt; set RHOSTS 192.168.1.200-254<br>RHOSTS =&gt; 192.168.1.200-254<br>msf auxiliary(hidden) &gt; set THREADS 55<br>THREADS =&gt; 55<br>msf auxiliary(hidden) &gt; run<br><br>[*] Connecting to the endpoint mapper service...<br>[*] Connecting to the endpoint mapper service...<br>[*] Connecting to the endpoint mapper service...<br>...snip...<br>[*] Connecting to the endpoint mapper service...<br>[*] Connecting to the endpoint mapper service...<br>[*] Could not obtain the endpoint list: DCERPC FAULT =&gt; nca_s_fault_access_denied<br>[*] Could not contact the endpoint mapper on 192.168.1.203<br>[*] Could not obtain the endpoint list: DCERPC FAULT =&gt; nca_s_fault_access_denied<br>[*] Could not contact the endpoint mapper on 192.168.1.201<br>[*] Could not connect to the endpoint mapper service<br>[*] Could not contact the endpoint mapper on 192.168.1.250<br>[*] Looking for services on 192.168.1.204:1025...<br>[*] 	HIDDEN: UUID 12345778-1234-abcd-ef00-0123456789ab v0.0<br>[*] Looking for services on 192.168.1.202:49152...<br>[*] 		CONN BIND CALL ERROR=DCERPC FAULT =&gt; nca_s_fault_ndr <br>[*] <br>[*] 	HIDDEN: UUID c681d488-d850-11d0-8c52-00c04fd90f7e v1.0<br>[*] 		CONN BIND CALL ERROR=DCERPC FAULT =&gt; nca_s_fault_ndr <br>[*] <br>[*] 	HIDDEN: UUID 11220835-5b26-4d94-ae86-c3e475a809de v1.0<br>[*] 		CONN BIND ERROR=DCERPC FAULT =&gt; nca_s_fault_access_denied <br>[*] <br>[*] 	HIDDEN: UUID 5cbe92cb-f4be-45c9-9fc9-33e73e557b20 v1.0<br>[*] 		CONN BIND ERROR=DCERPC FAULT =&gt; nca_s_fault_access_denied <br>[*] <br>[*] 	HIDDEN: UUID 3919286a-b10c-11d0-9ba8-00c04fd92ef5 v0.0<br>[*] 		CONN BIND CALL DATA=0000000057000000 <br>[*] <br>[*] 	HIDDEN: UUID 1cbcad78-df0b-4934-b558-87839ea501c9 v0.0<br>[*] 		CONN BIND ERROR=DCERPC FAULT =&gt; nca_s_fault_access_denied <br>[*] <br>[*] 	HIDDEN: UUID c9378ff1-16f7-11d0-a0b2-00aa0061426a v1.0<br>[*] 		CONN BIND ERROR=DCERPC FAULT =&gt; nca_s_fault_access_denied <br>[*] <br>[*] Remote Management Interface Error: The connection timed out (192.168.1.202:49152).<br>...snip...<br>[*] Scanned 55 of 55 hosts (100% complete)<br>[*] Auxiliary module execution completed<br>msf auxiliary(hidden) &gt;</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">As you can see, despite the simple
+setup, we still gathered some additional information about one of our
+targets.
+</span><br style="color: rgb(0, 0, 0);">
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/DCERPC_Scanners"
+ title="DCERPC Scanners">DCERPC Scanners</a></div>
+</body>
+</html>

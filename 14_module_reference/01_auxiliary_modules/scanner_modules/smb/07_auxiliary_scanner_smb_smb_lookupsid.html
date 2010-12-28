@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>auxiliary/scanner/smb/smb_lookupsid</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">auxiliary/scanner/smb/smb_lookupsid</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">The smb_lookupsid module brute-forces
+SID lookups on a range of
+targets to determine what local users exist the system. Knowing what
+users exist on a system can greatly speed up any further brute-force
+logon attempts later on.
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">msf &gt; use auxiliary/scanner/smb/smb_lookupsid<br>msf auxiliary(smb_lookupsid) &gt; show options<br><br>Module options:<br><br>   Name       Current Setting  Required  Description<br>   ----       ---------------  --------  -----------<br>   RHOSTS                      yes       The target address range or CIDR identifier<br>   SMBDomain  WORKGROUP        no        The Windows domain to use for authentication<br>   SMBPass                     no        The password for the specified username<br>   SMBUser                     no        The username to authenticate as<br>   THREADS    1                yes       The number of concurrent threads<br><br>msf auxiliary(smb_lookupsid) &gt; set RHOSTS 192.168.1.150-165<br>RHOSTS =&gt; 192.168.1.150-165<br>msf auxiliary(smb_lookupsid) &gt; set THREADS 16<br>THREADS =&gt; 16<br>msf auxiliary(smb_lookupsid) &gt; run<br><br>[*] 192.168.1.161 PIPE(LSARPC) LOCAL(XEN-XP-SP2-BARE - 5-21-583907252-1801674531-839522115) DOMAIN(HOTZONE - )<br>[*] 192.168.1.154 PIPE(LSARPC) LOCAL(METASPLOITABLE - 5-21-1042354039-2475377354-766472396) DOMAIN(WORKGROUP - )<br>[*] 192.168.1.161 USER=Administrator RID=500<br>[*] 192.168.1.154 USER=Administrator RID=500<br>[*] 192.168.1.161 USER=Guest RID=501<br>[*] 192.168.1.154 USER=nobody RID=501<br>[*] Scanned 04 of 16 hosts (025% complete)<br>[*] 192.168.1.154 GROUP=Domain Admins RID=512<br>[*] 192.168.1.161 GROUP=None RID=513<br>[*] 192.168.1.154 GROUP=Domain Users RID=513<br>[*] 192.168.1.154 GROUP=Domain Guests RID=514<br>[*] Scanned 07 of 16 hosts (043% complete)<br>[*] 192.168.1.154 USER=root RID=1000<br>...snip...<br>[*] 192.168.1.154 GROUP=service RID=3005<br>[*] 192.168.1.154 METASPLOITABLE [Administrator, nobody, root, daemon, bin, sys, sync, games, man, lp, mail, news, uucp, proxy, www-data, backup, list, irc, gnats, libuuid, dhcp, syslog, klog, sshd, bind, postfix, ftp, postgres, mysql, tomcat55, distccd, telnetd, proftpd, msfadmin, user, service ]<br>[*] Scanned 15 of 16 hosts (093% complete)<br>[*] 192.168.1.161 XEN-XP-SP2-BARE [Administrator, Guest, HelpAssistant, SUPPORT_388945a0, victim ]<br>[*] Scanned 16 of 16 hosts (100% complete)<br>[*] Auxiliary module execution completed<br>msf auxiliary(smb_lookupsid) &gt;</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">By way of comparison, we will also
+run the scan using a known set of user credentials to see the
+difference in output.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);">msf auxiliary(smb_lookupsid) &gt; set SMBPass s3cr3t<br>SMBPass =&gt; s3cr3t<br>msf auxiliary(smb_lookupsid) &gt; set SMBUser Administrator<br>SMBUser =&gt; Administrator<br>msf auxiliary(smb_lookupsid) &gt; run<br><br>[*] 192.168.1.160 PIPE(LSARPC) LOCAL(XEN-XP-PATCHED - 5-21-583907252-1801674531-839522115) DOMAIN(HOTZONE - )<br>[*] 192.168.1.161 PIPE(LSARPC) LOCAL(XEN-XP-SP2-BARE - 5-21-583907252-1801674531-839522115) DOMAIN(HOTZONE - )<br>[*] 192.168.1.161 USER=Administrator RID=500<br>[*] 192.168.1.160 USER=Administrator RID=500<br>[*] 192.168.1.150 PIPE(LSARPC) LOCAL(V-XPSP2-SPLOIT- - 5-21-2000478354-1965331169-725345543) DOMAIN(WORKGROUP - )<br>[*] 192.168.1.160 USER=Guest RID=501<br>[*] 192.168.1.150 TYPE=83886081 NAME=Administrator rid=500<br>[*] 192.168.1.161 USER=Guest RID=501<br>[*] 192.168.1.150 TYPE=83886081 NAME=Guest rid=501<br>[*] 192.168.1.160 GROUP=None RID=513<br>[*] 192.168.1.150 TYPE=83886082 NAME=None rid=513<br>[*] 192.168.1.161 GROUP=None RID=513<br>[*] 192.168.1.150 TYPE=83886081 NAME=HelpAssistant rid=1000<br>[*] 192.168.1.150 TYPE=83886084 NAME=HelpServicesGroup rid=1001<br>[*] 192.168.1.150 TYPE=83886081 NAME=SUPPORT_388945a0 rid=1002<br>[*] 192.168.1.150 TYPE=3276804 NAME=SQLServerMSSQLServerADHelperUser$DOOKIE-FA154354 rid=1003<br>[*] 192.168.1.150 TYPE=4 NAME=SQLServer2005SQLBrowserUser$DOOKIE-FA154354 rid=1004<br>...snip...<br>[*] 192.168.1.160 TYPE=651165700 NAME=SQLServer2005MSSQLServerADHelperUser$XEN-XP-PATCHED rid=1027<br>[*] 192.168.1.160 TYPE=651165700 NAME=SQLServer2005MSSQLUser$XEN-XP-PATCHED$SQLEXPRESS rid=1028<br>[*] 192.168.1.161 USER=HelpAssistant RID=1000<br>[*] 192.168.1.161 TYPE=4 NAME=HelpServicesGroup rid=1001<br>[*] 192.168.1.161 USER=SUPPORT_388945a0 RID=1002<br>[*] 192.168.1.161 USER=victim RID=1004<br>[*] 192.168.1.160 XEN-XP-PATCHED [Administrator, Guest, HelpAssistant, SUPPORT_388945a0, ASPNET ]<br>[*] 192.168.1.150 V-XPSP2-SPLOIT- [ ]<br>[*] Scanned 15 of 16 hosts (093% complete)<br>[*] 192.168.1.161 XEN-XP-SP2-BARE [Administrator, Guest, HelpAssistant, SUPPORT_388945a0, victim ]<br>[*] Scanned 16 of 16 hosts (100% complete)<br>[*] Auxiliary module execution completed<br>msf auxiliary(smb_lookupsid) &gt;</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">You will notice with credentialed
+scanning, that you get, as
+always, a great deal more interesting output, including accounts you
+likely never knew existed.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/SMB_Scanners"
+ title="SMB Scanners">SMB Scanners</a></div>
+</body>
+</html>

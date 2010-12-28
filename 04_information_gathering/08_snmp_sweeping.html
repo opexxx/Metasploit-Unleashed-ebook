@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>SNMP Sweeping</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">SNMP
+Sweeping</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">SNMP sweeps are often a good indicator
+in finding a ton of
+information about a specific system or actually compromising the remote
+device. If you can find a Cisco device running a private string for
+example, you can actually download the entire device configuration,
+modify it, and upload your own malicious config. Also a lot of times,
+the passwords themselves are level 7 encoded which means they are
+trivial to decode and obtain the enable or login password for the
+specific device.
+</p>
+<p style="color: rgb(0, 0, 0);">Metasploit comes with a built in
+auxiliary module specifically
+for sweeping SNMP devices. There are a couple of things to understand
+before we perform our attack. First, read only and read write community
+strings play an important role on what type of information can be
+extracted or modified on the devices themselves. If you can "guess" the
+read-only or read-write strings you can obtain quite a bit of access
+you would not normally have. In addition, if Windows based devices are
+configured with SNMP, often times with the RO/RW community strings you
+can extract patch levels, services running, last reboot times,
+usernames on the system, routes, and various other amounts of
+information that is valuable to an attacker.
+</p>
+<p style="color: rgb(0, 0, 0);">When querying through SNMP, there is
+whats called an MIB API.
+The MIB stands for the Management Information Base (MIB), this
+interface allows you to query the device and extract information.
+Metasploit comes loaded with a list of default MIBs that it has in its
+database, it uses them to query the device for more information
+depending on what level of access is obtained. Let's take a peek at the
+auxiliary module.
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">msf &gt; search snmp<br>[*] Searching loaded modules for pattern 'snmp'...<br><br>Exploits<br>========<br><br>   Name                                 Description<br>   ----                                 -----------<br>   windows/ftp/oracle9i_xdb_ftp_unlock  Oracle 9i XDB FTP UNLOCK Overflow (win32)<br><br><br>Auxiliary<br>=========<br><br>   Name                       Description<br>   ----                       -----------<br>   scanner/snmp/aix_version   AIX SNMP Scanner Auxiliary Module<br>   scanner/snmp/community     SNMP Community Scanner<br><br>msf &gt; use scanner/snmp/community<br>msf auxiliary(community) &gt; show options<br><br>Module options:<br><br>   Name         Current Setting                                       Required  Description<br>   ----         ---------------                                       --------  -----------<br>   BATCHSIZE    256                                                   yes       The number of hosts to probe in each set<br>   COMMUNITIES  /pentest/exploits/framework3/data/wordlists/snmp.txt  no        The list of communities that should be attempted per host<br>   RHOSTS                                                             yes       The target address range or CIDR identifier<br>   RPORT        161                                                   yes       The target port<br>   THREADS      1                                                     yes       The number of concurrent threads<br><br>msf auxiliary(community) &gt; set RHOSTS 192.168.0.0-192.168.5.255<br>rhosts =&gt; 192.168.0.0-192.168.5.255<br>msf auxiliary(community) &gt; set THREADS 10<br>threads =&gt; 10<br>msf auxiliary(community) &gt; exploit<br>[*] &gt;&gt; progress (192.168.0.0-192.168.0.255) 0/30208...<br>[*] &gt;&gt; progress (192.168.1.0-192.168.1.255) 0/30208...<br>[*] &gt;&gt; progress (192.168.2.0-192.168.2.255) 0/30208...<br>[*] &gt;&gt; progress (192.168.3.0-192.168.3.255) 0/30208...<br>[*] &gt;&gt; progress (192.168.4.0-192.168.4.255) 0/30208...<br>[*] &gt;&gt; progress (-) 0/0...<br>[*] 192.168.1.50 'public' 'APC Web/SNMP Management Card (MB:v3.8.6 PF:v3.5.5 PN:apc_hw02_aos_355.bin AF1:v3.5.5 AN1:apc_hw02_sumx_355.bin MN:AP9619 HR:A10 SN: NA0827001465 MD:07/01/2008) (Embedded PowerNet SNMP Agent SW v2.2 compatible)'<br>[*] Auxiliary module execution completed</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">As we can see here, we were able to
+find a community string of
+"public", this is most likely read-only and doesn't reveal a ton of
+information. We do learn that the device is an APC Web/SNMP device, and
+what versions its running. </span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/Information_Gathering"
+ title="Information Gathering">Information Gathering</a></div>
+</body>
+</html>

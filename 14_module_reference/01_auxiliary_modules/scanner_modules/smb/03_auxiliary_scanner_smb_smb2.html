@@ -1,0 +1,24 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>auxiliary/scanner/smb/smb2</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">auxiliary/scanner/smb/smb2</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">The SMB2 scanner module simply scans
+the remote hosts and determines if they support the SMB2 protocol.
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">msf &gt; use auxiliary/scanner/smb/smb2<br>msf auxiliary(smb2) &gt; show options<br><br>Module options:<br><br>   Name     Current Setting  Required  Description<br>   ----     ---------------  --------  -----------<br>   RHOSTS                    yes       The target address range or CIDR identifier<br>   RPORT    445              yes       The target port<br>   THREADS  1                yes       The number of concurrent threads<br><br>msf auxiliary(smb2) &gt; set RHOSTS 192.168.1.150-165<br>RHOSTS =&gt; 192.168.1.150-165<br>msf auxiliary(smb2) &gt; set THREADS 16<br>THREADS =&gt; 16<br>msf auxiliary(smb2) &gt; run<br><br>[*] 192.168.1.162 supports SMB 2 [dialect 255.2] and has been online for 618 hours<br>[*] Scanned 06 of 16 hosts (037% complete)<br>[*] Scanned 13 of 16 hosts (081% complete)<br>[*] Scanned 14 of 16 hosts (087% complete)<br>[*] Scanned 16 of 16 hosts (100% complete)<br>[*] Auxiliary module execution completed<br>msf auxiliary(smb2) &gt;</pre>
+<br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/SMB_Scanners"
+ title="SMB Scanners">SMB Scanners</a></div>
+</body>
+</html>

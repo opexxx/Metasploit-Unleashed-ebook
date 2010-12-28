@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>The setg Command</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">The
+setg Command</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">In order to save a lot of typing during
+a pentest, you can set
+global variables within msfconsole. You can do this with the 'setg'
+command. Once these have been set, you can use them in as many exploits
+and auxiliary modules as you like. You can also save them for use the
+next time your start msfconsole. However, the pitfall is forgetting you
+have saved globals, so always check your options before you <b>"run"</b>
+or <b>"exploit"</b>. Conversely, you can use the <b>"unsetg"</b>
+command to unset a global variable. In the examples that follow,
+variables are entered in all-caps (ie: LHOST), but Metasploit is
+case-insensitive so it is not necessary to do so.
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">msf &gt; setg LHOST 192.168.1.101<br>LHOST =&gt; 192.168.1.101<br>msf &gt; setg RHOSTS 192.168.1.0/24<br>RHOSTS =&gt; 192.168.1.0/24<br>msf &gt; setg RHOST 192.168.1.136<br>RHOST =&gt; 192.168.1.136</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">After setting your different
+variables, you can run the 'save'
+command to save your current environment and settings. With your
+settings saved, they will be automatically loaded on startup which
+saves you from having to set everything again.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);">msf &gt; save<br>Saved configuration to: /root/.msf3/config<br>msf &gt;</pre>
+<br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/Msfconsole"
+ title="Msfconsole">msfconsole</a></div>
+</body>
+</html>

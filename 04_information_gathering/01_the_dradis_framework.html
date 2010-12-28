@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>The Dradis Framework</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">The
+Dradis Framework</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">Whether you are performing a pen-test
+as part of a team or are
+working on your own, you will want to be able to store your results for
+quick reference, share your data with your team, and assist with
+writing your final report. An excellent tool for performing all of the
+above is the dradis framework. Dradis is an open source framework for
+sharing information during security assessments and can be found here.
+The dradis framework is being actively developed with new features
+being added regularly.
+</p>
+<p style="color: rgb(0, 0, 0);">Dradis is far more than just a mere
+note-taking application.
+Communicating over SSL, it can import Nmap and Nessus result files,
+attach files, generate reports, and can be extended to connect with
+external systems (e.g. vulnerability database). In back|track4 you can
+issue the following command:
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">root@bt4: apt-get install dradis<br><br>Once the framework has installed we can now go to the directory and start the server.<br><br>root@bt4: cd /pentest/misc/dradis/server<br>root@bt4: ruby ./script/server<br><br>=&gt; Booting WEBrick...<br>=&gt; Rails application started on https://localhost:3004<br>=&gt; Ctrl-C to shutdown server; call with --help for options<br>[2009-08-29 13:40:50] INFO WEBrick 1.3.1<br>[2009-08-29 13:40:50] INFO ruby 1.8.7 (2008-08-11) [i486-linux]<br>[2009-08-29 13:40:50] INFO<br><br>[2009-08-29 13:40:50] INFO WEBrick::HTTPServer#start: pid=8881 port=3004</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">At last, we are ready to open the
+dradis web interface. Navigate to </span><a
+ style="color: rgb(0, 0, 0);" href="https://localhost:3004"
+ class="external free" rel="nofollow">https://localhost:3004</a><span
+ style="color: rgb(0, 0, 0);">
+(or use the IP address), accept the certificate warning, enter a new
+server password when prompted, and login using the password set in the
+previous step. Note that there are no usernames to set so on login, you
+can use whichever login name you like. If all goes well, you will be
+presented with the main dradis workspace.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<div style="color: rgb(0, 0, 0);" class="center">
+<div class="floatnone"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/File:Dradis.png"
+ class="image"><img alt="Dradis.png"
+ src="http://www.offensive-security.com/w/images/9/99/Dradis.png"
+ width="574" height="508"></a></div>
+</div>
+<p style="color: rgb(0, 0, 0);"><br>
+<br>
+On the left-hand side you can create a tree structure. Use it to
+organise your information (eg: Hosts, Subnets, Services, etc). On the
+right-hand you can add the relevant information to each element (think
+notes or attachments).
+</p>
+<p style="color: rgb(0, 0, 0);">Prior to starting the dradis console,
+you will need to edit the file <b>"dradis.xml"</b>
+to reflect the username and password you set when initially running the
+server. This file can be located under back|track4 under <b>"/pentest/misc/dradis/client/conf"</b>.
+</p>
+<p style="color: rgb(0, 0, 0);">You can now launch the dradis console
+by issuing the following command from the <b>"/pentest/misc/dradis/client/"</b>
+directory:
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">root@bt4:/pentest/misc/dradis/client# ruby ./dradis.rb<br>event(s) registered: [:exception]<br>Registered observers:<br>        {:exception=&gt;[#&gt;, @io=#&gt;]}<br><br>dradis&gt;</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">You can find more information on the
+</span><a style="color: rgb(0, 0, 0);"
+ href="http://dradisframework.org/" class="external text" rel="nofollow">Dradis
+Framework Project Site</a><span style="color: rgb(0, 0, 0);">.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/Information_Gathering"
+ title="Information Gathering">Information Gathering</a></div>
+</body>
+</html>

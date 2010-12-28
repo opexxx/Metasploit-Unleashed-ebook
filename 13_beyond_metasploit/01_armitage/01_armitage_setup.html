@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>Armitage Setup</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">Armitage
+Setup</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">To install Armitage in BackTrack, we
+simply need to update the repositories and install the <b>"armitage"</b>
+package.
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">root@bt:~# apt-get update<br>...snip...<br>Reading package lists... Done<br>root@bt:~# apt-get install armitage<br>...snip...<br>Unpacking armitage (from .../armitage_0.1-bt0_i386.deb) ...<br>Setting up armitage (0.1-bt0) ...<br>root@bt:~#</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">Armitage communicates with
+Metasploit via the RPC daemon so we need to start that next.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);">root@bt:~# msfrpcd -f -U msf -P test -t Basic<br>[*] XMLRPC starting on 0.0.0.0:55553 (SSL):Basic...</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">Next, we need to start our MYSQL
+server so Armitage has a place to store its results.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);">root@bt:~# /etc/init.d/mysql start<br>Starting MySQL database server: mysqld.<br>Checking for corrupt, not cleanly closed and upgrade needing tables..<br>root@bt:~#</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">Lastly, we need to run </span><b
+ style="color: rgb(0, 0, 0);">"armitage.sh"</b><span
+ style="color: rgb(0, 0, 0);"> from the
+/pentest/exploits/armitage directory at which point, we are presented
+with the connection dialog. In BackTrack, the default MYSQL credentials
+are root / toor and for PostgreSQL, they are postgres / toor.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);">root@bt:/pentest/exploits/armitage# ./armitage.sh</pre>
+<br style="color: rgb(0, 0, 0);">
+<div style="color: rgb(0, 0, 0);" class="center">
+<div class="floatnone"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/File:Armitage_connect.png"
+ class="image"><img alt="Armitage connect.png"
+ src="http://www.offensive-security.com/w/images/d/d4/Armitage_connect.png"
+ width="397" height="331"></a></div>
+</div>
+<p style="color: rgb(0, 0, 0);"><br>
+We select the <b>"Use SSL"</b> checkbox, verify the rest of the
+settings and click <b>"Connect"</b>. Afterwards, the main Armitage
+window is displayed.
+<br>
+<br>
+</p>
+<div style="color: rgb(0, 0, 0);" class="center">
+<div class="floatnone"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/File:Armitage_launched.png"
+ class="image"><img alt="Armitage launched.png"
+ src="http://www.offensive-security.com/w/images/2/2d/Armitage_launched.png"
+ width="925" height="862"></a></div>
+</div>
+<p style="color: rgb(0, 0, 0);"><br>
+<br>
+</p>
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/Armitage"
+ title="Armitage">Armitage</a></div>
+</body>
+</html>

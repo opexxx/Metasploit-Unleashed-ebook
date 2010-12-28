@@ -1,0 +1,38 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>auxiliary/scanner/smb/smb_version</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">auxiliary/scanner/smb/smb_version</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">The smb_version scanner connects to
+each workstation in a given
+range of hosts and determines the version of the SMB service that is
+running.
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">msf &gt; use auxiliary/scanner/smb/smb_version<br>msf auxiliary(smb_version) &gt; show options<br><br>Module options:<br><br>   Name       Current Setting  Required  Description<br>   ----       ---------------  --------  -----------<br>   RHOSTS                      yes       The target address range or CIDR identifier<br>   SMBDomain  WORKGROUP        no        The Windows domain to use for authentication<br>   SMBPass                     no        The password for the specified username<br>   SMBUser                     no        The username to authenticate as<br>   THREADS    1                yes       The number of concurrent threads<br><br>msf auxiliary(smb_version) &gt; set RHOSTS 192.168.1.150-165<br>RHOSTS =&gt; 192.168.1.150-165<br>msf auxiliary(smb_version) &gt; set THREADS 16<br>THREADS =&gt; 16<br>msf auxiliary(smb_version) &gt; run<br><br>[*] 192.168.1.162 is running Windows 7 Enterprise (Build 7600) (language: Unknown) (name:XEN-WIN7-BARE) (domain:HOTZONE)<br>[*] 192.168.1.154 is running Unix Samba 3.0.20-Debian (language: Unknown) (domain:WORKGROUP)<br>[*] 192.168.1.150 is running Windows XP Service Pack 2 (language: English) (name:V-XPSP2-SPLOIT-) (domain:WORKGROUP)<br>[*] Scanned 04 of 16 hosts (025% complete)<br>[*] 192.168.1.160 is running Windows XP Service Pack 3 (language: English) (name:XEN-XP-PATCHED) (domain:HOTZONE)<br>[*] 192.168.1.161 is running Windows XP Service Pack 2 (language: English) (name:XEN-XP-SP2-BARE) (domain:XEN-XP-SP2-BARE)<br>[*] Scanned 11 of 16 hosts (068% complete)<br>[*] Scanned 14 of 16 hosts (087% complete)<br>[*] Scanned 16 of 16 hosts (100% complete)<br>[*] Auxiliary module execution completed</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">Running this same scan with a set of
+credentials will return some different, and perhaps unexpected,
+results.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);">msf auxiliary(smb_version) &gt; set SMBPass s3cr3t<br>SMBPass =&gt; s3cr3t<br>msf auxiliary(smb_version) &gt; set SMBUser Administrator<br>SMBUser =&gt; Administrator<br>msf auxiliary(smb_version) &gt; run<br><br>[*] 192.168.1.160 is running Windows XP Service Pack 3 (language: English) (name:XEN-XP-PATCHED) (domain:XEN-XP-PATCHED)<br>[*] 192.168.1.150 is running Windows XP Service Pack 2 (language: English) (name:V-XPSP2-SPLOIT-) (domain:V-XPSP2-SPLOIT-)<br>[*] Scanned 05 of 16 hosts (031% complete)<br>[*] 192.168.1.161 is running Windows XP Service Pack 2 (language: English) (name:XEN-XP-SP2-BARE) (domain:XEN-XP-SP2-BARE)<br>[*] Scanned 12 of 16 hosts (075% complete)<br>[*] Scanned 14 of 16 hosts (087% complete)<br>[*] Scanned 15 of 16 hosts (093% complete)<br>[*] Scanned 16 of 16 hosts (100% complete)<br>[*] Auxiliary module execution completed<br>msf auxiliary(smb_version) &gt;</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">Contrary to many other cases, a
+credentialed scan in this case does
+not necessarily give better results. If the credentials are not valid
+on a particular system, you will not get any result back from the scan.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/SMB_Scanners"
+ title="SMB Scanners">SMB Scanners</a></div>
+</body>
+</html>

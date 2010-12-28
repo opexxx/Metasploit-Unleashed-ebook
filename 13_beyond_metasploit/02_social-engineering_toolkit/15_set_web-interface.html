@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>SET Web-Interface</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">SET
+Web-Interface</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">The web interface for the
+Social-Engineer Toolkit takes whatever you
+select and generates an answer file that is ultimately placed into
+set-automate. Each response assigns a given value and the built in
+intelligence on the back-end parses your responses into building and
+crafting the attack into SET. To turn the web interface simply type
+./set-web
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">root@bt:/pentest/exploits/set# ./set-web<br><br><br>[*] Starting the SET Command Center on port: 44444<br><br><br>|                                                      |<br>|                                                      |<br>|             The Social-Engineer Toolkit              |<br>|                    Command Center                    |<br>|                                                      |<br>|                May the pwn be with you               |<br>|______________________________________________________|<br><br>  All results from the web interface will be displayed<br>  in this terminal.<br><br><br>[*] Interface is bound to http://127.0.0.1 on port 44444 (open browser to ip/port)</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">Once the SET Web Interface is
+running, browse to localhost:44444.
+SET will only listen on localhost, you will not be able to get to it
+remotely.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<div style="color: rgb(0, 0, 0);" class="center">
+<div class="floatnone"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/File:SET_Web.png"
+ class="image"><img alt="SET Web.png"
+ src="http://www.offensive-security.com/w/images/9/98/SET_Web.png"
+ width="900" height="585"></a></div>
+</div>
+<p style="color: rgb(0, 0, 0);"><br>
+The web interface should be pretty self-explanatory if you&#8217;re
+familiar with the menu mode. One thing to note is that under the
+update&#8217;s menu, you&#8217;ll notice that you can dynamically edit the
+configuration options. When you save the new settings to the file, it
+will actually propagate different options in different menus. For
+example, if you turn on self-signed-applets to ON, new options will
+appear under the web attack menu. Otherwise, the options will remain
+hidden. To launch an attack, just click on one of the attack vectors,
+fill out the appropriate attacks and hit launch attack. Check your
+window that you launched the web interface on, and you should see the
+attack being launched.
+<br>
+<br>
+</p>
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/SET"
+ title="SET">SET</a></div>
+<p style="color: rgb(0, 0, 0);"><br>
+</p>
+</body>
+</html>

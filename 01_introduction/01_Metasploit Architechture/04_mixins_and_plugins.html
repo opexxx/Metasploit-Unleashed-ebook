@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>Mixins and Plugins</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">Mixins
+and Plugins</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">A quick diversion into Ruby.
+</p>
+<dl style="color: rgb(0, 0, 0);">
+  <dd>
+    <ul>
+      <li> Every Class only has one parent
+      </li>
+      <li> A class may include many Modules
+      </li>
+      <li> Modules can add new methods
+      </li>
+      <li> Modules can overload old methods
+      </li>
+      <li> Metasploit modules inherit Msf::Module and include mixins to
+add features.
+      </li>
+    </ul>
+  </dd>
+</dl>
+<p style="color: rgb(0, 0, 0);"><br>
+</p>
+<h2 style="color: rgb(0, 0, 0);"> <span class="mw-headline"
+ id="Metasploit_Mixins"> Metasploit Mixins </span></h2>
+<p style="color: rgb(0, 0, 0);">Mixins are quite simply, the reason why
+Ruby rocks.
+</p>
+<dl style="color: rgb(0, 0, 0);">
+  <dd>
+    <ul>
+      <li> Mixins 'include' one class into another
+      </li>
+      <li> This is both different and similar to inheritance
+      </li>
+      <li> Mixins can override a class' methods
+      </li>
+    </ul>
+  </dd>
+</dl>
+<p style="color: rgb(0, 0, 0);">Mixins can add new features and allows
+modules to have different 'flavors'.
+</p>
+<dl style="color: rgb(0, 0, 0);">
+  <dd>
+    <ul>
+      <li> Protocol-specific (ie: HTTP, SMB)
+      </li>
+      <li> Behavior-specific (ie: brute force)
+      </li>
+      <li> connect() is implemented by the TCP mixin
+      </li>
+      <li> connect() is then overloaded by FTP, SMB, and others.
+      </li>
+    </ul>
+  </dd>
+</dl>
+<p style="color: rgb(0, 0, 0);">Mixins can change behavior.
+</p>
+<dl style="color: rgb(0, 0, 0);">
+  <dd>
+    <ul>
+      <li> The Scanner mixin overloads run()
+      </li>
+      <li> Scanner changes run() for run_host() and run_range()
+      </li>
+      <li> It calls these in parallel based on the THREADS setting
+      </li>
+      <li> The BruteForce mixin is similar
+      </li>
+    </ul>
+  </dd>
+</dl>
+<p style="color: rgb(0, 0, 0);"><br>
+</p>
+<pre style="color: rgb(0, 0, 0);">class MyParent<br>     def woof<br>          puts &#8220;woof!&#8221;<br>     end<br>end<br><br>class MyClass &lt; MyParent<br>end<br><br>object = MyClass.new<br>object.woof() =&gt; &#8220;woof!&#8221;<br><br>================================================================<br><br>module MyMixin<br>     def woof<br>          puts &#8220;hijacked the woof method!&#8221;<br>     end<br>end<br><br>class MyBetterClass &lt; MyClass<br>     include MyMixin<br>end</pre>
+<br style="color: rgb(0, 0, 0);">
+<h2 style="color: rgb(0, 0, 0);"> <span class="mw-headline"
+ id="Metasploit_Plugins"> Metasploit Plugins </span></h2>
+<p style="color: rgb(0, 0, 0);">Plugins work directly with the API.
+</p>
+<dl style="color: rgb(0, 0, 0);">
+  <dd>
+    <ul>
+      <li> They manipulate the framework as a whole
+      </li>
+      <li> Plugins hook into the event subsystem
+      </li>
+      <li> They automate specific tasks which would be tedious to do
+manually
+      </li>
+    </ul>
+  </dd>
+</dl>
+<p style="color: rgb(0, 0, 0);">Plugins only work in the msfconsole.
+</p>
+<dl style="color: rgb(0, 0, 0);">
+  <dd>
+    <ul>
+      <li> Plugins can add new console commands
+      </li>
+      <li> They extend the overall Framework functionality
+      </li>
+    </ul>
+  </dd>
+</dl>
+<p style="color: rgb(0, 0, 0);"><br>
+</p>
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/Metasploit_Architechture"
+ title="Metasploit Architechture">Metasploit Architechture</a></div>
+</body>
+</html>

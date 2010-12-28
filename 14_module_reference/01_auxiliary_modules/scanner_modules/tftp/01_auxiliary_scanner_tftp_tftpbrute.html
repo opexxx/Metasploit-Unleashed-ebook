@@ -1,0 +1,26 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>auxiliary/scanner/tftp/tftpbrute</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">auxiliary/scanner/tftp/tftpbrute</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">TFTP servers can contain a wealth of
+valuable information including backup files, router config files, and
+much more. The <b>tftpbrute</b> module will take list of filenames and
+brute-force a TFTP server to determine if the files are present.
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">msf &gt; use auxiliary/scanner/tftp/tftpbrute<br>msf auxiliary(tftpbrute) &gt; show options<br><br>Module options:<br><br>   Name        Current Setting                                Required  Description<br>   ----        ---------------                                --------  -----------<br>   CHOST                                                      no        The local client address<br>   DICTIONARY  /opt/metasploit3/msf3/data/wordlists/tftp.txt  yes       The list of filenames<br>   RHOSTS                                                     yes       The target address range or CIDR identifier<br>   RPORT       69                                             yes       The target port<br>   THREADS     1                                              yes       The number of concurrent threads<br><br>msf auxiliary(tftpbrute) &gt; set RHOSTS 192.168.1.116<br>RHOSTS =&gt; 192.168.1.116<br>msf auxiliary(tftpbrute) &gt; set THREADS 10<br>THREADS =&gt; 10<br>msf auxiliary(tftpbrute) &gt; run<br><br>[*] Found 46xxsettings.txt on 192.168.1.116<br>[*] Scanned 1 of 1 hosts (100% complete)<br>[*] Auxiliary module execution completed<br>msf auxiliary(tftpbrute) &gt;</pre>
+<br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/TFTP_Scanners"
+ title="TFTP Scanners">TFTP Scanners</a></div>
+</body>
+</html>

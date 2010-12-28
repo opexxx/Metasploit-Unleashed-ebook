@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>SET Frequently Asked Questions</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">SET
+Frequently Asked Questions</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">In an effort to avoid confusion and
+help understand some of the common questions with SET.
+<br>
+<br>
+<br>
+<b>Q. I&#8217;m using NAT/Port forwarding, how can I configure SET to support
+this scenario?</b>
+</p>
+<p style="color: rgb(0, 0, 0);"><b>A.</b> Edit the config/set_config
+file and turn <b>AUTO_DETECT=ON</b> to <b>AUTO_DETECT=OFF</b>. Once
+this option is you will be prompted with the following questions:
+<br>
+<br>
+NAT/Port Forwarding can be used in the cases where your SET machine is
+not externally exposed and may be a different IP address than your
+reverse listener.
+<br>
+Are you using NAT/Port Forwarding? yes or no: <b>yes</b><br>
+Enter the IP address to your SET web server (external IP or hostname): <b>&lt;ExternalIPGoesHere&gt;</b>
+<br>
+<br>
+In some cases you may have your listener on a different IP address,
+if this is the case the next question asks if your IP address is
+different for the reverse handler/listener. If that is the case,
+specify yes, and enter your separate IP address for the listener.
+</p>
+<p style="color: rgb(0, 0, 0);">Is your payload handler (metasploit) on
+a different IP from your external NAT/Port FWD address (yes or no): <b>yes</b><br>
+Enter the IP address for the reverse handler (reverse payload): <b>&lt;OtherExternalIPGoesHere&gt;</b>
+<br>
+<br>
+<br>
+<b>Q. My Java Applet isn&#8217;t working correctly and don&#8217;t get prompted for
+the Applet when browsing the site.</b>
+</p>
+<p style="color: rgb(0, 0, 0);"><b>A.</b> You either do not have Java
+installed on the victim machine, or your using a NAT/Port forwarding
+scenario and you need to turn <b>AUTO_DETECT=ON</b> to <b>AUTO_DETECT=OFF</b>.
+If
+you do a view source on the webpage, the applet should be downloaded
+from your IP address that is accessible from the the victim. In some
+cases SET may grab the wrong interface IP as well, in this scenario you
+again will want to edit the set_config and turn <b>AUTO_DETECT</b> to <b>OFF</b>.
+<br>
+<br>
+</p>
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/SET"
+ title="SET">SET</a></div>
+</body>
+</html>

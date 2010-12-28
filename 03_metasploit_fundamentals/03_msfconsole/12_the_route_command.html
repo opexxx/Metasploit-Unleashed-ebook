@@ -1,0 +1,29 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>The route Command</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">The
+route Command</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">The <b>"route"</b> command in
+Metasploit allows you to route sockets
+through a session or 'comm', providing basic pivoting capabilities. To
+add a route, you pass the target subnet and network mask followed by
+the session (comm) number.
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">msf exploit(ms08_067_netapi) &gt; route<br>Usage: route [add/remove/get/flush/print] subnet netmask [comm/sid]<br><br>Route traffic destined to a given subnet through a supplied session.<br>The default comm is Local.<br>msf exploit(ms08_067_netapi) &gt; route add 192.168.1.0 255.255.255.0 2<br>msf exploit(ms08_067_netapi) &gt; route print<br><br>Active Routing Table<br>====================<br><br>   Subnet             Netmask            Gateway<br>   ------             -------            -------<br>   192.168.1.0        255.255.255.0      Session 2</pre>
+<br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/Msfconsole"
+ title="Msfconsole">msfconsole</a></div>
+<br style="color: rgb(0, 0, 0);">
+</body>
+</html>

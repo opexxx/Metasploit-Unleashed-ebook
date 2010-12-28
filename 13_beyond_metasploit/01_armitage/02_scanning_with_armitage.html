@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>Scanning with Armitage</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">Scanning
+with Armitage</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">To select a scan we wish to run with
+Armitage, we expand the module
+tree and double-click on the scanner we wish to use, in this case, <b>"smb_version"</b>,
+and set our RHOSTS target range.
+<br>
+<br>
+</p>
+<div style="color: rgb(0, 0, 0);" class="center">
+<div class="floatnone"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/File:Armitage_scan_config.png"
+ class="image"><img alt="Armitage scan config.png"
+ src="http://www.offensive-security.com/w/images/c/cc/Armitage_scan_config.png"
+ width="924" height="857"></a></div>
+</div>
+<p style="color: rgb(0, 0, 0);"><br>
+After clicking <b>"Launch"</b>, we wait a brief amount of time
+for the scan to complete and are presented with the hosts that were
+detected. The graphics on the hosts indicate that there are either
+WinXP or Server 2003 targets.
+<br>
+<br>
+</p>
+<div style="color: rgb(0, 0, 0);" class="center">
+<div class="floatnone"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/File:Armitage_scanned_hosts.png"
+ class="image"><img alt="Armitage scanned hosts.png"
+ src="http://www.offensive-security.com/w/images/1/1c/Armitage_scanned_hosts.png"
+ width="921" height="776"></a></div>
+</div>
+<p style="color: rgb(0, 0, 0);"><br>
+If there are any hosts we don't wish to target, they can be removed by
+right-clicking on a host, expanding the <b>"Host"</b> menu, and
+selecting <b>"Remove Host"</b>.
+We
+see in our scan results that there are two Server 2003 targets so we
+can select just those two and perform additional scanning on them.
+Notice that Armitage automatically sets the RHOSTS value based on our
+selection.
+<br>
+<br>
+</p>
+<div style="color: rgb(0, 0, 0);" class="center">
+<div class="floatnone"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/File:Armitage_scan_servers.png"
+ class="image"><img alt="Armitage scan servers.png"
+ src="http://www.offensive-security.com/w/images/c/c9/Armitage_scan_servers.png"
+ width="920" height="775"></a></div>
+</div>
+<p style="color: rgb(0, 0, 0);"><br>
+Right-clicking on a host and selecting <b>"Services"</b> will open a
+new tab displaying all of the services that have been scanned on the
+target system.
+<br>
+<br>
+</p>
+<div style="color: rgb(0, 0, 0);" class="center">
+<div class="floatnone"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/File:Armitage_scanned_services.png"
+ class="image"><img alt="Armitage scanned services.png"
+ src="http://www.offensive-security.com/w/images/9/9d/Armitage_scanned_services.png"
+ width="919" height="778"></a></div>
+</div>
+<p style="color: rgb(0, 0, 0);"><br>
+Even with these brief scans, we can see that we have gathered
+quite a bit of information about our targets that is presented to us in
+a very friendly fashion. Additionally, all of the gathered information
+is also conveniently stored for us in the MYSQL database.
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">mysql&gt; use msf3;<br>Reading table information for completion of table and column names<br>You can turn off this feature to get a quicker startup with -A<br><br>Database changed<br>mysql&gt; select address,os_flavor from hosts;<br>+---------------+-----------------+<br>| address       | os_flavor       |<br>+---------------+-----------------+<br>| 192.168.1.205 | Windows 2003 R2 |<br>| 192.168.1.204 | Windows 2003 R2 |<br>| 192.168.1.206 | Windows XP      |<br>| 192.168.1.201 | Windows XP      |<br>| 192.168.1.203 | Windows XP      |<br>+---------------+-----------------+<br>5 rows in set (0.00 sec)<br><br>mysql&gt;</pre>
+<br style="color: rgb(0, 0, 0);">
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/Armitage"
+ title="Armitage">Armitage</a></div>
+</body>
+</html>

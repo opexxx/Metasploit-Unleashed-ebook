@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>auxiliary/scanner/ftp/anonymous</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">auxiliary/scanner/ftp/anonymous</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">The <b>"ftp/anonymous"</b> scanner
+will scan a range of IP addresses
+searching for FTP servers that allow anonymous access and determines
+where read or write permissions are allowed.
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">msf &gt; use auxiliary/scanner/ftp/anonymous<br>msf auxiliary(anonymous) &gt; show options<br><br>Module options:<br><br>   Name     Current Setting      Required  Description<br>   ----     ---------------      --------  -----------<br>   FTPPASS  mozilla@example.com  no        The password for the specified username<br>   FTPUSER  anonymous            no        The username to authenticate as<br>   RHOSTS                        yes       The target address range or CIDR identifier<br>   RPORT    21                   yes       The target port<br>   THREADS  1                    yes       The number of concurrent threads</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">Configuring the module is a simple
+matter of setting the IP range
+we wish to scan along with the number of concurrent threads and let it
+run.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);">msf auxiliary(anonymous) &gt; set RHOSTS 192.168.1.200-254<br>RHOSTS =&gt; 192.168.1.200-254<br>msf auxiliary(anonymous) &gt; set THREADS 55<br>THREADS =&gt; 55<br>msf auxiliary(anonymous) &gt; run<br><br>[*] 192.168.1.222:21 Anonymous READ (220 mailman FTP server (Version wu-2.6.2-5) ready.)<br>[*] 192.168.1.205:21 Anonymous READ (220 oracle2 Microsoft FTP Service (Version 5.0).)<br>[*] 192.168.1.215:21 Anonymous READ (220 (vsFTPd 1.1.3))<br>[*] 192.168.1.203:21 Anonymous READ/WRITE (220 Microsoft FTP Service)<br>[*] 192.168.1.227:21 Anonymous READ (220 srv2 Microsoft FTP Service (Version 5.0).)<br>[*] 192.168.1.204:21 Anonymous READ/WRITE (220 Microsoft FTP Service)<br>[*] Scanned 27 of 55 hosts (049% complete)<br>[*] Scanned 51 of 55 hosts (092% complete)<br>[*] Scanned 52 of 55 hosts (094% complete)<br>[*] Scanned 53 of 55 hosts (096% complete)<br>[*] Scanned 54 of 55 hosts (098% complete)<br>[*] Scanned 55 of 55 hosts (100% complete)<br>[*] Auxiliary module execution completed<br>msf auxiliary(anonymous) &gt;</pre>
+<br style="color: rgb(0, 0, 0);">
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/FTP_Scanners"
+ title="FTP Scanners">FTP Scanners</a></div>
+</body>
+</html>

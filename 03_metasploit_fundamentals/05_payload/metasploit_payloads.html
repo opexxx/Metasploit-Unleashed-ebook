@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>Metasploit Payloads</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">Metasploit
+Payloads</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">There are three different types of
+payload module types in
+Metasploit: Singles, Stagers, and Stages. These different types allow
+for a great deal of versatility and can be useful across numerous types
+of scenarios. Whether or not a payload is staged, is represented by '/'
+in the payload name. For example, <b>"windows/shell_bind_tcp"</b> is a
+single payload, with no stage whereas <b>"windows/shell/bind_tcp"</b>
+consists of a stager (bind_tcp) and a stage (shell).
+<br>
+</p>
+<h4 style="color: rgb(0, 0, 0);"> <span class="mw-headline"
+ id="Singles">Singles</span></h4>
+<p style="color: rgb(0, 0, 0);">Singles are payloads that are
+self-contained and completely
+standalone. A Single payload can be something as simple as adding a
+user to the target system or running calc.exe.
+<br>
+</p>
+<h4 style="color: rgb(0, 0, 0);"> <span class="mw-headline"
+ id="Stagers">Stagers</span></h4>
+<p style="color: rgb(0, 0, 0);">Stagers setup a network connection
+between the attacker and victim
+and are designed to be small and reliable. It is difficult to always do
+both of these well so the result is multiple similar stagers.
+Metasploit will use the best one when it can and fall back to a
+less-preferred one when necessary.
+<br>
+Windows NX vs NO-NX Stagers
+</p>
+<dl style="color: rgb(0, 0, 0);">
+  <dd>
+    <ul>
+      <li>Reliability issue for NX CPUs and DEP
+      </li>
+      <li>NX stagers are bigger (VirtualAlloc)
+      </li>
+      <li>Default is now NX + Win7 compatible
+      </li>
+    </ul>
+  </dd>
+</dl>
+<p style="color: rgb(0, 0, 0);"><br>
+</p>
+<h4 style="color: rgb(0, 0, 0);"> <span class="mw-headline" id="Stages">Stages</span></h4>
+<p style="color: rgb(0, 0, 0);">Stages are payload components that are
+downloaded by Stagers
+modules. The various payload stages provide advanced features with no
+size limits such as Meterpreter, VNC Injection, and the iPhone 'ipwn'
+Shell.
+</p>
+<p style="color: rgb(0, 0, 0);">Payload stages automatically use
+'middle stagers'
+</p>
+<dl style="color: rgb(0, 0, 0);">
+  <dd>
+    <ul>
+      <li>A single recv() fails with large payloads
+      </li>
+      <li>The stager receives the middle stager
+      </li>
+      <li>The middle stager then performs a full download
+      </li>
+      <li>Also better for RWX
+      </li>
+    </ul>
+  </dd>
+</dl>
+<p style="color: rgb(0, 0, 0);"><br>
+<br>
+</p>
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/Metasploit_Fundamentals"
+ title="Metasploit Fundamentals">Metasploit Fundamentals</a></div>
+<p style="color: rgb(0, 0, 0);"><br>
+</p>
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/Payload_Types"
+ title="Payload Types">Payload Types</a> - <a
+ href="http://www.offensive-security.com/metasploit-unleashed/Metasploit_Generating_Payloads"
+ title="Metasploit Generating Payloads">Generating Payloads</a></div>
+</body>
+</html>

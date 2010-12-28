@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>Modules and Locations</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">Modules
+and Locations</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">Metasploit, as presented to the user,
+is composed of modules.
+</p>
+<h4 style="color: rgb(0, 0, 0);"> <span class="mw-headline"
+ id="Exploits"> Exploits </span></h4>
+<dl style="color: rgb(0, 0, 0);">
+  <dd>
+    <ul>
+      <li> Defined as modules that use payloads
+      </li>
+      <li> An exploit without a payload is an Auxiliary module
+      </li>
+    </ul>
+  </dd>
+</dl>
+<h4 style="color: rgb(0, 0, 0);"> <span class="mw-headline"
+ id="Payloads.2C_Encoders.2C_Nops"> Payloads, Encoders, Nops </span></h4>
+<dl style="color: rgb(0, 0, 0);">
+  <dd>
+    <ul>
+      <li> Payloads consist of code that runs remotely
+      </li>
+      <li> Encoders ensure that payloads make it to their destination
+      </li>
+      <li> Nops keep the payload sizes consistent.
+      </li>
+    </ul>
+  </dd>
+</dl>
+<p style="color: rgb(0, 0, 0);"><br>
+</p>
+<h2 style="color: rgb(0, 0, 0);"> <span class="mw-headline"
+ id="Modules_Locations"> Modules Locations </span></h2>
+<h4 style="color: rgb(0, 0, 0);"> <span class="mw-headline"
+ id="Primary_Module_Tree"> Primary Module Tree </span></h4>
+<dl style="color: rgb(0, 0, 0);">
+  <dd>
+    <ul>
+      <li> Located under $install/modules//
+      </li>
+    </ul>
+  </dd>
+</dl>
+<h4 style="color: rgb(0, 0, 0);"> <span class="mw-headline"
+ id="User-Specified_Module_Tree"> User-Specified Module Tree </span></h4>
+<dl style="color: rgb(0, 0, 0);">
+  <dd>
+    <ul>
+      <li> Located under ~/.msf3/modules//
+      </li>
+      <li> This location is ideal for private module sets
+      </li>
+    </ul>
+  </dd>
+</dl>
+<h4 style="color: rgb(0, 0, 0);"> <span class="mw-headline"
+ id="Loading_Additional_Trees_at_Runtime"> Loading Additional Trees at
+Runtime </span></h4>
+<dl style="color: rgb(0, 0, 0);">
+  <dd>
+    <ul>
+      <li> Pass the -m option when running msfconsole (./msfconsole -m)
+      </li>
+      <li> Use the loadpath command within msfconsole
+      </li>
+    </ul>
+  </dd>
+</dl>
+<p style="color: rgb(0, 0, 0);"><br>
+</p>
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/Metasploit_Architechture"
+ title="Metasploit Architechture">Metasploit Architechture</a></div>
+</body>
+</html>

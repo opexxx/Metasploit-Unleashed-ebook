@@ -1,0 +1,179 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>Creating A Vulnerable Webapp</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">Creating
+A Vulnerable Webapp</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">In order to create our vulnerable web
+app, you will need to download <a
+ href="http://www.microsoft.com/downloadS/details.aspx?familyid=C243A5AE-4BD1-4E3D-94B8-5A0F62BF7796&amp;displaylang=en%7CSQL"
+ class="external text" rel="nofollow">Server Management Studio Express</a>.
+<br>
+<br>
+Install SQL Server Managment Studio Express, accepting all of the
+defaults for the installation then run it via <b>"Start"</b> -&gt; <b>"All
+Programs"</b> -&gt; <b>"Microsoft SQL Server 2005"</b> -&gt; <b>"SQL
+Server Management Studio Express"</b>.
+<br>
+<br>
+When Management Studio starts up, select <b>"SQL Server Authentication"</b>
+and connect using the username <b>"sa"</b> and password of <b>"password1"</b>.
+<br>
+<br>
+Right-click <b>"Databases"</b> in the <b>"Object Explorer"</b> and
+select <b>"New Database"</b>.
+<br>
+<br>
+</p>
+<div style="color: rgb(0, 0, 0);" class="center">
+<div class="floatnone"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/File:Webapp_01.png"
+ class="image"><img alt="Webapp 01.png"
+ src="http://www.offensive-security.com/w/images/3/3c/Webapp_01.png"
+ width="333" height="254"></a></div>
+</div>
+<p style="color: rgb(0, 0, 0);"><br>
+<br>
+Enter <b>"WebApp"</b> for the database name and click <b>"OK"</b>. In
+the <b>"Object Explorer"</b>, expand <b>"Databases"</b>, and expand
+the <b>"WebApp"</b> database. Right-click <b>"Tables"</b> and select <b>"New
+Table"</b>.
+<br>
+<br>
+</p>
+<div style="color: rgb(0, 0, 0);" class="center">
+<div class="floatnone"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/File:Webapp_02.png"
+ class="image"><img alt="Webapp 02.png"
+ src="http://www.offensive-security.com/w/images/6/65/Webapp_02.png"
+ width="385" height="216"></a></div>
+</div>
+<p style="color: rgb(0, 0, 0);"><br>
+<br>
+Create a new table named <b>"users"</b> with the column names and
+types as shown below.
+<br>
+<br>
+</p>
+<div style="color: rgb(0, 0, 0);" class="center">
+<div class="floatnone"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/File:Webapp_03.png"
+ class="image"><img alt="Webapp 03.png"
+ src="http://www.offensive-security.com/w/images/d/df/Webapp_03.png"
+ width="686" height="163"></a></div>
+</div>
+<p style="color: rgb(0, 0, 0);"><br>
+<br>
+Save the <b>"users"</b> table, right-click it and select <b>"Open
+Table"</b>.
+<br>
+<br>
+</p>
+<div style="color: rgb(0, 0, 0);" class="center">
+<div class="floatnone"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/File:Webapp_04.png"
+ class="image"><img alt="Webapp 04.png"
+ src="http://www.offensive-security.com/w/images/c/c8/Webapp_04.png"
+ width="308" height="135"></a></div>
+</div>
+<p style="color: rgb(0, 0, 0);"><br>
+<br>
+Enter in some sample data into the table and save all of your work.
+<br>
+<br>
+</p>
+<div style="color: rgb(0, 0, 0);" class="center">
+<div class="floatnone"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/File:Webapp_05.png"
+ class="image"><img alt="Webapp 05.png"
+ src="http://www.offensive-security.com/w/images/0/06/Webapp_05.png"
+ width="655" height="128"></a></div>
+</div>
+<p style="color: rgb(0, 0, 0);"><br>
+<br>
+Under the main <b>"Object Explorer"</b> tree, expand <b>"Security"</b>,
+then <b>"Logins"</b>. Right-click <b>"Logins"</b> and select <b>"New
+Login"</b>.
+<br>
+<br>
+</p>
+<div style="color: rgb(0, 0, 0);" class="center">
+<div class="floatnone"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/File:Webapp_06.png"
+ class="image"><img alt="Webapp 06.png"
+ src="http://www.offensive-security.com/w/images/d/db/Webapp_06.png"
+ width="283" height="169"></a></div>
+</div>
+<p style="color: rgb(0, 0, 0);"><br>
+<br>
+In the <b>"Login - New"</b> window, select <b>"Search"</b>, enter <b>"aspnet"</b>
+and click <b>"Check Names"</b>. Click <b>"OK"</b> but keep the <b>"Login
+- New"</b> window open.
+<br>
+<br>
+</p>
+<div style="color: rgb(0, 0, 0);" class="center">
+<div class="floatnone"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/File:Webapp_07.png"
+ class="image"><img alt="Webapp 07.png"
+ src="http://www.offensive-security.com/w/images/5/51/Webapp_07.png"
+ width="578" height="317"></a></div>
+</div>
+<p style="color: rgb(0, 0, 0);"><br>
+<br>
+Click on properties for ASPNET, and ensure that under user mapping the
+user account has db_owner and public rights to the WebApp database.
+<br>
+<br>
+</p>
+<div style="color: rgb(0, 0, 0);" class="center">
+<div class="floatnone"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/File:Webapp_08.png"
+ class="image"><img alt="Webapp 08.png"
+ src="http://www.offensive-security.com/w/images/4/45/Webapp_08.png"
+ width="703" height="630"></a></div>
+</div>
+<p style="color: rgb(0, 0, 0);"><br>
+<br>
+Next, we need to create our website to interact with the back-end
+database we created. Start Notepad and paste the following code into a
+new document. Save this file as <b>"C:\Inetpub\wwwroot\Default.aspx"</b>.
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">&lt;%@ Page Language="C#" AutoEventWireup="true" ValidateRequest="false" CodeFile="Default.aspx.cs" Inherits="_Default" %&gt;<br>&lt;%--the ValidateRequest="true" in the page directive will check for &lt;script&gt; and other potentially dangerous inputs--%&gt;<br>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;<br><br>&lt;html xmlns="http://www.w3.org/1999/xhtml" &gt;<br>&lt;head runat="server"&gt;<br><br>&lt;/head&gt;<br>&lt;body bgcolor="white"&gt;<br>&lt;form id="form1" runat="server"&gt;<br>&lt;div&gt;<br><br>&lt;font color="black"&gt;&lt;h1&gt;Login Page&lt;/h1&gt;&lt;/font&gt;<br>&lt;asp:Label ID="lblErrorMessage" Font-Size="Larger" ForeColor="red" Visible="false" runat="server" /&gt;<br><br>&lt;font color="black"&gt;<br>&lt;asp:Panel ID="pnlLogin" Visible="true" runat="server"&gt;<br>&lt;asp:Table ID="tblLogin" runat="server"&gt;<br>&lt;asp:TableRow&gt;<br>&lt;asp:TableCell&gt;<br>&lt;asp:Literal Text="Login:" runat="server" /&gt;<br>&lt;/asp:TableCell&gt;<br>&lt;asp:TableCell&gt;<br>&lt;asp:TextBox ID="txtLogin" width="200" BackColor="white" ForeColor="black" runat="server" /&gt;<br>&lt;/asp:TableCell&gt;<br>&lt;/asp:TableRow&gt;<br>&lt;asp:TableRow&gt;<br>&lt;asp:TableCell&gt;<br>&lt;asp:Literal ID="ltrlPassword" Text="Password" runat="server" /&gt;<br>&lt;/asp:TableCell&gt;<br>&lt;asp:TableCell&gt;<br>&lt;asp:TextBox ID="txtPassword" width="200" TextMode="password" BackColor="white" ForeColor="black" runat="server" /&gt;<br>&lt;/asp:TableCell&gt;<br>&lt;/asp:TableRow&gt;<br>&lt;asp:TableRow&gt;<br>&lt;asp:TableCell ColumnSpan="2" HorizontalAlign="center"&gt;<br>&lt;asp:Button ID="btnSubmit" BorderColor="white" BackColor="white" ForeColor="black"<br>Text="Login" OnClick="btnSubmit_Clicked" runat="server" /&gt;<br>&lt;br /&gt;&lt;/asp:TableCell&gt;<br>&lt;/asp:TableRow&gt;<br>&lt;/asp:Table&gt;<br>&lt;h5&gt;Please dont hack this site :-(<br>&lt;/asp:Panel&gt;<br>&lt;asp:Panel ID="pnlChatterBox" Visible="false" runat="server"&gt;<br>You haz logged in! :-)<br>&lt;/asp:Panel&gt;<br>&lt;/font&gt;<br><br>&lt;/div&gt;<br>&lt;/form&gt;<br>&lt;/body&gt;<br>&lt;/html&gt;</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">Create another document containing
+the following code and save it as </span><b
+ style="color: rgb(0, 0, 0);">"C:\Inetpub\wwwroot\Default.aspx.cs"</b><span
+ style="color: rgb(0, 0, 0);">.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);">using System;<br>using System.Data;<br>using System.Data.SqlClient;<br>using System.Configuration;<br>using System.Web;<br>using System.Web.Security;<br>using System.Web.UI;<br>using System.Web.UI.WebControls;<br>using System.Web.UI.WebControls.WebParts;<br>using System.Web.UI.HtmlControls;<br><br>public partial class _Default : System.Web.UI.Page<br>{<br>protected SqlConnection objConn = new SqlConnection(ConfigurationManager.ConnectionStrings["test"].ToString());<br>protected string sql = "";<br>protected void Page_Load(object sender, EventArgs e)<br>{<br>if((Request.QueryString["login"] != null) &amp;&amp;<br>(Request.QueryString["password"] != null))<br>{<br>Response.Write(Request.QueryString["login"].ToString() + "&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;" + Request.QueryString["password"].ToString());<br><br>sql = "SELECT first_name + ' ' + last_name + ' ' + middle_name FROM users WHERE username = '" + Request.QueryString["login"] + "' " +<br>"AND password = '" + Request.QueryString["password"] + "'";<br>Login();<br>}<br>}<br><br>public void btnSubmit_Clicked(object o, EventArgs e)<br>{<br>lblErrorMessage.Text = "";<br>lblErrorMessage.Visible = false;<br><br>if (txtLogin.Text == "")<br>{<br>lblErrorMessage.Text = "Missing login name!&lt;br /&gt;";<br>lblErrorMessage.Visible = true;<br>}<br>else<br>{<br>if (txtPassword.Text == "")<br>{<br>lblErrorMessage.Text = "Missing password!&lt;br /&gt;";<br>lblErrorMessage.Visible = true;<br>}<br>else<br>{<br>sql = "SELECT first_name + ' ' + last_name + ' ' + middle_name FROM users WHERE username = '" + txtLogin.Text + "' " +<br>"AND password = '" + txtPassword.Text + "'";<br>Login();<br>}<br>}<br>}<br><br>private void Login()<br>{<br>//correct sql string using sql parameters.<br>//string sql = "SELECT first_name + ' ' + last_name FROM users WHERE username = @txtLogin " +<br>// "AND password = @txtPassword";<br><br>SqlCommand cmd = new SqlCommand(sql, objConn);<br><br>//each parameter needs added for each user inputted value...<br>//to take the input literally and not break out with malicious input....<br>//cmd.Parameters.AddWithValue("@txtLogin", txtLogin.Text);<br>//cmd.Parameters.AddWithValue("@txtPassword", txtPassword.Text);<br><br>objConn.Open();<br><br>if (cmd.ExecuteScalar() != DBNull.Value)<br>{<br>if (Convert.ToString(cmd.ExecuteScalar()) != "")<br>{<br>lblErrorMessage.Text = "Sucessfully logged in!";<br>lblErrorMessage.Visible = true;<br>pnlLogin.Visible = false;<br>pnlChatterBox.Visible = true;<br>}<br>else<br>{<br>lblErrorMessage.Text = "Invalid Login!";<br>lblErrorMessage.Visible = true;<br>}<br>}<br>else<br>{<br>lblErrorMessage.Text = "Invalid Username/";<br>lblErrorMessage.Visible = true;<br>}<br><br>objConn.Close();<br>}<br><br>//&lt;style type="text/css"&gt;TABLE {display: none !important;}&lt;/style&gt; //remove tables totally.<br>//&lt;style type="text/css"&gt;body{background-color: #ffffff;}&lt;/style&gt; //change background color<br>//&lt;style type="text/css"&gt;div {display: none !important;}&lt;/style&gt; //remove all divs, blank out page<br>//&lt;script&gt;alert("hello");&lt;/script&gt;<br>//&lt;meta http-equiv="refresh" content="0; url=http://www.google.com" /&gt;<br>}</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">Lastly, create a file containing the
+following and save it as </span><b style="color: rgb(0, 0, 0);">"C:\Inetpub\wwwroot\Web.config"</b><span
+ style="color: rgb(0, 0, 0);">.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);">&lt;?xml version="1.0"?&gt;<br>&lt;configuration&gt;<br>&lt;connectionStrings&gt;<br>&lt;add name="test" connectionString="server=localhost;database=WebApp;uid=sa;password=password1;" providerName="System.Data.SqlClient"/&gt;<br>&lt;/connectionStrings&gt;<br>&lt;system.web&gt;<br><br>&lt;!-- DYNAMIC DEBUG COMPILATION<br>Set compilation debug="true" to enable ASPX debugging. Otherwise, setting this value to<br>false will improve runtime performance of this application.<br>Set compilation debug="true" to insert debugging symbols(.pdb information)<br>into the compiled page. Because this creates a larger file that executes<br>more slowly, you should set this value to true only when debugging and to<br>false at all other times. For more information, refer to the documentation about<br>debugging ASP.NET files.<br>--&gt;<br>&lt;compilation defaultLanguage="c#" debug="true"&gt;<br>&lt;assemblies&gt;<br>&lt;add assembly="System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=B03F5F7F11D50A3A"/&gt;<br>&lt;add assembly="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=B77A5C561934E089"/&gt;&lt;/assemblies&gt;&lt;/compilation&gt;<br>&lt;!-- CUSTOM ERROR MESSAGES<br>Set customErrors mode="On" or "RemoteOnly" to enable custom error messages, "Off" to disable.<br>Add &lt;error&gt; tags for each of the errors you want to handle.<br><br>"On" Always display custom (friendly) messages.<br>"Off" Always display detailed ASP.NET error information.<br>"RemoteOnly" Display custom (friendly) messages only to users not running<br>on the local Web server. This setting is recommended for security purposes, so<br>that you do not display application detail information to remote clients.<br>--&gt;<br>&lt;customErrors mode="Off"/&gt;<br>&lt;!-- AUTHENTICATION<br>This section sets the authentication policies of the application. Possible modes are "Windows",<br>"Forms", "Passport" and "None"<br><br>"None" No authentication is performed.<br>"Windows" IIS performs authentication (Basic, Digest, or Integrated Windows) according to<br>its settings for the application. Anonymous access must be disabled in IIS.<br>"Forms" You provide a custom form (Web page) for users to enter their credentials, and then<br>you authenticate them in your application. A user credential token is stored in a cookie.<br>"Passport" Authentication is performed via a centralized authentication service provided<br>by Microsoft that offers a single logon and core profile services for member sites.<br>--&gt;<br>&lt;authentication mode="Windows"/&gt;<br>&lt;!-- AUTHORIZATION<br>This section sets the authorization policies of the application. You can allow or deny access<br>to application resources by user or role. Wildcards: "*" mean everyone, "?" means anonymous<br>(unauthenticated) users.<br>--&gt;<br>&lt;authorization&gt;<br>&lt;allow users="*"/&gt;<br>&lt;!-- Allow all users --&gt;<br>&lt;!-- &lt;allow users="[comma separated list of users]"<br>roles="[comma separated list of roles]"/&gt;<br>&lt;deny users="[comma separated list of users]"<br>roles="[comma separated list of roles]"/&gt;<br>--&gt;<br>&lt;/authorization&gt;<br>&lt;!-- APPLICATION-LEVEL TRACE LOGGING<br>Application-level tracing enables trace log output for every page within an application.<br>Set trace enabled="true" to enable application trace logging. If pageOutput="true", the<br>trace information will be displayed at the bottom of each page. Otherwise, you can view the<br>application trace log by browsing the "trace.axd" page from your web application<br>root.<br>--&gt;<br>&lt;trace enabled="false" requestLimit="10" pageOutput="false" traceMode="SortByTime" localOnly="true"/&gt;<br>&lt;!-- SESSION STATE SETTINGS<br>By default ASP.NET uses cookies to identify which requests belong to a particular session.<br>If cookies are not available, a session can be tracked by adding a session identifier to the URL.<br>To disable cookies, set sessionState cookieless="true".<br>--&gt;<br>&lt;sessionState mode="InProc" stateConnectionString="tcpip=127.0.0.1:42424" sqlConnectionString="data source=127.0.0.1;Trusted_Connection=yes" <br><br>cookieless="false" timeout="20"/&gt;<br>&lt;!-- GLOBALIZATION<br>This section sets the globalization settings of the application.<br>--&gt;<br>&lt;globalization requestEncoding="utf-8" responseEncoding="utf-8"/&gt;<br>&lt;/system.web&gt;<br>&lt;/configuration&gt;</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">Open up Internet Explorer an enter </span><b
+ style="color: rgb(0, 0, 0);">"http://&lt;your ip address&gt;"</b><span
+ style="color: rgb(0, 0, 0);">.
+You should be presented with a login form. Enter a bogus set of
+credentials to verify that the query is running correctly on the
+database.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/Windows_XP_Machine_Setup"
+ title="Windows XP Machine Setup">Windows XP SP2</a></div>
+</body>
+</html>

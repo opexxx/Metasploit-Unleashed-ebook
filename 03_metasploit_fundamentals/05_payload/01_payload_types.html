@@ -1,0 +1,142 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>Payload Types</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">Payload
+Types</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">Metasploit contains many different
+types of payloads, each serving a
+unique role within the framework. Let's take a brief look at the
+various types of payloads available and get an idea of when each type
+should be used.
+</p>
+<p style="color: rgb(0, 0, 0);"><b>Inline (Non Staged)</b>
+</p>
+<dl style="color: rgb(0, 0, 0);">
+  <dd>
+    <ul>
+      <li>A single payload containing the exploit and full shell
+code for the selected task. Inline payloads are by design more stable
+than their counterparts because they contain everything all in one.
+However some exploits wont support the resulting size of these
+payloads.
+      </li>
+    </ul>
+  </dd>
+</dl>
+<p style="color: rgb(0, 0, 0);"><b>Staged</b>
+</p>
+<dl style="color: rgb(0, 0, 0);">
+  <dd>
+    <ul>
+      <li>Stager payloads work in conjunction with stage payloads
+in order to perform a specific task. A stager establishes a
+communication channel between the attacker and the victim and reads in
+a stage payload to execute on the remote host.
+      </li>
+    </ul>
+  </dd>
+</dl>
+<p style="color: rgb(0, 0, 0);"><b>Meterpreter</b>
+</p>
+<dl style="color: rgb(0, 0, 0);">
+  <dd>
+    <ul>
+      <li>Meterpreter, the short form of Meta-Interpreter is an
+advanced, multi-faceted payload that operates via dll injection. The
+Meterpreter resides completely in the memory of the remote host and
+leaves no traces on the hard drive, making it very difficult to detect
+with conventional forensic techniques. Scripts and plugins can be
+loaded and unloaded dynamically as required and Meterpreter development
+is very strong and constantly evolving.
+      </li>
+    </ul>
+  </dd>
+</dl>
+<p style="color: rgb(0, 0, 0);"><b>PassiveX</b>
+</p>
+<dl style="color: rgb(0, 0, 0);">
+  <dd>
+    <ul>
+      <li>PassiveX is a payload that can help in circumventing
+restrictive outbound firewalls. It does this by using an ActiveX
+control to create a hidden instance of Internet Explorer. Using the new
+ActiveX control, it communicates with the attacker via HTTP requests
+and responses.
+      </li>
+    </ul>
+  </dd>
+</dl>
+<p style="color: rgb(0, 0, 0);"><b>NoNX</b>
+</p>
+<dl style="color: rgb(0, 0, 0);">
+  <dd>
+    <ul>
+      <li>The NX (No eXecute) bit is a feature built into some
+CPUs to prevent code from executing in certain areas of memory. In
+Windows, NX is implemented as Data Execution Prevention (DEP). The
+Metasploit NoNX payloads are designed to circumvent DEP.
+      </li>
+    </ul>
+  </dd>
+</dl>
+<p style="color: rgb(0, 0, 0);"><b>Ord</b>
+</p>
+<dl style="color: rgb(0, 0, 0);">
+  <dd>
+    <ul>
+      <li>Ordinal payloads are Windows stager based payloads that
+have distinct advantages and disadvantages. The advantages being it
+works on every flavor and language of Windows dating back to Windows 9x
+without the explicit definition of a return address. They are also
+extremely tiny. However two very specific disadvantages make them not
+the default choice. The first being that it relies on the fact that
+ws2_32.dll is loaded in the process being exploited before
+exploitation. The second being that it's a bit less stable than the
+other stagers.
+      </li>
+    </ul>
+  </dd>
+</dl>
+<p style="color: rgb(0, 0, 0);"><b>IPv6</b>
+</p>
+<dl style="color: rgb(0, 0, 0);">
+  <dd>
+    <ul>
+      <li>The Metasploit IPv6 payloads, as the name indicates, are
+built to function over IPv6 networks.
+      </li>
+    </ul>
+  </dd>
+</dl>
+<p style="color: rgb(0, 0, 0);"><b>Reflective DLL injection</b>
+</p>
+<dl style="color: rgb(0, 0, 0);">
+  <dd>
+    <ul>
+      <li>Reflective DLL Injection is a technique whereby a stage
+payload is injected into a compromised host process running in memory,
+never touching the host hard drive. The VNC and Meterpreter payloads
+both make use of reflective DLL injection. You can read more about this
+from Stephen Fewer, the creator of the <a
+ href="http://blog.harmonysecurity.com/2008/10/new-paper-reflective-dll-injection.html"
+ class="external text" rel="nofollow">reflective DLL injection</a>
+method.
+      </li>
+    </ul>
+  </dd>
+</dl>
+<p style="color: rgb(0, 0, 0);"><br>
+<br>
+</p>
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/Metasploit_Payloads"
+ title="Metasploit Payloads">Payloads</a></div>
+</body>
+</html>

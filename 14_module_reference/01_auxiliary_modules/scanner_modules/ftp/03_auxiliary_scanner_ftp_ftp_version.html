@@ -1,0 +1,30 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>auxiliary/scanner/ftp/ftp_version</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">auxiliary/scanner/ftp/ftp_version</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">The <b>"ftp_version"</b> module simply
+scans a range of IP addresses and determines the version of any FTP
+servers that are running.
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">msf &gt; use auxiliary/scanner/ftp/ftp_version<br>msf auxiliary(ftp_version) &gt; show options<br><br>Module options:<br><br>   Name     Current Setting      Required  Description<br>   ----     ---------------      --------  -----------<br>   FTPPASS  mozilla@example.com  no        The password for the specified username<br>   FTPUSER  anonymous            no        The username to authenticate as<br>   RHOSTS                        yes       The target address range or CIDR identifier<br>   RPORT    21                   yes       The target port<br>   THREADS  1                    yes       The number of concurrent threads</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">To setup the module, we just set our
+RHOSTS and THREADS values and let it run.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);">msf auxiliary(ftp_version) &gt; set RHOSTS 192.168.1.200-254<br>RHOSTS =&gt; 192.168.1.200-254<br>msf auxiliary(ftp_version) &gt; set THREADS 55<br>THREADS =&gt; 55<br>msf auxiliary(ftp_version) &gt; run<br><br>[*] 192.168.1.205:21 FTP Banner: '220 oracle2 Microsoft FTP Service (Version 5.0).\x0d\x0a'<br>[*] 192.168.1.204:21 FTP Banner: '220 Microsoft FTP Service\x0d\x0a'<br>[*] 192.168.1.203:21 FTP Banner: '220 Microsoft FTP Service\x0d\x0a'<br>[*] 192.168.1.206:21 FTP Banner: '220 oracle2 Microsoft FTP Service (Version 5.0).\x0d\x0a'<br>[*] 192.168.1.216:21 FTP Banner: '220 (vsFTPd 2.0.1)\x0d\x0a'<br>[*] 192.168.1.211:21 FTP Banner: '220 (vsFTPd 2.0.5)\x0d\x0a'<br>[*] 192.168.1.215:21 FTP Banner: '220 (vsFTPd 1.1.3)\x0d\x0a'<br>[*] 192.168.1.222:21 FTP Banner: '220 mailman FTP server (Version wu-2.6.2-5) ready.\x0d\x0a'<br>[*] 192.168.1.227:21 FTP Banner: '220 srv2 Microsoft FTP Service (Version 5.0).\x0d\x0a'<br>[*] 192.168.1.249:21 FTP Banner: '220 ProFTPD 1.3.3a Server (Debian) [::ffff:192.168.1.249]\x0d\x0a'<br>[*] Scanned 28 of 55 hosts (050% complete)<br>[*] 192.168.1.217:21 FTP Banner: '220 ftp3 FTP server (Version wu-2.6.0(1) Mon Feb 28 10:30:36 EST 2000) ready.\x0d\x0a'<br>[*] Scanned 51 of 55 hosts (092% complete)<br>[*] Scanned 52 of 55 hosts (094% complete)<br>[*] Scanned 53 of 55 hosts (096% complete)<br>[*] Scanned 55 of 55 hosts (100% complete)<br>[*] Auxiliary module execution completed<br>msf auxiliary(ftp_version) &gt;</pre>
+<br style="color: rgb(0, 0, 0);">
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/FTP_Scanners"
+ title="FTP Scanners">FTP Scanners</a></div>
+</body>
+</html>

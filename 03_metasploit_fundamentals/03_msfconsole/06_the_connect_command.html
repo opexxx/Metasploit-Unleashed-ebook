@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>The connect Command</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">The
+connect Command</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">There is a miniature netcat clone built
+into the msfconsole that
+supports SSL, proxies, pivoting, and file sends. By issuing the
+'connect' command with an ip address and port number, you can connect
+to a remote host from within msfconsole the same as you would with
+netcat or telnet.
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">msf &gt; connect 192.168.1.1 23<br>[*] Connected to 192.168.1.1:23<br>&yuml;&yacute;&yuml;&yacute;&yuml;&yacute;!&yuml;&ucirc;&yuml;&ucirc;<br>DD-WRT v24 std (c) 2008 NewMedia-NET GmbH<br>Release: 07/27/08 (SVN revision: 10011)<br>&yuml;<br>DD-WRT login:</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">By passing the '-s' argument to
+connect, it will connect via SSL:
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);">msf &gt; connect -s www.metasploit.com 443<br>[*] Connected to www.metasploit.com:443<br>GET / HTTP/1.0<br><br>HTTP/1.1 302 Found<br>Date: Sat, 25 Jul 2009 05:03:42 GMT<br>Server: Apache/2.2.11<br>Location: http://www.metasploit.org/</pre>
+<br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/Msfconsole"
+ title="Msfconsole">msfconsole</a></div>
+</body>
+</html>

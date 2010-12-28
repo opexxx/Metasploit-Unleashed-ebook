@@ -1,0 +1,252 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>Setting Up Additional Services</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">Setting
+Up Additional Services</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">In order to provide a larger attack
+surface for the various
+components of Metasploit, we will enable and install some additional
+services within our Windows virtual machine. Bear in mind that you will
+require the Windows XP installation CD or iso in order to install
+additional services in the VM.
+<br>
+<br>
+</p>
+<h2 style="color: rgb(0, 0, 0);"> <span class="mw-headline"
+ id="Internet_Information_Services_.28IIS.29_and_Simple_Network_Management_Protocol_.28SNMP.29">
+Internet Information Services (IIS) and Simple Network Management
+Protocol (SNMP) </span></h2>
+<p style="color: rgb(0, 0, 0);">To begin, navigate to the Control Panel
+and open <b>"Add or Remove Programs"</b>. Select <b>"Add/Remove
+Windows Components"</b> on the left-hand side.
+<br>
+<br>
+</p>
+<div style="color: rgb(0, 0, 0);" class="center">
+<div class="floatnone"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/File:Additional_services_01.png"
+ class="image"><img alt="Additional services 01.png"
+ src="http://www.offensive-security.com/w/images/5/5a/Additional_services_01.png"
+ width="501" height="392"></a></div>
+</div>
+<p style="color: rgb(0, 0, 0);"><br>
+<br>
+Select the <b>"Internet Information Services (IIS)"</b> checkbox and
+click <b>"Details"</b>. Select the <b>"File Transfer Protocol (FTP)
+Service"</b> checkbox and click <b>"OK"</b>. By default, the installed
+IIS FTP service allows for anonymous connections.
+<br>
+<br>
+</p>
+<div style="color: rgb(0, 0, 0);" class="center">
+<div class="floatnone"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/File:Additional_services_02.png"
+ class="image"><img alt="Additional services 02.png"
+ src="http://www.offensive-security.com/w/images/f/f6/Additional_services_02.png"
+ width="695" height="462"></a></div>
+</div>
+<p style="color: rgb(0, 0, 0);"><br>
+<br>
+Lastly, select the <b>"Management and Monitoring Tools"</b> checkbox
+and click <b>"Details"</b>. Ensure that both options are selected and
+click <b>"OK"</b>. When all is ready, click <b>"Next"</b> to proceed
+with the installation of IIS and SNMP.
+<br>
+<br>
+</p>
+<div style="color: rgb(0, 0, 0);" class="center">
+<div class="floatnone"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/File:Additional_services_03.png"
+ class="image"><img alt="Additional services 03.png"
+ src="http://www.offensive-security.com/w/images/d/d4/Additional_services_03.png"
+ width="699" height="445"></a></div>
+</div>
+<p style="color: rgb(0, 0, 0);"><br>
+<br>
+There is an issue with the .NET Framework installed in the NIST
+virtual machine but it is easily fixed. In the Control Panel, select <b>"Add
+or Remove Programs"</b> again, select <b>"Microsoft .NET Framework 2.0
+Service Pack 1"</b>, and click <b>"Change"</b>.
+<br>
+<br>
+</p>
+<div style="color: rgb(0, 0, 0);" class="center">
+<div class="floatnone"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/File:Additional_services_04.png"
+ class="image"><img alt="Additional services 04.png"
+ src="http://www.offensive-security.com/w/images/d/d8/Additional_services_04.png"
+ width="703" height="500"></a></div>
+</div>
+<p style="color: rgb(0, 0, 0);"><br>
+<br>
+A progress window will pop up and a progress bar will be displayed and
+then it will close. This is normal behavior and you can now exit the
+Control Panel and proceed.
+<br>
+<br>
+</p>
+<div style="color: rgb(0, 0, 0);" class="center">
+<div class="floatnone"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/File:Additional_services_05.png"
+ class="image"><img alt="Additional services 05.png"
+ src="http://www.offensive-security.com/w/images/f/f6/Additional_services_05.png"
+ width="383" height="152"></a></div>
+</div>
+<p style="color: rgb(0, 0, 0);"><br>
+<br>
+</p>
+<h2 style="color: rgb(0, 0, 0);"> <span class="mw-headline"
+ id="SQL_Server_2005_Express"> SQL Server 2005 Express </span></h2>
+<p style="color: rgb(0, 0, 0);">We will also perform an installation of
+Microsoft's free SQL Server
+2005 Express. This will allow us to use some of the different SQL
+modules in Metasploit. First, download the non-service pack version of <a
+ href="http://www.microsoft.com/downloads/details.aspx?familyid=220549B5-0B07-4448-8848-DCC397514B41&amp;displaylang=en"
+ class="external text" rel="nofollow">SQL Server Express</a>
+<br>
+<br>
+Note that if you are using your own custom-built VM for this course,
+you will need to install the Windows Installer 3.1 and the .Net
+Framework 2.0 in order to install SQL Express.<br>
+<a
+ href="http://www.microsoft.com/downloads/details.aspx?familyid=889482FC-5F56-4A38-B838-DE776FD4138C&amp;displaylang=en"
+ class="external text" rel="nofollow">Windows Installer 3.1</a><br>
+<a
+ href="http://www.microsoft.com/downloads/details.aspx?FamilyID=0856EACB-4362-4B0D-8EDD-AAB15C5E04F5&amp;displaylang=en"
+ class="external text" rel="nofollow">.NET Framework 2.0</a>
+<br>
+<br>
+Once the installer has finished downloading, we can run it and select
+all of the defaults except for <b>"Authentication Mode"</b>. Select <b>"Mixed
+Mode"</b>, set an <b>"sa"</b> password of <b>"password1"</b>, and
+then continue on with the rest of the installation.
+<br>
+<br>
+</p>
+<div style="color: rgb(0, 0, 0);" class="center">
+<div class="floatnone"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/File:Sql_express_01.png"
+ class="image"><img alt="Sql express 01.png"
+ src="http://www.offensive-security.com/w/images/e/ed/Sql_express_01.png"
+ width="484" height="448"></a></div>
+</div>
+<p style="color: rgb(0, 0, 0);"><br>
+<br>
+Once the installation is complete, we will need to make it accessible
+on our network. Click <b>"Start"</b> -&gt; <b>"All Programs"</b>
+-&gt; <b>"Microsoft SQL Server 2005"</b> -&gt; <b>"Configuration
+Tools"</b> -&gt; <b>"SQL Server Configuration Manager"</b>. When the
+Configuration Manager starts up, select <b>"SQL Server 2005 Services"</b>,
+right-click <b>"SQL Server (SQL EXPRESS)"</b> and select <b>"Stop"</b>.
+Next, expand <b>"SQL Server 2005 Network Configuration"</b> and select
+<b>"Protocols for SQLEXPRESS"</b>.
+<br>
+<br>
+</p>
+<div style="color: rgb(0, 0, 0);" class="center">
+<div class="floatnone"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/File:Sql_express_02.png"
+ class="image"><img alt="Sql express 02.png"
+ src="http://www.offensive-security.com/w/images/3/35/Sql_express_02.png"
+ width="625" height="458"></a></div>
+</div>
+<p style="color: rgb(0, 0, 0);"><br>
+<br>
+Double-click <b>"TCP/IP"</b>, change <b>"Enabled"</b> to <b>"Yes"</b>,
+and change <b>"Listen All"</b> to <b>"No"</b> on the <b>"Protocol"</b>
+tab.
+<br>
+<br>
+</p>
+<div style="color: rgb(0, 0, 0);" class="center">
+<div class="floatnone"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/File:Sql_express_03.png"
+ class="image"><img alt="Sql express 03.png"
+ src="http://www.offensive-security.com/w/images/9/96/Sql_express_03.png"
+ width="676" height="465"></a></div>
+</div>
+<p style="color: rgb(0, 0, 0);"><br>
+<br>
+Next, select the <b>"IP Addresses"</b> tab, and remove any entries
+under <b>"IPAll"</b>. Under <b>"IP1"</b> and <b>"IP2"</b>, remove
+any values for <b>"Dynamic Ports"</b>. Both IP1 and IP2 should have <b>"Active"</b>
+and <b>"Enabled"</b> set to <b>"Yes"</b>. Lastly, set the IP1 <b>"IP
+Address"</b> to your local address and set the IP2 address to
+127.0.0.1. Your settings should look similar to the screenshot below.
+Click <b>"OK"</b> when everything is set correctly.
+<br>
+<br>
+</p>
+<div style="color: rgb(0, 0, 0);" class="center">
+<div class="floatnone"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/File:Sql_express_04.png"
+ class="image"><img alt="Sql express 04.png"
+ src="http://www.offensive-security.com/w/images/8/87/Sql_express_04.png"
+ width="677" height="462"></a></div>
+</div>
+<p style="color: rgb(0, 0, 0);"><br>
+<br>
+Next, we'll enable the SQL Server Browser service. Select <b>"SQL
+Server 2005 Services"</b> and double-click <b>"SQL Server Browser"</b>.
+On the <b>"Service"</b> tab, set the <b>"Start Mode"</b> to <b>"Automatic"</b>
+and click <b>"OK"</b>.
+<br>
+<br>
+</p>
+<div style="color: rgb(0, 0, 0);" class="center">
+<div class="floatnone"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/File:Sql_express_05.png"
+ class="image"><img alt="Sql express 05.png"
+ src="http://www.offensive-security.com/w/images/b/be/Sql_express_05.png"
+ width="675" height="462"></a></div>
+</div>
+<p style="color: rgb(0, 0, 0);"><br>
+<br>
+By default, the SQL server runs under a limited-privilege account which
+breaks a lot of custom web applications. We will change this by
+double-clicking <b>"SQL Server (SQLEXPRESS)"</b> and setting it to Log
+On as the Built-in Account <b>"Local System"</b>. This can also be set
+by running <b>"services.msc"</b>. Click <b>"OK"</b> when you've
+finished.
+<br>
+<br>
+</p>
+<div style="color: rgb(0, 0, 0);" class="center">
+<div class="floatnone"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/File:Sql_express_06.png"
+ class="image"><img alt="Sql express 06.png"
+ src="http://www.offensive-security.com/w/images/d/d3/Sql_express_06.png"
+ width="668" height="445"></a></div>
+</div>
+<p style="color: rgb(0, 0, 0);"><br>
+<br>
+With everything finally configured, right-click <b>"SQL Server (SQL
+EXPRESS)"</b> and select <b>"Start"</b>. Do the same for the <b>"SQL
+Server Browser"</b> service. You can now exit the Configuration Manager
+and verify that the services are listening properly by running <b>"netstat
+-ano"</b> from a command prompt. You should see UDP port 1434 listening
+as well as your network IP address listening on port 1433.
+<br>
+<br>
+</p>
+<div style="color: rgb(0, 0, 0);" class="center">
+<div class="floatnone"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/File:Sql_express_07a.png"
+ class="image"><img alt="Sql express 07a.png"
+ src="http://www.offensive-security.com/w/images/9/94/Sql_express_07a.png"
+ width="412" height="465"></a></div>
+</div>
+<p style="color: rgb(0, 0, 0);"><br>
+</p>
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/Windows_XP_Machine_Setup"
+ title="Windows XP Machine Setup">Windows XP SP2</a></div>
+</body>
+</html>

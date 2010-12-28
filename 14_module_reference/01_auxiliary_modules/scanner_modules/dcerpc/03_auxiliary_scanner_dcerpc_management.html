@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>auxiliary/scanner/dcerpc/management</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">auxiliary/scanner/dcerpc/management</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">The dcerpc/management module scans a
+range of IP addresses and
+obtains information from the Remote Management interface of the DCERPC
+service.
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">msf &gt; use auxiliary/scanner/dcerpc/management <br>msf auxiliary(management) &gt; show options<br><br>Module options:<br><br>   Name     Current Setting  Required  Description<br>   ----     ---------------  --------  -----------<br>   RHOSTS                    yes       The target address range or CIDR identifier<br>   RPORT    135              yes       The target port<br>   THREADS  1                yes       The number of concurrent threads</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">There is minimal configuration
+required for this module; we simply
+need to set our THREADS value and the range of hosts we want scanned
+and run the module.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);">msf auxiliary(management) &gt; set RHOSTS 192.168.1.200-254<br>RHOSTS =&gt; 192.168.1.200-254<br>msf auxiliary(management) &gt; set THREADS 55<br>THREADS =&gt; 55<br>msf auxiliary(management) &gt; run<br><br>[*] Remote Management Interface Error: DCERPC FAULT =&gt; nca_s_fault_access_denied<br>[*] Remote Management Interface Error: DCERPC FAULT =&gt; nca_s_fault_access_denied<br>[*] UUID e1af8308-5d1f-11c9-91a4-08002b14a0fa v3.0<br>[*] Remote Management Interface Error: DCERPC FAULT =&gt; nca_s_fault_access_denied<br>[*] Remote Management Interface Error: The connection was refused by the remote host (192.168.1.250:135).<br>[*] Remote Management Interface Error: DCERPC FAULT =&gt; nca_s_fault_ndr<br>[*] 	 listening: 00000000<br>[*] 	 killed: 00000005<br>[*] 	 name: 00010000000000000100000000000000d3060000<br>[*] UUID 0b0a6584-9e0f-11cf-a3cf-00805f68cb1b v1.1<br>[*] Remote Management Interface Error: DCERPC FAULT =&gt; nca_s_fault_ndr<br>[*] 	 listening: 00000000<br>[*] 	 killed: 00000005<br>[*] 	 name: 00010000000000000100000000000000d3060000<br>[*] UUID 1d55b526-c137-46c5-ab79-638f2a68e869 v1.0<br>[*] Remote Management Interface Error: DCERPC FAULT =&gt; nca_s_fault_ndr<br>[*] 	 listening: 00000000<br>[*] 	 killed: 00000005<br>[*] 	 name: 00010000000000000100000000000000d3060000<br>[*] UUID e60c73e6-88f9-11cf-9af1-0020af6e72f4 v2.0<br>[*] Remote Management Interface Error: DCERPC FAULT =&gt; nca_s_fault_ndr<br>[*] 	 listening: 00000000<br>[*] 	 killed: 00000005<br>[*] 	 name: 00010000000000000100000000000000d3060000<br>[*] UUID 99fcfec4-5260-101b-bbcb-00aa0021347a v0.0<br>[*] Remote Management Interface Error: DCERPC FAULT =&gt; nca_s_fault_ndr<br>[*] 	 listening: 00000000<br>[*] 	 killed: 00000005<br>[*] 	 name: 00010000000000000100000000000000d3060000<br>[*] UUID b9e79e60-3d52-11ce-aaa1-00006901293f v0.2<br>[*] Remote Management Interface Error: DCERPC FAULT =&gt; nca_s_fault_ndr<br>[*] 	 listening: 00000000<br>[*] 	 killed: 00000005<br>[*] 	 name: 00010000000000000100000000000000d3060000<br>[*] UUID 412f241e-c12a-11ce-abff-0020af6e7a17 v0.2<br>[*] Remote Management Interface Error: DCERPC FAULT =&gt; nca_s_fault_ndr<br>[*] 	 listening: 00000000<br>[*] 	 killed: 00000005<br>[*] 	 name: 00010000000000000100000000000000d3060000<br>[*] UUID 00000136-0000-0000-c000-000000000046 v0.0<br>[*] Remote Management Interface Error: DCERPC FAULT =&gt; nca_s_fault_ndr<br>[*] 	 listening: 00000000<br>[*] 	 killed: 00000005<br>[*] 	 name: 00010000000000000100000000000000d3060000<br>[*] UUID c6f3ee72-ce7e-11d1-b71e-00c04fc3111a v1.0<br>[*] Remote Management Interface Error: DCERPC FAULT =&gt; nca_s_fault_ndr<br>[*] 	 listening: 00000000<br>[*] 	 killed: 00000005<br>[*] 	 name: 00010000000000000100000000000000d3060000<br>[*] UUID 4d9f4ab8-7d1c-11cf-861e-0020af6e7c57 v0.0<br>[*] Remote Management Interface Error: DCERPC FAULT =&gt; nca_s_fault_ndr<br>[*] 	 listening: 00000000<br>[*] 	 killed: 00000005<br>[*] 	 name: 00010000000000000100000000000000d3060000<br>[*] UUID 000001a0-0000-0000-c000-000000000046 v0.0<br>[*] Remote Management Interface Error: DCERPC FAULT =&gt; nca_s_fault_ndr<br>[*] 	 listening: 00000000<br>[*] 	 killed: 00000005<br>[*] 	 name: 00010000000000000100000000000000d3060000<br>...snip...<br>[*] Scanned 55 of 55 hosts (100% complete)<br>[*] Auxiliary module execution completed<br>msf auxiliary(management) &gt;</pre>
+<br style="color: rgb(0, 0, 0);">
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/DCERPC_Scanners"
+ title="DCERPC Scanners">DCERPC Scanners</a></div>
+</body>
+</html>

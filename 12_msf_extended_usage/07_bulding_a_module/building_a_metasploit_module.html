@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>Building A Metasploit Module</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">Building
+A Metasploit Module</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">For me (Dave Kennedy) this was one of
+my first modules that I have
+ever built for the Metasploit framework. I am a python guy and
+switching to ruby actually ended up not being "as" bad as I had
+anticipated. After I built the module, I wanted to write step by step
+how I was able to create the module, give a little introduction into
+module building and how easy it really is to add additional tools or
+exploits into the Metasploit framework.
+</p>
+<p style="color: rgb(0, 0, 0);">I first want to start you off with
+giving you a little idea on
+some of the key components to the Metasploit framework that we'll be
+talking about.
+</p>
+<p style="color: rgb(0, 0, 0);">First take a peek at the lib/msf/core
+section within
+Metasploit, this area here is a goldmine that you will want to leverage
+in order to not have to reconstruct every protocol or attack each
+individual time. Browse to the core/exploit section:
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">root@bt4:/pentest/exploits/framework3/lib/msf/core/exploit$ ls<br>arkeia.rb dect_coa.rb lorcon2.rb seh.rb.ut.rb<br>browser_autopwn.rb dialup.rb lorcon.rb smb.rb<br>brute.rb egghunter.rb mixins.rb smtp_deliver.rb<br>brutetargets.rb fileformat.rb mssql_commands.rb smtp.rb<br>capture.rb ftp.rb mssql.rb snmp.rb<br>dcerpc_epm.rb ftpserver.rb ndmp.rb sunrpc.rb<br>dcerpc_lsa.rb http.rb oracle.rb tcp.rb<br>dcerpc_mgmt.rb imap.rb pdf_parse.rb tcp.rb.ut.rb<br>dcerpc.rb ip.rb pop2.rb tns.rb<br>dcerpc.rb.ut.rb kernel_mode.rb seh.rb udp.rb<br>root@bt4:/pentest/exploits/framework3/lib/msf/core/exploit$</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">We can see several areas that could
+be useful for us, for example
+theres already prepackaged protocols like Microsoft SQL, HTTP, TCP,
+Oracle, RPC, FTP, SMB, SMTP, and much more. Take a look at the mssql.rb
+and mssql_commands.rb, these two have undergone some significant
+changes by HD Moore, myself, and Dark Operator recently as we are
+adding quite a bit of functionality through the MSSQL aspects.
+</span>
+<p style="color: rgb(0, 0, 0);">If you look starting on line 126 in
+mssql.rb, this is the section
+we will be heavily focusing on, read through it and get a basic
+understanding as we will be covering this area later.
+</p>
+<p style="color: rgb(0, 0, 0);">Lets leave core, and head to the
+"modules" directory, if we add
+any new file into here, it will dynamically be imported into Metasploit
+for us. Let's try a very simple program, go into
+framework3/modules/auxiliary/scanner/mssql
+</p>
+<p style="color: rgb(0, 0, 0);">Do a quick "cp mssql_ping.rb
+ihaz_sql.rb"
+</p>
+<p style="color: rgb(0, 0, 0);">Edit the file real quick using nano or
+vi and lets modify it
+just slightly, I'm going to walk you through each line and what it
+means:
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">##<br># $Id: ihaz_sql.rb 7243 2009-12-04 21:13:15Z rel1k $   &lt;--- automatically gets set for us when we check in<br>##<br><br>##<br># This file is part of the Metasploit Framework and may be subject to           &lt;---- licensing agreement, keep standard<br># redistribution and commercial restrictions. Please see the Metasploit<br># Framework web site for more information on licensing and terms of use.<br># http://metasploit.com/framework/<br>##<br><br><br>require 'msf/core'  &lt;--- use the msf core library<br><br>class Metasploit3 &lt; Msf::Auxiliary   &lt;---- its going to be an auxiliary module<br><br>include Msf::Exploit::Remote::MSSQL   &lt;----- we are using remote MSSQL right?<br>include Msf::Auxiliary::Scanner  &lt;----------- it use to be a SQL scanner<br><br>def initialize &lt;---- initialize the main section<br>super(<br>'Name' =&gt; 'I HAZ SQL Utility',   &lt;------- name of the exploit<br>'Version' =&gt; '$Revision: 7243 $', &lt;------- svn number<br>'Description' =&gt; 'This just prints some funny stuff.', &lt;------------ description of the exploit<br>'Author' =&gt; 'relik', &lt;--- thats you bro!<br>'License' =&gt; MSF_LICENSE &lt;---- keep standard<br>)<br><br>deregister_options('RPORT', 'RHOST')    &lt;---- dont specify RPORT or RHOST<br>end<br><br><br>def run_host(ip) &lt;--- define the main function<br><br>begin &lt;---begin the function<br>puts "I HAZ SQL!!!!"  &lt;---- print to screen i haz SQL!!!<br>end &lt;--- close<br>end &lt;---- close<br>end &lt;---- close</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">Now that you have a basic idea of
+the module, save this (without the &lt;------) and lets run it in
+msfconsole.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);">msf &gt; search ihaz<br>[*] Searching loaded modules for pattern 'ihaz'...<br><br>Auxiliary<br>=========<br><br>Name Description<br>---- -----------<br>scanner/mssql/ihaz_sql MSSQL Ping Utility<br><br>msf &gt; use scanner/mssql/ihaz_sql<br>msf auxiliary(ihaz_sql) &gt; show options<br><br>Module options:<br><br>Name Current Setting Required Description<br>---- --------------- -------- -----------<br>HEX2BINARY /pentest/exploits/framework3/data/exploits/mssql/h2b no The path to the hex2binary script on the disk<br>MSSQL_PASS no The password for the specified username<br>MSSQL_USER sa no The username to authenticate as<br>RHOSTS yes The target address range or CIDR identifier<br>THREADS 1 yes The number of concurrent threads<br><br>msf auxiliary(ihaz_sql) &gt; set RHOSTS doesntmatter<br>RHOSTS =&gt; doesntmatter<br>msf auxiliary(ihaz_sql) &gt; exploit<br>I HAZ SQL!!!!<br><br>[*] Scanned 1 of 1 hosts (100% complete)<br>[*] Auxiliary module execution completed</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">Success our module has been added!
+Now that we have a basic
+understanding of how to add a module, lets look at the module I wrote
+on the next section.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/MSF_Extended_Usage"
+ title="MSF Extended Usage">MSF Extended Usage</a></div>
+<p style="color: rgb(0, 0, 0);"><br>
+</p>
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/Payloads_Through_MSSQL"
+ title="Payloads Through MSSQL">Payloads Through MSSQL</a> - <a
+ href="http://www.offensive-security.com/metasploit-unleashed/Creating_Our_Auxiliary_Module"
+ title="Creating Our Auxiliary Module">Creating our Auxiliary Module</a>
+- <a
+ href="http://www.offensive-security.com/metasploit-unleashed/The_Guts_Behind_It"
+ title="The Guts Behind It">The Guts Behind It</a></div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>auxiliary/scanner/discovery/ipv6_neighbor</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">auxiliary/scanner/discovery/ipv6_neighbor</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">The <b>"ipv6_neighbor"</b> auxiliary
+module probes the local network
+for IPv6 hosts that respond to Neighbor Solicitations with a link-local
+address. This module, like the arp_sweep one, will generally only work
+within the attacking machine's broadcast domain.
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">msf &gt; use auxiliary/scanner/discovery/ipv6_neighbor<br>msf auxiliary(ipv6_neighbor) &gt; show options<br><br>Module options:<br><br>   Name       Current Setting  Required  Description<br>   ----       ---------------  --------  -----------<br>   INTERFACE                   no        The name of the interface<br>   PCAPFILE                    no        The name of the PCAP capture file to process<br>   RHOSTS                      yes       The target address range or CIDR identifier<br>   SHOST                       yes       Source IP Address<br>   SMAC                        yes       Source MAC Address<br>   THREADS    1                yes       The number of concurrent threads<br>   TIMEOUT    500              yes       The number of seconds to wait for new data</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">In addition to setting our RHOSTS
+value, we also need to set our
+source MAC address(SMAC) and source host(SHOST) IP address. We then set
+our RHOSTS and THREADS values and let the scanner run.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);">msf auxiliary(ipv6_neighbor) &gt; set RHOSTS 192.168.1.2-254<br>RHOSTS =&gt; 192.168.1.200-254<br>msf auxiliary(ipv6_neighbor) &gt; set SHOST 192.168.1.101<br>SHOST =&gt; 192.168.1.101<br>msf auxiliary(ipv6_neighbor) &gt; set SMAC d6:46:a7:38:15:65<br>SMAC =&gt; d6:46:a7:38:15:65<br>msf auxiliary(ipv6_neighbor) &gt; set THREADS 55<br>THREADS =&gt; 55<br>msf auxiliary(ipv6_neighbor) &gt; run<br><br>[*] IPv4 Hosts Discovery<br>[*] 192.168.1.10 is alive.<br>[*] 192.168.1.11 is alive.<br>[*] 192.168.1.2 is alive.<br>[*] 192.168.1.69 is alive.<br>[*] 192.168.1.109 is alive.<br>[*] 192.168.1.150 is alive.<br>[*] 192.168.1.61 is alive.<br>[*] 192.168.1.201 is alive.<br>[*] 192.168.1.203 is alive.<br>[*] 192.168.1.205 is alive.<br>[*] 192.168.1.206 is alive.<br>[*] 192.168.1.99 is alive.<br>[*] 192.168.1.97 is alive.<br>[*] 192.168.1.250 is alive.<br>[*] IPv6 Neighbor Discovery<br>[*] 192.168.1.69 maps to IPv6 link local address fe80::5a55:caff:fe14:1e61<br>[*] 192.168.1.99 maps to IPv6 link local address fe80::5ab0:35ff:fe6a:4ecc<br>[*] 192.168.1.97 maps to IPv6 link local address fe80::7ec5:37ff:fef9:a96a<br>[*] Scanned 253 of 253 hosts (100% complete)<br>[*] Auxiliary module execution completed<br>msf auxiliary(ipv6_neighbor) &gt;</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">Looking at the module output, you
+can see that this scanner serves
+the dual-purpose of showing what hosts are online similar to arp_sweep
+and then performs the IPv6 Neighbor Discovery.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/Discovery_Scanners"
+ title="Discovery Scanners">Discovery Scanners</a></div>
+<p style="color: rgb(0, 0, 0);"><br>
+</p>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>Fast Track Modes</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">Fast
+Track Modes</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">Fast-Track can be used in two different
+modes: interactive mode and web interface. Let's look at each one.
+</p>
+<p style="color: rgb(0, 0, 0);">Interactive mode can be launched by
+passing the '-i' switch to Fast Track.
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">root@bt:/pentest/exploits/fasttrack# ./fast-track.py -i<br><br>***********************************************<br>******* Performing dependency checks... *******<br>***********************************************<br><br>*** FreeTDS and PYMMSQL are installed. (Check) ***<br>*** PExpect is installed. (Check) ***<br>*** ClientForm is installed. (Check) ***<br>*** Beautiful Soup is installed. (Check) ***<br>*** PyMills is installed. (Check) ***<br><br>Also ensure ProFTP, WinEXE, and SQLite3 is installed from<br>the Updates/Installation menu.<br><br>Your system has all requirements needed to run Fast-Track!<br> *****************************************************************<br> **                                                             **<br> **  Fast-Track - A new beginning...                            **<br> **  Version: 4.0.1                                             **<br> **  Written by: David Kennedy (ReL1K)                          **<br> **  Lead Developer: Joey Furr (j0fer)                          **<br> **  http://www.secmaniac.com                                   **<br> **                                                             **<br> *****************************************************************<br><br>Fast-Track Main Menu:<br><br>        1.  Fast-Track Updates<br>        2.  Autopwn Automation<br>        3.  Nmap Scripting Engine<br>        4.  Microsoft SQL Tools<br>        5.  Mass Client-Side Attack<br>        6.  Exploits<br>        7.  Binary to Hex Payload Converter<br>        8.  Payload Generator<br>        9.  Fast-Track Tutorials<br>        10. Fast-Track Changelog<br>        11. Fast-Track Credits<br>        12. Exit Fast-Track<br><br>        Enter the number:</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);"> The Web Gui Mode is launched by
+running './fast-track.py -g'. By
+default, the web server will start listening on port 44444 but you can
+change it by passing a different port number on the command line.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);">root@bt:/pentest/exploits/fasttrack# ./fast-track.py -g 31337<br><br>***********************************************<br>******* Performing dependency checks... *******<br>***********************************************<br><br>*** FreeTDS and PYMMSQL are installed. (Check) ***<br>*** PExpect is installed. (Check) ***<br>*** ClientForm is installed. (Check) ***<br>*** Beautiful Soup is installed. (Check) ***<br>*** PyMills is installed. (Check) ***<br><br>Also ensure ProFTP, WinEXE, and SQLite3 is installed from<br>the Updates/Installation menu.<br><br>Your system has all requirements needed to run Fast-Track!<br><br>****************************************<br>Fast-Track Web GUI Front-End<br>Written by: David Kennedy (ReL1K)<br>****************************************<br><br>Starting HTTP Server on 127.0.0.1 port 31337<br><br>*** Open a browser and go to http://127.0.0.1:31337 ***<br><br>Type -c to exit..</pre>
+<br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<div style="color: rgb(0, 0, 0);" class="center">
+<div class="floatnone"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/File:Fast_track_gui.jpg"
+ class="image"><img alt="Fast track gui.jpg"
+ src="http://www.offensive-security.com/w/images/6/6d/Fast_track_gui.jpg"
+ width="841" height="599"></a></div>
+</div>
+<p style="color: rgb(0, 0, 0);"><br>
+<br>
+We'll be focusing primarily on the interactive mode functionality.
+The graphical mode is easy to understand once you understand each of
+the tools in interactive mode.
+<br>
+<br>
+</p>
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/Fast-Track"
+ title="Fast-Track">Fast-Track</a></div>
+</body>
+</html>

