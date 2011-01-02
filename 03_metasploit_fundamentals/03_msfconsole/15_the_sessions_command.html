@@ -4,7 +4,7 @@
   <meta content="text/html; charset=ISO-8859-1"
  http-equiv="Content-Type">
   <title>The sessions Command</title>
-</head>
+<link rel="stylesheet" type="text/css" href="/home/steve/metasploit_unleashed/css.css" /></head>
 <body>
 <h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">The
 sessions Command</h1>
@@ -17,20 +17,20 @@ VNC, etc.
 <br>
 <br>
 </p>
-<pre style="color: rgb(0, 0, 0);">msf &gt; sessions<br><br>Usage: sessions [options]<br><br>Active session manipulation and interaction.<br><br>OPTIONS:<br><br>    -d   Detach an interactive session<br>    -h        Help banner.<br>    -i   Interact with the supplied session identifier.<br>    -k   Terminate session.<br>    -l        List all active sessions.<br>    -q        Quiet mode.<br>    -v        List verbose fields.</pre>
+<pre id="code">msf &gt; sessions<br><br>Usage: sessions [options]<br><br>Active session manipulation and interaction.<br><br>OPTIONS:<br><br>    -d   Detach an interactive session<br>    -h        Help banner.<br>    -i   Interact with the supplied session identifier.<br>    -k   Terminate session.<br>    -l        List all active sessions.<br>    -q        Quiet mode.<br>    -v        List verbose fields.</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">To list any active sessions, pass
 the '-l' options to 'sessions'.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);">msf exploit(3proxy) &gt; sessions -l<br><br>Active sessions<br>===============<br><br>  Id  Description    Tunnel<br>  --  -----------    ------<br>  1   Command shell  192.168.1.101:33191 -&gt; 192.168.1.104:4444</pre>
+<pre id="code">msf exploit(3proxy) &gt; sessions -l<br><br>Active sessions<br>===============<br><br>  Id  Description    Tunnel<br>  --  -----------    ------<br>  1   Command shell  192.168.1.101:33191 -&gt; 192.168.1.104:4444</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">To interact with a given session,
 you just need to use the '-i' switch followed by the Id number of the
 session.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);">msf exploit(3proxy) &gt; sessions -i 1<br>[*] Starting interaction with 1...<br><br>C:\WINDOWS\system32&gt;</pre>
+<pre id="code">msf exploit(3proxy) &gt; sessions -i 1<br>[*] Starting interaction with 1...<br><br>C:\WINDOWS\system32&gt;</pre>
 <br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
 <div style="text-align: center; color: rgb(0, 0, 0);"><a

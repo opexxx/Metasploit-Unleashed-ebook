@@ -4,7 +4,7 @@
   <meta content="text/html; charset=ISO-8859-1"
  http-equiv="Content-Type">
   <title>auxiliary/scanner/discovery/arp_sweep</title>
-</head>
+<link rel="stylesheet" type="text/css" href="/home/steve/metasploit_unleashed/css.css" /></head>
 <body>
 <h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">auxiliary/scanner/discovery/arp_sweep</h1>
 <h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
@@ -16,7 +16,7 @@ Naturally, Metasploit has a module that can help you out.
 <br>
 <br>
 </p>
-<pre style="color: rgb(0, 0, 0);">msf &gt; use auxiliary/scanner/discovery/arp_sweep<br>msf auxiliary(arp_sweep) &gt; show options<br><br>Module options:<br><br>   Name       Current Setting  Required  Description<br>   ----       ---------------  --------  -----------<br>   INTERFACE                   no        The name of the interface<br>   PCAPFILE                    no        The name of the PCAP capture file to process<br>   RHOSTS                      yes       The target address range or CIDR identifier<br>   SHOST                       yes       Source IP Address<br>   SMAC                        yes       Source MAC Address<br>   THREADS    1                yes       The number of concurrent threads<br>   TIMEOUT    500              yes       The number of seconds to wait for new data</pre>
+<pre id="code">msf &gt; use auxiliary/scanner/discovery/arp_sweep<br>msf auxiliary(arp_sweep) &gt; show options<br><br>Module options:<br><br>   Name       Current Setting  Required  Description<br>   ----       ---------------  --------  -----------<br>   INTERFACE                   no        The name of the interface<br>   PCAPFILE                    no        The name of the PCAP capture file to process<br>   RHOSTS                      yes       The target address range or CIDR identifier<br>   SHOST                       yes       Source IP Address<br>   SMAC                        yes       Source MAC Address<br>   THREADS    1                yes       The number of concurrent threads<br>   TIMEOUT    500              yes       The number of seconds to wait for new data</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">Due to the manner in which ARP
 scanning is performed, you need to
@@ -24,7 +24,7 @@ pass your MAC address and source IP address to the scanner in order for
 it to function properly.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);">msf auxiliary(arp_sweep) &gt; set RHOSTS 192.168.1.200-254<br>RHOSTS =&gt; 192.168.1.200-254<br>msf auxiliary(arp_sweep) &gt; set SHOST 192.168.1.101<br>SHOST =&gt; 192.168.1.101<br>msf auxiliary(arp_sweep) &gt; set SMAC d6:46:a7:38:15:65<br>SMAC =&gt; d6:46:a7:38:15:65<br>msf auxiliary(arp_sweep) &gt; set THREADS 55<br>THREADS =&gt; 55<br>msf auxiliary(arp_sweep) &gt; run<br><br>[*] 192.168.1.201 appears to be up.<br>[*] 192.168.1.203 appears to be up.<br>[*] 192.168.1.205 appears to be up.<br>[*] 192.168.1.206 appears to be up.<br>[*] 192.168.1.250 appears to be up.<br>[*] Scanned 55 of 55 hosts (100% complete)<br>[*] Auxiliary module execution completed<br>msf auxiliary(arp_sweep) &gt;</pre>
+<pre id="code">msf auxiliary(arp_sweep) &gt; set RHOSTS 192.168.1.200-254<br>RHOSTS =&gt; 192.168.1.200-254<br>msf auxiliary(arp_sweep) &gt; set SHOST 192.168.1.101<br>SHOST =&gt; 192.168.1.101<br>msf auxiliary(arp_sweep) &gt; set SMAC d6:46:a7:38:15:65<br>SMAC =&gt; d6:46:a7:38:15:65<br>msf auxiliary(arp_sweep) &gt; set THREADS 55<br>THREADS =&gt; 55<br>msf auxiliary(arp_sweep) &gt; run<br><br>[*] 192.168.1.201 appears to be up.<br>[*] 192.168.1.203 appears to be up.<br>[*] 192.168.1.205 appears to be up.<br>[*] 192.168.1.206 appears to be up.<br>[*] 192.168.1.250 appears to be up.<br>[*] Scanned 55 of 55 hosts (100% complete)<br>[*] Auxiliary module execution completed<br>msf auxiliary(arp_sweep) &gt;</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">As you will see when running this
 module, ARP scanning is very fast.

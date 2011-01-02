@@ -4,7 +4,7 @@
   <meta content="text/html; charset=ISO-8859-1"
  http-equiv="Content-Type">
   <title>The connect Command</title>
-</head>
+<link rel="stylesheet" type="text/css" href="/home/steve/metasploit_unleashed/css.css" /></head>
 <body>
 <h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">The
 connect Command</h1>
@@ -19,13 +19,13 @@ netcat or telnet.
 <br>
 <br>
 </p>
-<pre style="color: rgb(0, 0, 0);">msf &gt; connect 192.168.1.1 23<br>[*] Connected to 192.168.1.1:23<br>&yuml;&yacute;&yuml;&yacute;&yuml;&yacute;!&yuml;&ucirc;&yuml;&ucirc;<br>DD-WRT v24 std (c) 2008 NewMedia-NET GmbH<br>Release: 07/27/08 (SVN revision: 10011)<br>&yuml;<br>DD-WRT login:</pre>
+<pre id="code">msf &gt; connect 192.168.1.1 23<br>[*] Connected to 192.168.1.1:23<br>&yuml;&yacute;&yuml;&yacute;&yuml;&yacute;!&yuml;&ucirc;&yuml;&ucirc;<br>DD-WRT v24 std (c) 2008 NewMedia-NET GmbH<br>Release: 07/27/08 (SVN revision: 10011)<br>&yuml;<br>DD-WRT login:</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">By passing the '-s' argument to
 connect, it will connect via SSL:
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);">msf &gt; connect -s www.metasploit.com 443<br>[*] Connected to www.metasploit.com:443<br>GET / HTTP/1.0<br><br>HTTP/1.1 302 Found<br>Date: Sat, 25 Jul 2009 05:03:42 GMT<br>Server: Apache/2.2.11<br>Location: http://www.metasploit.org/</pre>
+<pre id="code">msf &gt; connect -s www.metasploit.com 443<br>[*] Connected to www.metasploit.com:443<br>GET / HTTP/1.0<br><br>HTTP/1.1 302 Found<br>Date: Sat, 25 Jul 2009 05:03:42 GMT<br>Server: Apache/2.2.11<br>Location: http://www.metasploit.org/</pre>
 <br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
 <div style="text-align: center; color: rgb(0, 0, 0);"><a

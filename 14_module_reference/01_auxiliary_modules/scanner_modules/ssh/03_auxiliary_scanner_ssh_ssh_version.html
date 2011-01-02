@@ -4,7 +4,7 @@
   <meta content="text/html; charset=ISO-8859-1"
  http-equiv="Content-Type">
   <title>auxiliary/scanner/ssh/ssh_version</title>
-</head>
+<link rel="stylesheet" type="text/css" href="/home/steve/metasploit_unleashed/css.css" /></head>
 <body>
 <h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">auxiliary/scanner/ssh/ssh_version</h1>
 <h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
@@ -19,6 +19,6 @@ the SSH version running on the remote host.
 <br>
 <br>
 </p>
-<pre style="color: rgb(0, 0, 0);">msf &gt; use auxiliary/scanner/ssh/ssh_version<br>msf auxiliary(ssh_version) &gt; show options<br><br>Module options:<br><br>   Name     Current Setting  Required  Description<br>   ----     ---------------  --------  -----------<br>   RHOSTS                    yes       The target address range or CIDR identifier<br>   RPORT    22               yes       The target port<br>   THREADS  1                yes       The number of concurrent threads<br><br>msf auxiliary(ssh_version) &gt; set RHOSTS 192.168.1.0/24<br>RHOSTS =&gt; 192.168.1.0/24<br>msf auxiliary(ssh_version) &gt; set THREADS 255<br>THREADS =&gt; 255<br>msf auxiliary(ssh_version) &gt; run<br><br>[*] 192.168.1.10:22, SSH server version: SSH-2.0-OpenSSH_4.3<br>[*] 192.168.1.101:22, SSH server version: SSH-2.0-OpenSSH_5.1p1 Debian-3ubuntu1<br>[*] 192.168.1.154:22, SSH server version: SSH-2.0-OpenSSH_4.7p1 Debian-8ubuntu1<br>[*] 192.168.1.250:22, SSH server version: SSH-2.0-OpenSSH_5.2p1-hpn13v6 FreeBSD-openssh-portable-overwrite-base-5.2.p1_2,1<br>[*] Scanned 251 of 256 hosts (098% complete)<br>[*] Scanned 253 of 256 hosts (098% complete)<br>[*] Scanned 254 of 256 hosts (099% complete)<br>[*] Scanned 256 of 256 hosts (100% complete)<br>[*] Auxiliary module execution completed<br>msf auxiliary(ssh_version) &gt;</pre>
+<pre id="code">msf &gt; use auxiliary/scanner/ssh/ssh_version<br>msf auxiliary(ssh_version) &gt; show options<br><br>Module options:<br><br>   Name     Current Setting  Required  Description<br>   ----     ---------------  --------  -----------<br>   RHOSTS                    yes       The target address range or CIDR identifier<br>   RPORT    22               yes       The target port<br>   THREADS  1                yes       The number of concurrent threads<br><br>msf auxiliary(ssh_version) &gt; set RHOSTS 192.168.1.0/24<br>RHOSTS =&gt; 192.168.1.0/24<br>msf auxiliary(ssh_version) &gt; set THREADS 255<br>THREADS =&gt; 255<br>msf auxiliary(ssh_version) &gt; run<br><br>[*] 192.168.1.10:22, SSH server version: SSH-2.0-OpenSSH_4.3<br>[*] 192.168.1.101:22, SSH server version: SSH-2.0-OpenSSH_5.1p1 Debian-3ubuntu1<br>[*] 192.168.1.154:22, SSH server version: SSH-2.0-OpenSSH_4.7p1 Debian-8ubuntu1<br>[*] 192.168.1.250:22, SSH server version: SSH-2.0-OpenSSH_5.2p1-hpn13v6 FreeBSD-openssh-portable-overwrite-base-5.2.p1_2,1<br>[*] Scanned 251 of 256 hosts (098% complete)<br>[*] Scanned 253 of 256 hosts (098% complete)<br>[*] Scanned 254 of 256 hosts (099% complete)<br>[*] Scanned 256 of 256 hosts (100% complete)<br>[*] Auxiliary module execution completed<br>msf auxiliary(ssh_version) &gt;</pre>
 </body>
 </html>

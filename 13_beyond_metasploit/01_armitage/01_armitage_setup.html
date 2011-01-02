@@ -4,7 +4,7 @@
   <meta content="text/html; charset=ISO-8859-1"
  http-equiv="Content-Type">
   <title>Armitage Setup</title>
-</head>
+<link rel="stylesheet" type="text/css" href="/home/steve/metasploit_unleashed/css.css" /></head>
 <body>
 <h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">Armitage
 Setup</h1>
@@ -16,19 +16,19 @@ package.
 <br>
 <br>
 </p>
-<pre style="color: rgb(0, 0, 0);">root@bt:~# apt-get update<br>...snip...<br>Reading package lists... Done<br>root@bt:~# apt-get install armitage<br>...snip...<br>Unpacking armitage (from .../armitage_0.1-bt0_i386.deb) ...<br>Setting up armitage (0.1-bt0) ...<br>root@bt:~#</pre>
+<pre id="code">root@bt:~# apt-get update<br>...snip...<br>Reading package lists... Done<br>root@bt:~# apt-get install armitage<br>...snip...<br>Unpacking armitage (from .../armitage_0.1-bt0_i386.deb) ...<br>Setting up armitage (0.1-bt0) ...<br>root@bt:~#</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">Armitage communicates with
 Metasploit via the RPC daemon so we need to start that next.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);">root@bt:~# msfrpcd -f -U msf -P test -t Basic<br>[*] XMLRPC starting on 0.0.0.0:55553 (SSL):Basic...</pre>
+<pre id="code">root@bt:~# msfrpcd -f -U msf -P test -t Basic<br>[*] XMLRPC starting on 0.0.0.0:55553 (SSL):Basic...</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">Next, we need to start our MYSQL
 server so Armitage has a place to store its results.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);">root@bt:~# /etc/init.d/mysql start<br>Starting MySQL database server: mysqld.<br>Checking for corrupt, not cleanly closed and upgrade needing tables..<br>root@bt:~#</pre>
+<pre id="code">root@bt:~# /etc/init.d/mysql start<br>Starting MySQL database server: mysqld.<br>Checking for corrupt, not cleanly closed and upgrade needing tables..<br>root@bt:~#</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">Lastly, we need to run </span><b
  style="color: rgb(0, 0, 0);">"armitage.sh"</b><span
@@ -38,7 +38,7 @@ with the connection dialog. In BackTrack, the default MYSQL credentials
 are root / toor and for PostgreSQL, they are postgres / toor.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);">root@bt:/pentest/exploits/armitage# ./armitage.sh</pre>
+<pre id="code">root@bt:/pentest/exploits/armitage# ./armitage.sh</pre>
 <br style="color: rgb(0, 0, 0);">
 <div style="color: rgb(0, 0, 0);" class="center">
 <div class="floatnone"><a

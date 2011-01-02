@@ -4,7 +4,7 @@
   <meta content="text/html; charset=ISO-8859-1"
  http-equiv="Content-Type">
   <title>The set/unset Commands</title>
-</head>
+<link rel="stylesheet" type="text/css" href="/home/steve/metasploit_unleashed/css.css" /></head>
 <body>
 <h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">The
 set/unset Commands</h1>
@@ -16,7 +16,7 @@ parameters for the current module you are working with.
 <br>
 <br>
 </p>
-<pre style="color: rgb(0, 0, 0);">msf auxiliary(ms09_001_write) &gt; set RHOST 192.168.1.1<br>RHOST =&gt; 192.168.1.1<br>msf auxiliary(ms09_001_write) &gt; show options<br><br>Module options:<br><br>   Name   Current Setting  Required  Description<br>   ----   ---------------  --------  -----------<br>   RHOST  192.168.1.1      yes       The target address<br>   RPORT  445              yes       Set the SMB service port</pre>
+<pre id="code">msf auxiliary(ms09_001_write) &gt; set RHOST 192.168.1.1<br>RHOST =&gt; 192.168.1.1<br>msf auxiliary(ms09_001_write) &gt; show options<br><br>Module options:<br><br>   Name   Current Setting  Required  Description<br>   ----   ---------------  --------  -----------<br>   RHOST  192.168.1.1      yes       The target address<br>   RPORT  445              yes       Set the SMB service port</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">A recently added feature in
 Metasploit is the ability to set an encoder
@@ -25,7 +25,7 @@ when you aren't quite certain as to which payload encoding methods will
 work with an exploit.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);">msf exploit(ms08_067_netapi) &gt; show encoders<br><br>Compatible encoders<br>===================<br><br>   Name                       Description<br>   ----                       -----------<br>   cmd/generic_sh             Generic Shell Variable Substitution Command Encoder<br>   generic/none               The "none" Encoder<br>   mipsbe/longxor             XOR Encoder<br>   mipsle/longxor             XOR Encoder<br>   php/base64                 PHP Base64 encoder<br>   ppc/longxor                PPC LongXOR Encoder<br>   ppc/longxor_tag            PPC LongXOR Encoder<br>   sparc/longxor_tag          SPARC DWORD XOR Encoder<br>   x64/xor                    XOR Encoder<br>   x86/alpha_mixed            Alpha2 Alphanumeric Mixedcase Encoder<br>   x86/alpha_upper            Alpha2 Alphanumeric Uppercase Encoder<br>   x86/avoid_utf8_tolower     Avoid UTF8/tolower<br>   x86/call4_dword_xor        Call+4 Dword XOR Encoder<br>   x86/countdown              Single-byte XOR Countdown Encoder<br>   x86/fnstenv_mov            Variable-length Fnstenv/mov Dword XOR Encoder<br>   x86/jmp_call_additive      Polymorphic Jump/Call XOR Additive Feedback Encoder<br>   x86/nonalpha               Non-Alpha Encoder<br>   x86/nonupper               Non-Upper Encoder<br>   x86/shikata_ga_nai         Polymorphic XOR Additive Feedback Encoder<br>   x86/unicode_mixed          Alpha2 Alphanumeric Unicode Mixedcase Encoder<br>   x86/unicode_upper          Alpha2 Alphanumeric Unicode Uppercase Encoder<br><br>msf exploit(ms08_067_netapi) &gt; set encoder x86/shikata_ga_nai<br>encoder =&gt; x86/shikata_ga_nai</pre>
+<pre id="code">msf exploit(ms08_067_netapi) &gt; show encoders<br><br>Compatible encoders<br>===================<br><br>   Name                       Description<br>   ----                       -----------<br>   cmd/generic_sh             Generic Shell Variable Substitution Command Encoder<br>   generic/none               The "none" Encoder<br>   mipsbe/longxor             XOR Encoder<br>   mipsle/longxor             XOR Encoder<br>   php/base64                 PHP Base64 encoder<br>   ppc/longxor                PPC LongXOR Encoder<br>   ppc/longxor_tag            PPC LongXOR Encoder<br>   sparc/longxor_tag          SPARC DWORD XOR Encoder<br>   x64/xor                    XOR Encoder<br>   x86/alpha_mixed            Alpha2 Alphanumeric Mixedcase Encoder<br>   x86/alpha_upper            Alpha2 Alphanumeric Uppercase Encoder<br>   x86/avoid_utf8_tolower     Avoid UTF8/tolower<br>   x86/call4_dword_xor        Call+4 Dword XOR Encoder<br>   x86/countdown              Single-byte XOR Countdown Encoder<br>   x86/fnstenv_mov            Variable-length Fnstenv/mov Dword XOR Encoder<br>   x86/jmp_call_additive      Polymorphic Jump/Call XOR Additive Feedback Encoder<br>   x86/nonalpha               Non-Alpha Encoder<br>   x86/nonupper               Non-Upper Encoder<br>   x86/shikata_ga_nai         Polymorphic XOR Additive Feedback Encoder<br>   x86/unicode_mixed          Alpha2 Alphanumeric Unicode Mixedcase Encoder<br>   x86/unicode_upper          Alpha2 Alphanumeric Unicode Uppercase Encoder<br><br>msf exploit(ms08_067_netapi) &gt; set encoder x86/shikata_ga_nai<br>encoder =&gt; x86/shikata_ga_nai</pre>
 <br style="color: rgb(0, 0, 0);">
 <h4 style="color: rgb(0, 0, 0);"> <span class="mw-headline"
  id=".22unset.22_Command">"unset" Command</span></h4>
@@ -36,7 +36,7 @@ all assigned variables with 'unset all'.
 <br>
 <br>
 </p>
-<pre style="color: rgb(0, 0, 0);">msf &gt; set RHOSTS 192.168.1.0/24<br>RHOSTS =&gt; 192.168.1.0/24<br>msf &gt; set THREADS 50<br>THREADS =&gt; 50<br>msf &gt; set<br><br>Global<br>======<br><br>  Name     Value<br>  ----     -----<br>  RHOSTS   192.168.1.0/24<br>  THREADS  50<br><br>msf &gt; unset THREADS<br>Unsetting THREADS...<br>msf &gt; unset all<br>Flushing datastore...<br>msf &gt; set<br><br>Global<br>======<br><br>No entries in data store.</pre>
+<pre id="code">msf &gt; set RHOSTS 192.168.1.0/24<br>RHOSTS =&gt; 192.168.1.0/24<br>msf &gt; set THREADS 50<br>THREADS =&gt; 50<br>msf &gt; set<br><br>Global<br>======<br><br>  Name     Value<br>  ----     -----<br>  RHOSTS   192.168.1.0/24<br>  THREADS  50<br><br>msf &gt; unset THREADS<br>Unsetting THREADS...<br>msf &gt; unset all<br>Flushing datastore...<br>msf &gt; set<br><br>Global<br>======<br><br>No entries in data store.</pre>
 <br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
 <div style="text-align: center; color: rgb(0, 0, 0);"><a

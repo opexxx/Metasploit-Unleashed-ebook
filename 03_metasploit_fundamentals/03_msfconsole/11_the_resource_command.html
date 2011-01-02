@@ -4,7 +4,7 @@
   <meta content="text/html; charset=ISO-8859-1"
  http-equiv="Content-Type">
   <title>The resource Command</title>
-</head>
+<link rel="stylesheet" type="text/css" href="/home/steve/metasploit_unleashed/css.css" /></head>
 <body>
 <h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">The
 resource Command</h1>
@@ -19,7 +19,7 @@ Karmetasploit, that can be very useful.
 <br>
 <br>
 </p>
-<pre style="color: rgb(0, 0, 0);">msf &gt; resource karma.rc<br>resource&gt; load db_sqlite3<br>[-]<br>[-] The functionality previously provided by this plugin has been<br>[-] integrated into the core command set. Use the new 'db_driver'<br>[-] command to use a database driver other than sqlite3 (which<br>[-] is now the default). All of the old commands are the same.<br>[-]<br>[-] Failed to load plugin from /pentest/exploits/framework3/plugins/db_sqlite3: Deprecated plugin<br>resource&gt; db_create /root/karma.db<br>[*] The specified database already exists, connecting<br>[*] Successfully connected to the database<br>[*] File: /root/karma.db<br>resource&gt; use auxiliary/server/browser_autopwn<br>resource&gt; setg AUTOPWN_HOST 10.0.0.1<br>AUTOPWN_HOST =&gt; 10.0.0.1<br>...snip...</pre>
+<pre id="code">msf &gt; resource karma.rc<br>resource&gt; load db_sqlite3<br>[-]<br>[-] The functionality previously provided by this plugin has been<br>[-] integrated into the core command set. Use the new 'db_driver'<br>[-] command to use a database driver other than sqlite3 (which<br>[-] is now the default). All of the old commands are the same.<br>[-]<br>[-] Failed to load plugin from /pentest/exploits/framework3/plugins/db_sqlite3: Deprecated plugin<br>resource&gt; db_create /root/karma.db<br>[*] The specified database already exists, connecting<br>[*] Successfully connected to the database<br>[*] File: /root/karma.db<br>resource&gt; use auxiliary/server/browser_autopwn<br>resource&gt; setg AUTOPWN_HOST 10.0.0.1<br>AUTOPWN_HOST =&gt; 10.0.0.1<br>...snip...</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">Batch files can greatly speed up
 testing and development times as
@@ -29,7 +29,7 @@ the '-r' flag. The simple example below creates a batch file to display
 the Metasploit version number at startup.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);">root@bt4-pre:/pentest/exploits/framework3# echo version &gt; version.rc<br>root@bt4-pre:/pentest/exploits/framework3# ./msfconsole -r version.rc<br><br>                     888                           888        d8b888<br>                     888                           888        Y8P888<br>                     888                           888           888<br>88888b.d88b.  .d88b. 888888 8888b. .d8888b 88888b. 888 .d88b. 888888888<br>888 "888 "88bd8P  Y8b888       "88b88K     888 "88b888d88""88b888888<br>888  888  88888888888888   .d888888"Y8888b.888  888888888  888888888<br>888  888  888Y8b.    Y88b. 888  888     X88888 d88P888Y88..88P888Y88b.<br>888  888  888 "Y8888  "Y888"Y888888 88888P'88888P" 888 "Y88P" 888 "Y888<br>                                           888<br>                                           888<br>                                           888<br><br><br>       =[ metasploit v3.3-rc1 [core:3.3 api:1.0]<br>+ -- --=[ 379 exploits - 234 payloads<br>+ -- --=[ 20 encoders - 7 nops<br>       =[ 155 aux<br><br>resource&gt; version<br>Framework: 3.3-dev.6055<br>Console  : 3.3-dev.6476<br>msf &gt;</pre>
+<pre id="code">root@bt4-pre:/pentest/exploits/framework3# echo version &gt; version.rc<br>root@bt4-pre:/pentest/exploits/framework3# ./msfconsole -r version.rc<br><br>                     888                           888        d8b888<br>                     888                           888        Y8P888<br>                     888                           888           888<br>88888b.d88b.  .d88b. 888888 8888b. .d8888b 88888b. 888 .d88b. 888888888<br>888 "888 "88bd8P  Y8b888       "88b88K     888 "88b888d88""88b888888<br>888  888  88888888888888   .d888888"Y8888b.888  888888888  888888888<br>888  888  888Y8b.    Y88b. 888  888     X88888 d88P888Y88..88P888Y88b.<br>888  888  888 "Y8888  "Y888"Y888888 88888P'88888P" 888 "Y88P" 888 "Y888<br>                                           888<br>                                           888<br>                                           888<br><br><br>       =[ metasploit v3.3-rc1 [core:3.3 api:1.0]<br>+ -- --=[ 379 exploits - 234 payloads<br>+ -- --=[ 20 encoders - 7 nops<br>       =[ 155 aux<br><br>resource&gt; version<br>Framework: 3.3-dev.6055<br>Console  : 3.3-dev.6476<br>msf &gt;</pre>
 <br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
 <div style="text-align: center; color: rgb(0, 0, 0);"><a

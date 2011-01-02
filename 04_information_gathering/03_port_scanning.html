@@ -4,7 +4,7 @@
   <meta content="text/html; charset=ISO-8859-1"
  http-equiv="Content-Type">
   <title>Port Scanning</title>
-</head>
+<link rel="stylesheet" type="text/css" href="/home/steve/metasploit_unleashed/css.css" /></head>
 <body>
 <h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">Port
 Scanning</h1>
@@ -18,7 +18,7 @@ quick retrieval and for use in certain attack scenarios.
 <br>
 <br>
 </p>
-<pre style="color: rgb(0, 0, 0);">msf &gt; db_create<br>[*] Creating a new database instance...<br>[*] Successfully connected to the database<br>[*] File: /root/.msf3/sqlite3.db<br>msf &gt; load db_tracker<br>[*] Successfully loaded plugin: db_tracker<br>msf &gt; help<br>...snip...<br>Database Backend Commands<br>=========================<br><br>    Command               Description<br>    -------               -----------<br>    db_add_host           Add one or more hosts to the database<br>    db_add_note           Add a note to host<br>    db_add_port           Add a port to host<br>    db_autopwn            Automatically exploit everything<br>    db_connect            Connect to an existing database<br>    db_create             Create a brand new database<br>    db_del_host           Delete one or more hosts from the database<br>    db_del_port           Delete one port from the database<br>    db_destroy            Drop an existing database<br>    db_disconnect         Disconnect from the current database instance<br>    db_driver             Specify a database driver<br>    db_hosts              List all hosts in the database<br>    db_import_amap_mlog   Import a THC-Amap scan results file (-o -m)<br>    db_import_nessus_nbe  Import a Nessus scan result file (NBE)<br>    db_import_nessus_xml  Import a Nessus scan result file (NESSUS)<br>    db_import_nmap_xml    Import a Nmap scan results file (-oX)<br>    db_nmap               Executes nmap and records the output automatically<br>    db_notes              List all notes in the database<br>    db_services           List all services in the database<br>    db_vulns              List all vulnerabilities in the database<br><br>msf &gt;</pre>
+<pre id="code">msf &gt; db_create<br>[*] Creating a new database instance...<br>[*] Successfully connected to the database<br>[*] File: /root/.msf3/sqlite3.db<br>msf &gt; load db_tracker<br>[*] Successfully loaded plugin: db_tracker<br>msf &gt; help<br>...snip...<br>Database Backend Commands<br>=========================<br><br>    Command               Description<br>    -------               -----------<br>    db_add_host           Add one or more hosts to the database<br>    db_add_note           Add a note to host<br>    db_add_port           Add a port to host<br>    db_autopwn            Automatically exploit everything<br>    db_connect            Connect to an existing database<br>    db_create             Create a brand new database<br>    db_del_host           Delete one or more hosts from the database<br>    db_del_port           Delete one port from the database<br>    db_destroy            Drop an existing database<br>    db_disconnect         Disconnect from the current database instance<br>    db_driver             Specify a database driver<br>    db_hosts              List all hosts in the database<br>    db_import_amap_mlog   Import a THC-Amap scan results file (-o -m)<br>    db_import_nessus_nbe  Import a Nessus scan result file (NBE)<br>    db_import_nessus_xml  Import a Nessus scan result file (NESSUS)<br>    db_import_nmap_xml    Import a Nmap scan results file (-oX)<br>    db_nmap               Executes nmap and records the output automatically<br>    db_notes              List all notes in the database<br>    db_services           List all services in the database<br>    db_vulns              List all vulnerabilities in the database<br><br>msf &gt;</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">We can use the 'db_nmap' command to
 run an Nmap scan against our
@@ -38,19 +38,19 @@ the output flag. The example below would then be <b>"db_nmap -v -sV
 <br>
 <br>
 </p>
-<pre style="color: rgb(0, 0, 0);">msf &gt; nmap -v -sV 192.168.1.0/24 -oA subnet_1<br>[*] exec: nmap -v -sV 192.168.1.0/24 -oA subnet_1<br><br>Starting Nmap 5.00 ( http://nmap.org ) at 2009-08-13 19:29 MDT<br>NSE: Loaded 3 scripts for scanning.<br>Initiating ARP Ping Scan at 19:29<br>Scanning 101 hosts [1 port/host]<br>...<br>Nmap done: 256 IP addresses (16 hosts up) scanned in 499.41 seconds<br>Raw packets sent: 19973 (877.822KB) | Rcvd: 15125 (609.512KB)</pre>
+<pre id="code">msf &gt; nmap -v -sV 192.168.1.0/24 -oA subnet_1<br>[*] exec: nmap -v -sV 192.168.1.0/24 -oA subnet_1<br><br>Starting Nmap 5.00 ( http://nmap.org ) at 2009-08-13 19:29 MDT<br>NSE: Loaded 3 scripts for scanning.<br>Initiating ARP Ping Scan at 19:29<br>Scanning 101 hosts [1 port/host]<br>...<br>Nmap done: 256 IP addresses (16 hosts up) scanned in 499.41 seconds<br>Raw packets sent: 19973 (877.822KB) | Rcvd: 15125 (609.512KB)</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">With the scan finished, we will
 issue the 'db_import_nmap_xml' command to import the Nmap xml file.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);">msf &gt; db_import_nmap_xml subnet_1.xml</pre>
+<pre id="code">msf &gt; db_import_nmap_xml subnet_1.xml</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">Results of the imported Nmap scan
 can be viewed via the 'db_hosts' and 'db_services' commands:
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);">msf &gt; db_hosts<br>[*] Time: Thu Aug 13 19:39:05 -0600 2009 Host: 192.168.1.1 Status: alive OS:<br>[*] Time: Thu Aug 13 19:39:05 -0600 2009 Host: 192.168.1.2 Status: alive OS:<br>[*] Time: Thu Aug 13 19:39:05 -0600 2009 Host: 192.168.1.10 Status: alive OS:<br>[*] Time: Thu Aug 13 19:39:05 -0600 2009 Host: 192.168.1.100 Status: alive OS:<br>...snip...<br><br>msf &gt; db_services<br>[*] Time: Thu Aug 13 19:39:05 -0600 2009 Service: host=192.168.1.1 port=22 proto=tcp state=up name=ssh<br>[*] Time: Thu Aug 13 19:39:05 -0600 2009 Service: host=192.168.1.1 port=23 proto=tcp state=up name=telnet<br>[*] Time: Thu Aug 13 19:39:05 -0600 2009 Service: host=192.168.1.1 port=80 proto=tcp state=up name=http<br>[*] Time: Thu Aug 13 19:39:05 -0600 2009 Service: host=192.168.1.2 port=23 proto=tcp state=up name=telnet<br>...snip...</pre>
+<pre id="code">msf &gt; db_hosts<br>[*] Time: Thu Aug 13 19:39:05 -0600 2009 Host: 192.168.1.1 Status: alive OS:<br>[*] Time: Thu Aug 13 19:39:05 -0600 2009 Host: 192.168.1.2 Status: alive OS:<br>[*] Time: Thu Aug 13 19:39:05 -0600 2009 Host: 192.168.1.10 Status: alive OS:<br>[*] Time: Thu Aug 13 19:39:05 -0600 2009 Host: 192.168.1.100 Status: alive OS:<br>...snip...<br><br>msf &gt; db_services<br>[*] Time: Thu Aug 13 19:39:05 -0600 2009 Service: host=192.168.1.1 port=22 proto=tcp state=up name=ssh<br>[*] Time: Thu Aug 13 19:39:05 -0600 2009 Service: host=192.168.1.1 port=23 proto=tcp state=up name=telnet<br>[*] Time: Thu Aug 13 19:39:05 -0600 2009 Service: host=192.168.1.1 port=80 proto=tcp state=up name=http<br>[*] Time: Thu Aug 13 19:39:05 -0600 2009 Service: host=192.168.1.2 port=23 proto=tcp state=up name=telnet<br>...snip...</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">We are now ready to import our
 results into dradis by changing to the
@@ -58,7 +58,7 @@ terminal where we have the dradis console running and issuing the
 'import nmap ' command.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);">dradis&gt; import nmap /pentest/exploits/framework3/subnet_1.nmap normal<br>There has been an exception:<br>[error] undefined method `each' for nil:NilClass<br>/pentest/exploits/framework3/subnet_1.nmap was successfully imported <br>dradis&gt;</pre>
+<pre id="code">dradis&gt; import nmap /pentest/exploits/framework3/subnet_1.nmap normal<br>There has been an exception:<br>[error] undefined method `each' for nil:NilClass<br>/pentest/exploits/framework3/subnet_1.nmap was successfully imported <br>dradis&gt;</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">If you switch to your dradis web
 interface and refresh the view,

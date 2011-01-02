@@ -4,7 +4,7 @@
   <meta content="text/html; charset=ISO-8859-1"
  http-equiv="Content-Type">
   <title>Configuring Databases</title>
-</head>
+<link rel="stylesheet" type="text/css" href="/home/steve/metasploit_unleashed/css.css" /></head>
 <body>
 <h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">Configuring
 Databases</h1>
@@ -19,7 +19,7 @@ although sqlite3 is no longer supported.
 <br>
 <br>
 </p>
-<pre style="color: rgb(0, 0, 0);">msf &gt; db_driver<br>[*]    Active Driver: postgresql<br>[*]        Available: postgresql, mysql, sqlite3</pre>
+<pre id="code">msf &gt; db_driver<br>[*]    Active Driver: postgresql<br>[*]        Available: postgresql, mysql, sqlite3</pre>
 <h3 style="color: rgb(0, 0, 0);"> <span class="mw-headline" id="MYSQL">MYSQL</span></h3>
 <p style="color: rgb(0, 0, 0);">With the release of BackTrack 4 r2,
 MYSQL and Metasploit work
@@ -29,13 +29,13 @@ service if it is not running already.
 <br>
 <br>
 </p>
-<pre style="color: rgb(0, 0, 0);">root@bt4:~# /etc/init.d/mysql start<br>Starting MySQL database server: mysqld.<br>Checking for corrupt, not cleanly closed and upgrade needing tables..<br>root@bt4:~#</pre>
+<pre id="code">root@bt4:~# /etc/init.d/mysql start<br>Starting MySQL database server: mysqld.<br>Checking for corrupt, not cleanly closed and upgrade needing tables..<br>root@bt4:~#</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">Within msfconsole, we then need to
 tell Metasploit to use the mysql database driver.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);">msf &gt; db_driver mysql<br>[*] Using database driver mysql</pre>
+<pre id="code">msf &gt; db_driver mysql<br>[*] Using database driver mysql</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">Once the driver has been loaded, we
 simply need to connect to the database. Running </span><b
@@ -46,7 +46,7 @@ it will be created for us automatically. In BackTrack 4, the default
 credentials for MYSQL are root / toor.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);">msf &gt; db_connect<br>[*]    Usage: db_connect @/<br>[*]       OR: db_connect -y [path/to/database.yml]<br>[*] Examples:<br>[*]        db_connect user@metasploit3<br>[*]        db_connect user:pass@192.168.0.2/metasploit3<br>[*]        db_connect user:pass@192.168.0.2:1500/metasploit3<br>msf &gt; db_connect root:toor@127.0.0.1/msf3</pre>
+<pre id="code">msf &gt; db_connect<br>[*]    Usage: db_connect @/<br>[*]       OR: db_connect -y [path/to/database.yml]<br>[*] Examples:<br>[*]        db_connect user@metasploit3<br>[*]        db_connect user:pass@192.168.0.2/metasploit3<br>[*]        db_connect user:pass@192.168.0.2:1500/metasploit3<br>msf &gt; db_connect root:toor@127.0.0.1/msf3</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">In order to verify that the database
 was created properly and that we are not using one we do not want to,
@@ -54,14 +54,14 @@ we just run </span><b style="color: rgb(0, 0, 0);">"db_hosts"</b><span
  style="color: rgb(0, 0, 0);"> and can see that the table is empty.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);">msf &gt; db_hosts<br><br>Hosts<br>=====<br><br>address  address6  arch  comm  comments  created_at  info  mac  name  os_flavor  os_lang  os_name  os_sp  purpose  state  updated_at  svcs  vulns  workspace<br>-------  --------  ----  ----  --------  ----------  ----  ---  ----  ---------  -------  -------  -----  -------  -----  ----------  ----  -----  ---------<br><br>msf &gt;</pre>
+<pre id="code">msf &gt; db_hosts<br><br>Hosts<br>=====<br><br>address  address6  arch  comm  comments  created_at  info  mac  name  os_flavor  os_lang  os_name  os_sp  purpose  state  updated_at  svcs  vulns  workspace<br>-------  --------  ----  ----  --------  ----------  ----  ---  ----  ---------  -------  -------  -----  -------  -----  ----------  ----  -----  ---------<br><br>msf &gt;</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">When you have finished with the
 database or you simply want to start over, you can delete the database
 as follows.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);">msf &gt; db_destroy root:toor@127.0.0.1/msf3<br>Database "msf3" dropped<br>msf &gt;</pre>
+<pre id="code">msf &gt; db_destroy root:toor@127.0.0.1/msf3<br>Database "msf3" dropped<br>msf &gt;</pre>
 <h3 style="color: rgb(0, 0, 0);"> <span class="mw-headline"
  id="PostgreSQL">PostgreSQL</span></h3>
 <p style="color: rgb(0, 0, 0);">As with MYSQL, we first need to start
@@ -72,7 +72,7 @@ package as shown.
 <br>
 <br>
 </p>
-<pre style="color: rgb(0, 0, 0);">root@bt4:~# /etc/init.d/postgresql-8.3 start<br>Starting PostgreSQL 8.3 database server: mainThe PostgreSQL server failed to start. Please check the log output:<br>2010-11-23 08:18:57 MST FATAL:  could not load server certificate file "server.crt": No such file or directory<br> failed!<br>root@bt4:~# apt-get install postgresql-backtrack-config<br>Reading package lists... Done<br>Building dependency tree       <br>Reading state information... Done<br>The following packages were automatically installed and are no longer required:<br>  libshishi0 shishi-common<br>Use 'apt-get autoremove' to remove them.<br>The following NEW packages will be installed:<br>  postgresql-backtrack-config<br>0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.<br>Need to get 6004B of archives.<br>After this operation, 0B of additional disk space will be used.<br>Get:1 http://archive.offensive-security.com pwnsauce/microverse postgresql-backtrack-config 8.3-bt0 [6004B]<br>Fetched 6004B in 0s (9282B/s)                <br>Selecting previously deselected package postgresql-backtrack-config.<br>(Reading database ... 258288 files and directories currently installed.)<br>Unpacking postgresql-backtrack-config (from .../postgresql-backtrack-config_8.3-bt0_i386.deb) ...<br>Setting up postgresql-backtrack-config (8.3-bt0) ...<br><br>root@bt4:~# /etc/init.d/postgresql-8.3 start<br>Starting PostgreSQL 8.3 database server: main.<br>root@bt4:~#</pre>
+<pre id="code">root@bt4:~# /etc/init.d/postgresql-8.3 start<br>Starting PostgreSQL 8.3 database server: mainThe PostgreSQL server failed to start. Please check the log output:<br>2010-11-23 08:18:57 MST FATAL:  could not load server certificate file "server.crt": No such file or directory<br> failed!<br>root@bt4:~# apt-get install postgresql-backtrack-config<br>Reading package lists... Done<br>Building dependency tree       <br>Reading state information... Done<br>The following packages were automatically installed and are no longer required:<br>  libshishi0 shishi-common<br>Use 'apt-get autoremove' to remove them.<br>The following NEW packages will be installed:<br>  postgresql-backtrack-config<br>0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.<br>Need to get 6004B of archives.<br>After this operation, 0B of additional disk space will be used.<br>Get:1 http://archive.offensive-security.com pwnsauce/microverse postgresql-backtrack-config 8.3-bt0 [6004B]<br>Fetched 6004B in 0s (9282B/s)                <br>Selecting previously deselected package postgresql-backtrack-config.<br>(Reading database ... 258288 files and directories currently installed.)<br>Unpacking postgresql-backtrack-config (from .../postgresql-backtrack-config_8.3-bt0_i386.deb) ...<br>Setting up postgresql-backtrack-config (8.3-bt0) ...<br><br>root@bt4:~# /etc/init.d/postgresql-8.3 start<br>Starting PostgreSQL 8.3 database server: main.<br>root@bt4:~#</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">When we load up msfconsole, and run </span><b
  style="color: rgb(0, 0, 0);">"db_driver"</b><span
@@ -80,7 +80,7 @@ package as shown.
 configured to use PostgreSQL.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);">msf &gt; db_driver<br>[*]    Active Driver: postgresql<br>[*]        Available: postgresql, mysql, sqlite3<br><br>msf &gt;</pre>
+<pre id="code">msf &gt; db_driver<br>[*]    Active Driver: postgresql<br>[*]        Available: postgresql, mysql, sqlite3<br><br>msf &gt;</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">Next, we need to connect to the
 database using the same syntax as
@@ -89,20 +89,20 @@ toor and Metasploit will automatically create the database if it does
 not already exist.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);">msf &gt; db_connect postgres:toor@127.0.0.1/msf3<br>NOTICE:  CREATE TABLE will create implicit sequence "hosts_id_seq" for serial column "hosts.id"<br>NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index "hosts_pkey" for table "hosts"<br>NOTICE:  CREATE TABLE will create implicit sequence "clients_id_seq" for serial column "clients.id"<br>NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index "clients_pkey" for table "clients"<br>...snip...<br>NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index "web_vulns_pkey" for table "web_vulns"<br>NOTICE:  CREATE TABLE will create implicit sequence "imported_creds_id_seq" for serial column "imported_creds.id"<br>NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index "imported_creds_pkey" for table "imported_creds"<br>msf &gt;</pre>
+<pre id="code">msf &gt; db_connect postgres:toor@127.0.0.1/msf3<br>NOTICE:  CREATE TABLE will create implicit sequence "hosts_id_seq" for serial column "hosts.id"<br>NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index "hosts_pkey" for table "hosts"<br>NOTICE:  CREATE TABLE will create implicit sequence "clients_id_seq" for serial column "clients.id"<br>NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index "clients_pkey" for table "clients"<br>...snip...<br>NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index "web_vulns_pkey" for table "web_vulns"<br>NOTICE:  CREATE TABLE will create implicit sequence "imported_creds_id_seq" for serial column "imported_creds.id"<br>NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index "imported_creds_pkey" for table "imported_creds"<br>msf &gt;</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">We can then verify that the database
 was created by issuing the </span><b style="color: rgb(0, 0, 0);">"db_hosts"</b><span
  style="color: rgb(0, 0, 0);"> command.
 </span>
-<pre style="color: rgb(0, 0, 0);">msf &gt; db_hosts<br><br>Hosts<br>=====<br><br>address  address6  arch  comm  comments  created_at  info  mac  name  os_flavor  os_lang  os_name  os_sp  purpose  state  updated_at  svcs  vulns  workspace<br>-------  --------  ----  ----  --------  ----------  ----  ---  ----  ---------  -------  -------  -----  -------  -----  ----------  ----  -----  ---------<br><br>msf &gt;</pre>
+<pre id="code">msf &gt; db_hosts<br><br>Hosts<br>=====<br><br>address  address6  arch  comm  comments  created_at  info  mac  name  os_flavor  os_lang  os_name  os_sp  purpose  state  updated_at  svcs  vulns  workspace<br>-------  --------  ----  ----  --------  ----------  ----  ---  ----  ---------  -------  -------  -----  -------  -----  ----------  ----  -----  ---------<br><br>msf &gt;</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">To destroy the database, we use the </span><b
  style="color: rgb(0, 0, 0);">"db_destroy"</b><span
  style="color: rgb(0, 0, 0);"> command as shown below.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);">msf &gt; db_destroy postgres:toor@127.0.0.1/msf3<br>[*] Warning: You will need to enter the password at the prompts below<br>Password: <br>msf &gt;</pre>
+<pre id="code">msf &gt; db_destroy postgres:toor@127.0.0.1/msf3<br>[*] Warning: You will need to enter the password at the prompts below<br>Password: <br>msf &gt;</pre>
 <h3 style="color: rgb(0, 0, 0);"> <span class="mw-headline"
  id="sqlite3">sqlite3</span></h3>
 <p style="color: rgb(0, 0, 0);">The final database available is
@@ -114,7 +114,7 @@ MYSQL and PostgreSQL available.
 <br>
 <br>
 </p>
-<pre style="color: rgb(0, 0, 0);">msf &gt; db_driver sqlite3 <br>[*] Using database driver sqlite3<br>msf &gt; db_connect<br>[-] Note that sqlite is not supported due to numerous issues.<br>[-] It may work, but don't count on it<br>[*] Successfully connected to the database<br>[*] File: /root/.msf3/sqlite3.db<br>msf &gt; db_hosts<br><br>Hosts<br>=====<br><br>address  address6  arch  comm  comments  created_at  info  mac  name  os_flavor  os_lang  os_name  os_sp  purpose  state  updated_at  svcs  vulns  workspace<br>-------  --------  ----  ----  --------  ----------  ----  ---  ----  ---------  -------  -------  -----  -------  -----  ----------  ----  -----  ---------<br><br>msf &gt;</pre>
+<pre id="code">msf &gt; db_driver sqlite3 <br>[*] Using database driver sqlite3<br>msf &gt; db_connect<br>[-] Note that sqlite is not supported due to numerous issues.<br>[-] It may work, but don't count on it<br>[*] Successfully connected to the database<br>[*] File: /root/.msf3/sqlite3.db<br>msf &gt; db_hosts<br><br>Hosts<br>=====<br><br>address  address6  arch  comm  comments  created_at  info  mac  name  os_flavor  os_lang  os_name  os_sp  purpose  state  updated_at  svcs  vulns  workspace<br>-------  --------  ----  ----  --------  ----------  ----  ---  ----  ---------  -------  -------  -----  -------  -----  ----------  ----  -----  ---------<br><br>msf &gt;</pre>
 <br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
 <div style="text-align: center; color: rgb(0, 0, 0);"><a

@@ -4,7 +4,7 @@
   <meta content="text/html; charset=ISO-8859-1"
  http-equiv="Content-Type">
   <title>Mixins and Plugins</title>
-</head>
+<link rel="stylesheet" type="text/css" href="/home/steve/metasploit_unleashed/css.css" /></head>
 <body>
 <h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">Mixins
 and Plugins</h1>
@@ -83,7 +83,7 @@ modules to have different 'flavors'.
 </dl>
 <p style="color: rgb(0, 0, 0);"><br>
 </p>
-<pre style="color: rgb(0, 0, 0);">class MyParent<br>     def woof<br>          puts &#8220;woof!&#8221;<br>     end<br>end<br><br>class MyClass &lt; MyParent<br>end<br><br>object = MyClass.new<br>object.woof() =&gt; &#8220;woof!&#8221;<br><br>================================================================<br><br>module MyMixin<br>     def woof<br>          puts &#8220;hijacked the woof method!&#8221;<br>     end<br>end<br><br>class MyBetterClass &lt; MyClass<br>     include MyMixin<br>end</pre>
+<pre id="code">class MyParent<br>     def woof<br>          puts &#8220;woof!&#8221;<br>     end<br>end<br><br>class MyClass &lt; MyParent<br>end<br><br>object = MyClass.new<br>object.woof() =&gt; &#8220;woof!&#8221;<br><br>================================================================<br><br>module MyMixin<br>     def woof<br>          puts &#8220;hijacked the woof method!&#8221;<br>     end<br>end<br><br>class MyBetterClass &lt; MyClass<br>     include MyMixin<br>end</pre>
 <br style="color: rgb(0, 0, 0);">
 <h2 style="color: rgb(0, 0, 0);"> <span class="mw-headline"
  id="Metasploit_Plugins"> Metasploit Plugins </span></h2>

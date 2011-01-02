@@ -4,7 +4,7 @@
   <meta content="text/html; charset=ISO-8859-1"
  http-equiv="Content-Type">
   <title>Useful API Calls</title>
-</head>
+<link rel="stylesheet" type="text/css" href="/home/steve/metasploit_unleashed/css.css" /></head>
 <body>
 <h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">Useful
 API Calls</h1>
@@ -24,7 +24,7 @@ Meterpreter shell.
 <br>
 <br>
 </p>
-<pre style="color: rgb(0, 0, 0);"><u>meterpreter</u> &gt; irb<br>[*] Starting IRB shell<br>[*] The 'client' variable holds the meterpreter client<br><br>&gt;&gt;</pre>
+<pre id="code"><u>meterpreter</u> &gt; irb<br>[*] Starting IRB shell<br>[*] The 'client' variable holds the meterpreter client<br><br>&gt;&gt;</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">We will start with calls for
 gathering information on the target.
@@ -32,7 +32,7 @@ Let's get the machine name of the target host. The API call for this is
 'client.sys.config.sysinfo'
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);">&gt;&gt; client.sys.config.sysinfo<br>=&gt; {"OS"=&gt;"Windows XP (Build 2600, Service Pack 3).", "Computer"=&gt;"WINXPVM01"}<br>&gt;&gt;</pre>
+<pre id="code">&gt;&gt; client.sys.config.sysinfo<br>=&gt; {"OS"=&gt;"Windows XP (Build 2600, Service Pack 3).", "Computer"=&gt;"WINXPVM01"}<br>&gt;&gt;</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">As we can see in irb, a series of
 values were returned. If we want
@@ -40,21 +40,21 @@ to know the type of values returned, we can use the class object to
 learn what is returned:
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);">&gt;&gt; client.sys.config.sysinfo.class<br>=&gt; Hash<br>&gt;&gt;</pre>
+<pre id="code">&gt;&gt; client.sys.config.sysinfo.class<br>=&gt; Hash<br>&gt;&gt;</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">We can see that we got a hash, so we
 can call elements of this hash through its key. Let&#8217;s say we want the
 OS version only:
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);">&gt;&gt; client.sys.config.sysinfo['OS']<br>=&gt; "Windows XP (Build 2600, Service Pack 3)."<br>&gt;&gt;</pre>
+<pre id="code">&gt;&gt; client.sys.config.sysinfo['OS']<br>=&gt; "Windows XP (Build 2600, Service Pack 3)."<br>&gt;&gt;</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">Now let&#8217;s get the credentials under
 which the payload is running. For this, we use the
 'client.sys.config.getuid' API call:
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);">&gt;&gt; client.sys.config.getuid<br>=&gt; "WINXPVM01\labuser"<br>&gt;&gt;</pre>
+<pre id="code">&gt;&gt; client.sys.config.getuid<br>=&gt; "WINXPVM01\labuser"<br>&gt;&gt;</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">To get the process ID under which
 the session is running, we use
@@ -62,7 +62,7 @@ the 'client.sys.process.getpid' call which can be used for determining
 what process the session is running under:
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);">&gt;&gt; client.sys.process.getpid<br>=&gt; 684</pre>
+<pre id="code">&gt;&gt; client.sys.process.getpid<br>=&gt; 684</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">We can use API calls under
 'client.sys.net' to gather information
@@ -71,7 +71,7 @@ get a list of interfaces and their configuration we use the API call
 'client.net.config.interfaces':
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);">&gt;&gt; client.net.config.interfaces<br>=&gt; [#, #]<br>&gt;&gt; client.net.config.interfaces.class<br>=&gt; Array</pre>
+<pre id="code">&gt;&gt; client.net.config.interfaces<br>=&gt; [#, #]<br>&gt;&gt; client.net.config.interfaces.class<br>=&gt; Array</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">As we can see it returns an array of
 objects that are of type
@@ -81,7 +81,7 @@ objects and get what is called a pretty output of each one of the
 interfaces like this:
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);"> &gt;&gt; interfaces = client.net.config.interfaces<br> =&gt; [#, #]<br> &gt;&gt; interfaces.each do |i|<br> ?&gt; puts i.pretty<br> &gt;&gt; end<br> MS TCP Loopback interface<br> Hardware MAC: 00:00:00:00:00:00<br> IP Address  : 127.0.0.1<br> Netmask     : 255.0.0.0<br> <br> AMD PCNET Family PCI Ethernet Adapter - Packet Scheduler Miniport<br> Hardware MAC: 00:0c:29:dc:aa:e4<br> IP Address  : 192.168.1.104<br> Netmask     : 255.255.255.0</pre>
+<pre id="code"> &gt;&gt; interfaces = client.net.config.interfaces<br> =&gt; [#, #]<br> &gt;&gt; interfaces.each do |i|<br> ?&gt; puts i.pretty<br> &gt;&gt; end<br> MS TCP Loopback interface<br> Hardware MAC: 00:00:00:00:00:00<br> IP Address  : 127.0.0.1<br> Netmask     : 255.0.0.0<br> <br> AMD PCNET Family PCI Ethernet Adapter - Packet Scheduler Miniport<br> Hardware MAC: 00:0c:29:dc:aa:e4<br> IP Address  : 192.168.1.104<br> Netmask     : 255.255.255.0</pre>
 <br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
 <div style="text-align: center; color: rgb(0, 0, 0);"><a

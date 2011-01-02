@@ -4,7 +4,7 @@
   <meta content="text/html; charset=ISO-8859-1"
  http-equiv="Content-Type">
   <title>auxiliary/scanner/smtp/smtp_version</title>
-</head>
+<link rel="stylesheet" type="text/css" href="/home/steve/metasploit_unleashed/css.css" /></head>
 <body>
 <h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">auxiliary/scanner/smtp/smtp_version</h1>
 <h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
@@ -19,7 +19,7 @@ servers it encounters.
 <br>
 <br>
 </p>
-<pre style="color: rgb(0, 0, 0);">msf &gt; use auxiliary/scanner/smtp/smtp_version<br>msf auxiliary(smtp_version) &gt; show options<br><br>Module options:<br><br>   Name     Current Setting  Required  Description<br>   ----     ---------------  --------  -----------<br>   RHOSTS                    yes       The target address range or CIDR identifier<br>   RPORT    25               yes       The target port<br>   THREADS  1                yes       The number of concurrent threads<br><br>msf auxiliary(smtp_version) &gt; set RHOSTS 192.168.1.0/24<br>RHOSTS =&gt; 192.168.1.0/24<br>msf auxiliary(smtp_version) &gt; set THREADS 254<br>THREADS =&gt; 254<br>msf auxiliary(smtp_version) &gt; run<br><br>[*] 192.168.1.56:25 SMTP 220 metasploitable.localdomain ESMTP Postfix (Ubuntu)\x0d\x0a<br>[*] Scanned 254 of 256 hosts (099% complete)<br>[*] Scanned 255 of 256 hosts (099% complete)<br>[*] Scanned 256 of 256 hosts (100% complete)<br>[*] Auxiliary module execution completed<br>msf auxiliary(smtp_version) &gt;</pre>
+<pre id="code">msf &gt; use auxiliary/scanner/smtp/smtp_version<br>msf auxiliary(smtp_version) &gt; show options<br><br>Module options:<br><br>   Name     Current Setting  Required  Description<br>   ----     ---------------  --------  -----------<br>   RHOSTS                    yes       The target address range or CIDR identifier<br>   RPORT    25               yes       The target port<br>   THREADS  1                yes       The number of concurrent threads<br><br>msf auxiliary(smtp_version) &gt; set RHOSTS 192.168.1.0/24<br>RHOSTS =&gt; 192.168.1.0/24<br>msf auxiliary(smtp_version) &gt; set THREADS 254<br>THREADS =&gt; 254<br>msf auxiliary(smtp_version) &gt; run<br><br>[*] 192.168.1.56:25 SMTP 220 metasploitable.localdomain ESMTP Postfix (Ubuntu)\x0d\x0a<br>[*] Scanned 254 of 256 hosts (099% complete)<br>[*] Scanned 255 of 256 hosts (099% complete)<br>[*] Scanned 256 of 256 hosts (100% complete)<br>[*] Auxiliary module execution completed<br>msf auxiliary(smtp_version) &gt;</pre>
 <br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
 <div style="text-align: center; color: rgb(0, 0, 0);"><a

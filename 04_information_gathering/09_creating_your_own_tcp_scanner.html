@@ -4,7 +4,7 @@
   <meta content="text/html; charset=ISO-8859-1"
  http-equiv="Content-Type">
   <title>Creating Your Own TCP Scanner</title>
-</head>
+<link rel="stylesheet" type="text/css" href="/home/steve/metasploit_unleashed/css.css" /></head>
 <body>
 <h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">Creating
 Your Own TCP Scanner</h1>
@@ -53,7 +53,7 @@ address of the remote host.
 <br>
 <br>
 </p>
-<pre style="color: rgb(0, 0, 0);">require 'msf/core'<br>class Metasploit3 &lt; Msf::Auxiliary<br>        include Msf::Exploit::Remote::Tcp<br>        include Msf::Auxiliary::Scanner<br>        def initialize<br>                super(<br>                        'Name'           =&gt; 'My custom TCP scan',<br>                        'Version'        =&gt; '$Revision: 1 $',<br>                        'Description'    =&gt; 'My quick scanner',<br>                        'Author'         =&gt; 'Your name here',<br>                        'License'        =&gt; MSF_LICENSE<br>                )<br>                register_options(<br>                        [<br>                                Opt::RPORT(12345)<br>                        ], self.class)<br>        end<br><br>        def run_host(ip)<br>                connect()<br>                sock.puts('HELLO SERVER')<br>                data = sock.recv(1024)<br>                print_status("Received: #{data} from #{ip}")<br>                disconnect()<br>        end<br>end</pre>
+<pre id="code">require 'msf/core'<br>class Metasploit3 &lt; Msf::Auxiliary<br>        include Msf::Exploit::Remote::Tcp<br>        include Msf::Auxiliary::Scanner<br>        def initialize<br>                super(<br>                        'Name'           =&gt; 'My custom TCP scan',<br>                        'Version'        =&gt; '$Revision: 1 $',<br>                        'Description'    =&gt; 'My quick scanner',<br>                        'Author'         =&gt; 'Your name here',<br>                        'License'        =&gt; MSF_LICENSE<br>                )<br>                register_options(<br>                        [<br>                                Opt::RPORT(12345)<br>                        ], self.class)<br>        end<br><br>        def run_host(ip)<br>                connect()<br>                sock.puts('HELLO SERVER')<br>                data = sock.recv(1024)<br>                print_status("Received: #{data} from #{ip}")<br>                disconnect()<br>        end<br>end</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">We save the file into our
 ./modules/auxiliary/scanner/ directory as </span><b
@@ -72,13 +72,13 @@ listener on port 12345 and pipe in a text file to act as the server
 response.
 <br>
 </p>
-<pre style="color: rgb(0, 0, 0);">root@bt4:~/docs# nc -lnvp 12345 &lt; response.txt<br>listening on [any] 12345 ...</pre>
+<pre id="code">root@bt4:~/docs# nc -lnvp 12345 &lt; response.txt<br>listening on [any] 12345 ...</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">Next, you select your new scanner
 module, set its parameters, and run it to see the results.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);">msf &gt; use scanner/simple_tcp<br>msf auxiliary(simple_tcp) &gt; set RHOSTS 192.168.1.101<br>RHOSTS =&gt; 192.168.1.101<br>msf auxiliary(simple_tcp) &gt; run<br><br>[*] Received: hello metasploit from 192.168.1.101<br>[*] Auxiliary module execution completed</pre>
+<pre id="code">msf &gt; use scanner/simple_tcp<br>msf auxiliary(simple_tcp) &gt; set RHOSTS 192.168.1.101<br>RHOSTS =&gt; 192.168.1.101<br>msf auxiliary(simple_tcp) &gt; run<br><br>[*] Received: hello metasploit from 192.168.1.101<br>[*] Auxiliary module execution completed</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">As you can tell from this simple
 example, this level of versatility can
@@ -108,18 +108,18 @@ autoloaded.
 <br>
 <br>
 </p>
-<pre style="color: rgb(0, 0, 0);">db_driver sqlite3 (or postgres, mysql)</pre>
+<pre id="code">db_driver sqlite3 (or postgres, mysql)</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">Use the 'Auxiliary::Report mixin in
 your scanner code.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);">include Msf::Auxiliary::Report</pre>
+<pre id="code">include Msf::Auxiliary::Report</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">Then, call the report_note() method.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);">report_note(<br>:host =&gt; rhost,<br>:type =&gt; "myscanner_password",<br>:data =&gt; data<br>)</pre>
+<pre id="code">report_note(<br>:host =&gt; rhost,<br>:type =&gt; "myscanner_password",<br>:data =&gt; data<br>)</pre>
 <br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
 <div style="text-align: center; color: rgb(0, 0, 0);"><a

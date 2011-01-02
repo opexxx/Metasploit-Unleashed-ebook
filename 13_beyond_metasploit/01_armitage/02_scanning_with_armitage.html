@@ -4,7 +4,7 @@
   <meta content="text/html; charset=ISO-8859-1"
  http-equiv="Content-Type">
   <title>Scanning with Armitage</title>
-</head>
+<link rel="stylesheet" type="text/css" href="/home/steve/metasploit_unleashed/css.css" /></head>
 <body>
 <h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">Scanning
 with Armitage</h1>
@@ -80,7 +80,7 @@ is also conveniently stored for us in the MYSQL database.
 <br>
 <br>
 </p>
-<pre style="color: rgb(0, 0, 0);">mysql&gt; use msf3;<br>Reading table information for completion of table and column names<br>You can turn off this feature to get a quicker startup with -A<br><br>Database changed<br>mysql&gt; select address,os_flavor from hosts;<br>+---------------+-----------------+<br>| address       | os_flavor       |<br>+---------------+-----------------+<br>| 192.168.1.205 | Windows 2003 R2 |<br>| 192.168.1.204 | Windows 2003 R2 |<br>| 192.168.1.206 | Windows XP      |<br>| 192.168.1.201 | Windows XP      |<br>| 192.168.1.203 | Windows XP      |<br>+---------------+-----------------+<br>5 rows in set (0.00 sec)<br><br>mysql&gt;</pre>
+<pre id="code">mysql&gt; use msf3;<br>Reading table information for completion of table and column names<br>You can turn off this feature to get a quicker startup with -A<br><br>Database changed<br>mysql&gt; select address,os_flavor from hosts;<br>+---------------+-----------------+<br>| address       | os_flavor       |<br>+---------------+-----------------+<br>| 192.168.1.205 | Windows 2003 R2 |<br>| 192.168.1.204 | Windows 2003 R2 |<br>| 192.168.1.206 | Windows XP      |<br>| 192.168.1.201 | Windows XP      |<br>| 192.168.1.203 | Windows XP      |<br>+---------------+-----------------+<br>5 rows in set (0.00 sec)<br><br>mysql&gt;</pre>
 <br style="color: rgb(0, 0, 0);">
 <div style="text-align: center; color: rgb(0, 0, 0);"><a
  href="http://www.offensive-security.com/metasploit-unleashed/Armitage"

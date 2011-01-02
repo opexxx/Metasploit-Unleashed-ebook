@@ -4,7 +4,7 @@
   <meta content="text/html; charset=ISO-8859-1"
  http-equiv="Content-Type">
   <title>The load Command</title>
-</head>
+<link rel="stylesheet" type="text/css" href="/home/steve/metasploit_unleashed/css.css" /></head>
 <body>
 <h1 style="color: rgb(0, 0, 0);" id="firstHeading" class="firstHeading">The
 load Command</h1>
@@ -16,7 +16,7 @@ Arguments are passed as 'key=val' on the shell.
 <br>
 <br>
 </p>
-<pre style="color: rgb(0, 0, 0);">msf &gt; load<br><br>Usage: load [var=val var=val ...]<br><br>Load a plugin from the supplied path.  The optional<br>var=val options are custom parameters that can be<br>passed to plugins.<br><br>msf &gt; load pcap_log<br><br>[*] Successfully loaded plugin: pcap_log</pre>
+<pre id="code">msf &gt; load<br><br>Usage: load [var=val var=val ...]<br><br>Load a plugin from the supplied path.  The optional<br>var=val options are custom parameters that can be<br>passed to plugins.<br><br>msf &gt; load pcap_log<br><br>[*] Successfully loaded plugin: pcap_log</pre>
 <br style="color: rgb(0, 0, 0);">
 <h4 style="color: rgb(0, 0, 0);"> <span class="mw-headline"
  id=".22unload.22_Command">"unload" Command</span></h4>
@@ -25,7 +25,7 @@ unloads a previously loaded plugin and removes any extended commands.
 <br>
 <br>
 </p>
-<pre style="color: rgb(0, 0, 0);">msf &gt; load pcap_log<br>[*] Successfully loaded plugin: pcap_log<br><br>msf &gt; unload pcap_log<br>Unloading plugin pcap_log...unloaded.</pre>
+<pre id="code">msf &gt; load pcap_log<br>[*] Successfully loaded plugin: pcap_log<br><br>msf &gt; unload pcap_log<br>Unloading plugin pcap_log...unloaded.</pre>
 <br style="color: rgb(0, 0, 0);">
 <h4 style="color: rgb(0, 0, 0);"> <span class="mw-headline"
  id=".22loadpath.22_Command">"loadpath" Command</span></h4>
@@ -36,7 +36,7 @@ payloads, etc.
 <br>
 <br>
 </p>
-<pre style="color: rgb(0, 0, 0);">msf &gt; loadpath /home/secret/modules<br><br>Loaded 0 modules.</pre>
+<pre id="code">msf &gt; loadpath /home/secret/modules<br><br>Loaded 0 modules.</pre>
 <br style="color: rgb(0, 0, 0);">
 <br style="color: rgb(0, 0, 0);">
 <div style="text-align: center; color: rgb(0, 0, 0);"><a
